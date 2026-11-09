@@ -16,9 +16,13 @@
       "concepts": "Optional beginner tutorial - `print()` - strings - Run, Test and Submit",
       "lesson": [
         {
+          "heading": "The archive wakes",
+          "text": "You and the grimoire’s little snake have reached the sealed archive. Before the cartographer’s grimoire can record routes, its little console needs to prove it can print one line. That greeting is a small check that your instructions actually ran."
+        },
+        {
           "heading": "A program is a set of instructions",
-          "text": "Python reads your instructions and carries them out. In this example, `print()` displays a value. Text in quotes, such as `\"Hello, world!\"`, is a string. The quotes tell Python where the text begins and ends; they do not appear in the output. A line that starts with `#` is a comment for the reader.",
-          "code": "# This is a comment.\nprint(\"Hello, world!\")"
+          "text": "Python reads your instructions and carries them out. In this example, `print()` displays a value. Text in quotes, such as `\"The archive gate is open.\"`, is a string. The quotes tell Python where the text begins and ends; they do not appear in the output. A line that starts with `#` is a comment for the reader.",
+          "code": "# This is a comment.\nprint(\"The archive gate is open.\")"
         },
         {
           "heading": "Try the editor",

@@ -1,3 +1,19 @@
+## The archive expedition
+
+Teach each new chapter as part of a solo dungeon expedition. The learner is an
+apprentice cartographer with a grimoire and a snake companion. The planning desk,
+archive gates and lifts, torchlight budget, route log, and supply ledger are
+recurring systems. Carry one of those systems forward across related lessons so
+the next exercise builds on something familiar. Future chapters can cover map
+discovery, save files, and a playable Pygame expedition.
+
+Open each mission with a short situation that explains what the behavior is for.
+Use a meaningful boundary or failure when it helps the concept click. Keep
+assignment behavior and exact interfaces visible, with implementation tips in
+the collapsed hints. When retheming an existing lesson, preserve the lesson ID,
+starter, function signatures, expected output, and grading cases so learners can
+resume their current drafts and keep their earned progress.
+
 ## Chapter badge artwork and lesson updates
 
 Every new chapter gets a Journey icon. Create a transparent square PNG at

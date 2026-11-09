@@ -16,12 +16,16 @@
       "concepts": "Independent checkpoint - repeated updates",
       "lesson": [
         {
+          "heading": "Track a winch turn by turn",
+          "text": "Each turn of a winch moves the platform by a fixed amount. Start from the platform’s actual position and update it once per turn. With no turns, the platform is still where it started."
+        },
+        {
           "heading": "The idea",
           "text": "A loop applies an action repeatedly. Track the state before the first iteration and after each update. This checkpoint revisits the review loop using a general contract.",
-          "code": "level = 2\nfor turn in range(3):\n    level = level + 4\nprint(level)  # 14"
+          "code": "height = 2\nfor turn in range(3):\n    height = height + 4\nprint(height)  # 14"
         }
       ],
-      "brief": "Return the value reached after steps equal updates to a starting counter.",
+      "brief": "Return the platform position reached after `steps` equal winch turns from its starting position.",
       "requirements": [
         "start and `increment` are integers; `steps` is a non-negative integer. Each update adds increment. Zero steps leaves start unchanged.",
         "Practice aim: trace repeated state with a loop. Equivalent arithmetic is accepted by behavioral checks.",
@@ -109,12 +113,16 @@
       "concepts": "range endpoints - empty ranges",
       "lesson": [
         {
+          "heading": "Tally the corridor toll",
+          "text": "Each marker in a corridor has a signed cost. Your route includes the first marker and ends just before the marker at the exit. Add all the visited costs. The final marker’s cost alone is not the cost of the route."
+        },
+        {
           "heading": "The idea",
           "text": "`range(start, stop)` includes `start` and excludes `stop`. With its default positive step, it is empty when `start >= stop`. An accumulator initialized to zero naturally handles an empty interval.",
-          "code": "for number in range(3, 6):\n    print(number)  # 3, 4, 5"
+          "code": "for marker in range(3, 6):\n    print(marker)  # 3, 4, 5"
         }
       ],
-      "brief": "Return the sum of integers from `start` up to, but not including, stop.",
+      "brief": "Return the total toll from marker `start` up to, but not including, `stop`.",
       "requirements": [
         "Both inputs are integers. If `start >= stop`, return zero. Negative integers are valid. Practice aim: use range and an accumulator; equivalent valid implementations are accepted.",
         "Return the result without printing or reading input inside the helper."
@@ -197,12 +205,16 @@
       "concepts": "Loop conditions - counting matches",
       "lesson": [
         {
+          "heading": "Count the lit beacons",
+          "text": "The guide beacons along a tunnel are numbered, and only every specified beacon is lit. Count the lit positions up to the final marker, including that marker if it qualifies."
+        },
+        {
           "heading": "The idea",
           "text": "A loop can count only values that meet a condition. A counter and a running sum look similar, but their updates answer different questions. Keep the meaning of the accumulator clear.",
           "code": "count = 0\nfor number in range(1, 5):\n    if number > 2:\n        count = count + 1\nprint(count)  # 2"
         }
       ],
-      "brief": "Return how many integers from 1 through `stop` are divisible by `factor`.",
+      "brief": "Count the lit beacons from 1 through `stop`. A beacon is lit if its position is divisible by `factor`.",
       "requirements": [
         "`stop` is a non-negative integer; `factor` is a positive integer. Include stop when it qualifies. Zero stop means zero candidates.",
         "Return the result without printing or reading input inside the helper."
@@ -297,12 +309,16 @@
       "concepts": "`while` - state and stopping conditions",
       "lesson": [
         {
+          "heading": "Track the fading signal",
+          "text": "An echo’s whole-number strength halves each time it crosses a ward. Count how many wards it takes to reach strength 1 or below. An echo already that weak needs no crossings."
+        },
+        {
           "heading": "The idea",
           "text": "`while` repeats as long as its condition is true. Unlike a fixed range, the number of iterations depends on state. Each iteration must make progress toward stopping.",
-          "code": "remaining = 10\nwhile remaining > 0:\n    remaining = remaining - 3\nprint(remaining)  # -2"
+          "code": "torchlight = 10\nwhile torchlight > 0:\n    torchlight = torchlight - 3\nprint(torchlight)  # -2"
         }
       ],
-      "brief": "Return how many floor-halving operations reduce value to 1 or less.",
+      "brief": "Return how many whole-number halvings take the echo strength to 1 or less.",
       "requirements": [
         "`value` is a positive integer. One operation replaces it with `value // 2`. Starting at 1 needs zero operations.",
         "Return the result without printing or reading input inside the helper."
@@ -392,12 +408,16 @@
       "concepts": "`while` - crossing a boundary",
       "lesson": [
         {
+          "heading": "Count the lantern ticks",
+          "text": "A lamp loses a fixed amount of charge each tick. Its last tick can take it below zero, so the countdown ends when it runs out rather than waiting for an exact zero reading."
+        },
+        {
           "heading": "The idea",
           "text": "A decreasing state may cross below zero rather than land exactly on it. A condition such as `remaining != 0` can therefore be unsafe when subtraction skips over zero.",
           "code": "remaining = 5\nwhile remaining > 0:\n    print(remaining)\n    remaining = remaining - 2"
         }
       ],
-      "brief": "Return how many ticks a countdown performs before its remaining amount is zero or negative.",
+      "brief": "Return how many ticks it takes for the lantern charge to reach zero or below.",
       "requirements": [
         "`start` is a non-negative integer; `step` is a positive integer. Each tick subtracts step. Starting at zero performs no ticks.",
         "Return the result without printing or reading input inside the helper."
@@ -480,12 +500,16 @@
       "concepts": "Early loop exit - first match",
       "lesson": [
         {
+          "heading": "Find the first working gear",
+          "text": "A gate’s mechanism needs the smallest gear that divides the tooth count evenly. Try from the smallest size upward. Once a gear fits, larger ones cannot beat it. The full-size gear is the fallback."
+        },
+        {
           "heading": "The idea",
           "text": "`break` stops the nearest loop; code after that loop still runs. A `return` inside a loop exits the entire function. Either can be appropriate for a first-match search. A divisor divides a number with remainder zero.",
           "code": "for attempt in range(1, 8):\n    if attempt * attempt > 12:\n        print(attempt)\n        break\nprint(\"Search finished\")"
         }
       ],
-      "brief": "Return the smallest divisor of `number` that is at least 2.",
+      "brief": "Return the smallest gear size of at least 2 that divides `number` evenly.",
       "requirements": [
         "`number` is an `integer >= 2`. If none of 2 through `number`-1 divides it, return number itself. Example: 9 has first divisor 3; 7 returns 7.",
         "Return the result without printing or reading input inside the helper."
@@ -575,12 +599,16 @@
       "concepts": "`continue` - skip one iteration",
       "lesson": [
         {
+          "heading": "Skip the sealed rooms",
+          "text": "Room numbers also tell you how much light a survey would cost. Every specified room is sealed. Skip those rooms and add only the costs of rooms the cartographer can enter."
+        },
+        {
           "heading": "The idea",
           "text": "`continue` skips the rest of the current iteration and moves to the next. It can keep a loop body focused on accepted values. An `if` around the work can express the same filtering.",
           "code": "for number in range(1, 5):\n    if number == 3:\n        continue\n    print(number)  # 1, 2, 4"
         }
       ],
-      "brief": "Return the sum of integers from 1 through `stop`, excluding multiples of `factor`.",
+      "brief": "Add the room costs from 1 through `stop`, excluding the sealed rooms at multiples of `factor`.",
       "requirements": [
         "`stop` is a non-negative integer; `factor` is positive. Empty candidate ranges sum to zero. Practice aim: try continue; an equivalent conditional filter is accepted.",
         "Return the result without printing or reading input inside the helper."
@@ -663,12 +691,16 @@
       "concepts": "Nested loops - coordinate pairs",
       "lesson": [
         {
+          "heading": "Read the tiled floor",
+          "text": "The archive floor alternates light and dark tiles. Check every row and column to count the light ones. A wing with zero rows or zero columns contains no tiles to count."
+        },
+        {
           "heading": "The idea",
           "text": "Nested loops visit combinations: an outer row and an inner column. The inner loop runs fully for each row. Coordinates here start at zero. A checkerboard can classify a tile by whether `row + column` is even.",
           "code": "for row in range(2):\n    for column in range(3):\n        print(row, column)"
         }
       ],
-      "brief": "Return how many tiles in a rectangular grid have an even sum of row and column coordinates.",
+      "brief": "Count the light tiles in a rectangular archive floor. A tile is light if the sum of its row and column is even.",
       "requirements": [
         "rows and `columns` are non-negative integers. Coordinates start at 0; a tile is light when `(row + column) % 2 == 0`. Any zero-sized dimension means zero tiles.",
         "Return the result without printing or reading input inside the helper."
@@ -763,12 +795,16 @@
       "concepts": "Bounded `while` - success and exhaustion",
       "lesson": [
         {
+          "heading": "Reach the door before the bell",
+          "text": "A wind-up lift gains the same amount of height each turn. Count the turns it needs to reach the landing before the bell. It might already be there, or it might run out of turns first."
+        },
+        {
           "heading": "The idea",
           "text": "A simulation may need both a success condition and a limit on work. Check whether the starting state already succeeds. A finite turn budget also handles cases that cannot make progress.",
           "code": "turns = 0\nvalue = 0\nwhile value < 5 and turns < 3:\n    value = value + 2\n    turns = turns + 1"
         }
       ],
-      "brief": "Return how many turns reach a target, or -1 if the allowed turns cannot reach it.",
+      "brief": "Return how many turns the lift needs to reach its target, or `-1` if it cannot reach it in the allowed turns.",
       "requirements": [
         "All inputs are non-negative integers. Each turn adds gain to the current value. A starting value `already >= target` succeeds in zero turns.",
         "Reaching the target on the last allowed turn succeeds. If it remains below target, return -1. Gain may be zero.",
@@ -889,12 +925,16 @@
       "boss": true,
       "lesson": [
         {
+          "heading": "Keep the field console running",
+          "text": "At camp, the cartographer records survey durations and asks for a report whenever the crew needs one. Each report reads the same running log. The console should wait for another command until the cartographer quits."
+        },
+        {
           "heading": "A program that stays open",
           "text": "A command loop reads a command, performs an action, then waits for another. State lives across iterations. The workshop supplies all input lines in advance; the exported program accepts them interactively in a terminal. Every test includes `quit` so this is bounded by supplied input.",
           "code": "while True:\n    command = input()\n    if command == \"stop\":\n        break"
         }
       ],
-      "brief": "Build a small console that accepts add, report and quit commands.",
+      "brief": "Build the field console that accepts `add`, `report`, and `quit` commands.",
       "requirements": [
         "Read commands using `input()` without prompts, ignoring surrounding whitespace and case. Start with zero sessions and zero total minutes.",
         "add reads one extra line containing a valid non-negative integer duration, records it and prints nothing. report prints `Sessions: N | Total: T min`. quit prints `Finished.` and stops without reading anything else.",

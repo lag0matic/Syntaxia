@@ -16,12 +16,16 @@
       "concepts": "Lists - length - zero-based indexing",
       "lesson": [
         {
+          "heading": "Peek at the first piece of gear",
+          "text": "The equipment list is in pick-up order. Show what the cartographer should grab first without taking it off the list. If the list is empty, there is nothing to inspect."
+        },
+        {
           "heading": "The idea",
           "text": "A list stores an ordered collection. Square brackets create one; `len` counts its elements. Index 0 selects the first element. A missing index raises `IndexError`, so an empty-list contract needs attention before indexing.",
-          "code": "tools = [\"radio\", \"printer\", \"headset\"]\nprint(len(tools))  # 3\nprint(tools[1])    # printer"
+          "code": "tools = [\"lantern\", \"rope\", \"chalk\"]\nprint(len(tools))  # 3\nprint(tools[1])    # rope"
         }
       ],
-      "brief": "Return the first element of `items`, or `None` when the list is empty.",
+      "brief": "Return the first gear label in `items`, or `None` when the list is empty.",
       "requirements": [
         "`items` is a list of text values. Return an element, not a one-element list. Leave the supplied list unchanged.",
         "Return the result without printing or reading input inside the helper."
@@ -97,12 +101,16 @@
       "concepts": "Negative indexes - empty lists",
       "lesson": [
         {
+          "heading": "Read the last travel time",
+          "text": "The grimoire records a time after every leg. Retrieve the most recent entry without erasing any of the log. An expedition that has not moved yet has no last reading."
+        },
+        {
           "heading": "The idea",
           "text": "Negative indexes count backward from the end: `-1` is the last element, `-2` the one before it. They still require an element to exist. Empty lists have no valid positive or negative indexes.",
           "code": "values = [4, 8, 12]\nprint(values[-1])  # 12\nprint(values[-2])  # 8"
         }
       ],
-      "brief": "Return the final element of `items`, or `None` for an empty list.",
+      "brief": "Return the most recent travel time in `items`, or `None` when the list is empty.",
       "requirements": [
         "`items` is a list of integers. Do not remove or change any elements.",
         "Return the result without printing or reading input inside the helper."
@@ -194,12 +202,16 @@
       "concepts": "Slicing - new lists - bounded prefixes",
       "lesson": [
         {
+          "heading": "Preview the next stops",
+          "text": "The scout wants to see the first few jobs on the expedition route without editing the plan. A short route shows only the jobs it has. Asking for zero should show an empty preview."
+        },
+        {
           "heading": "The idea",
           "text": "A slice selects a range of elements: `items[start:stop]` includes `start` and excludes `stop`. Omitting `start` uses the beginning. Slicing beyond the end is safe and returns the elements that exist. A slice creates a new outer list.",
           "code": "letters = [\"A\", \"B\", \"C\", \"D\"]\nprint(letters[1:3])  # ['B', 'C']\nprint(letters[:2])   # ['A', 'B']"
         }
       ],
-      "brief": "Return a new list containing up to `count` jobs from the beginning of `jobs`.",
+      "brief": "Return a new preview containing up to `count` jobs from the start of the expedition queue `jobs`.",
       "requirements": [
         "`jobs` is a list of strings and `count` is a non-negative integer. Return all available jobs if count exceeds the length; zero returns an empty list. Do not change `jobs`.",
         "Return the result without printing or reading input inside the helper."
@@ -304,9 +316,13 @@
       "concepts": "`append` - in-place mutation - `None`",
       "lesson": [
         {
+          "heading": "Add a stop to the real route",
+          "text": "The crew has agreed to take another survey job. Add it to the shared queue itself so everyone sees the change. The same job label can appear twice when the crew plans two visits."
+        },
+        {
           "heading": "The idea",
           "text": "`append` adds one element to the end of a list in place. The method returns `None`; it does not return the changed list. The caller sees the mutation because its name refers to the same list object.",
-          "code": "tasks = [\"Check\"]\nresult = tasks.append(\"Report\")\nprint(tasks)   # ['Check', 'Report']\nprint(result)  # None"
+          "code": "tasks = [\"Gate\"]\nresult = tasks.append(\"Vault\")\nprint(tasks)   # ['Gate', 'Vault']\nprint(result)  # None"
         }
       ],
       "brief": "Add job to the end of the supplied queue, changing that same list.",
@@ -404,6 +420,10 @@
       "concepts": "`pop` - returned element - mutation",
       "lesson": [
         {
+          "heading": "Undo the last route edit",
+          "text": "The cartographer added the wrong stop and wants to undo just that addition. Remove the last queued job and return it so the console can say what was removed. An empty route has nothing to undo."
+        },
+        {
           "heading": "The idea",
           "text": "`pop` removes and returns an element. With no index, it uses the last element. Popping an empty list raises `IndexError`, so decide the empty behavior before calling it.",
           "code": "scores = [10, 20]\nremoved = scores.pop()\nprint(removed)  # 20\nprint(scores)   # [10]"
@@ -491,6 +511,10 @@
       ],
       "concepts": "Direct iteration - filtering into a new list",
       "lesson": [
+        {
+          "heading": "Keep the real travel times",
+          "text": "The grimoire stores trial readings alongside survey durations. Zero and negative values are invalid in this part of the log. Keep the positive values in the order they were recorded, even when two durations match."
+        },
         {
           "heading": "The idea",
           "text": "A `for` loop can iterate list values directly, without `range` or indexing. Build a separate output collection when selecting elements. Changing the input while iterating it can skip or duplicate work.",
@@ -603,12 +627,16 @@
       "concepts": "`enumerate` - position and value - str display",
       "lesson": [
         {
+          "heading": "Number the gear manifest",
+          "text": "A quartermaster calls out equipment by its number on the printed list. Start the numbers at one and keep the original order so the crew can match a printed label to its place."
+        },
+        {
           "heading": "The idea",
           "text": "`enumerate` supplies a position and a value together. A `for` loop can bind both names, separated by a comma. The default position starts at zero; `start=1` is useful for human labels. F-strings convert inserted values to text for display.",
-          "code": "for position, word in enumerate([\"Red\", \"Blue\"], start=1):\n    print(f\"{position}: {word}\")"
+          "code": "for position, word in enumerate([\"Lantern\", \"Rope\"], start=1):\n    print(f\"{position}: {word}\")"
         }
       ],
-      "brief": "Return labels numbered from 1 for the supplied names.",
+      "brief": "Return numbered gear labels starting at 1 for the supplied names.",
       "requirements": [
         "`names` is a list of strings. Return a new list of strings in the form `\"N: NAME\"`, preserving order and name text exactly. Empty input returns an empty list. Do not modify `names`.",
         "Return the result without printing or reading input inside the helper."
@@ -711,12 +739,16 @@
       "concepts": "List membership - exact element equality",
       "lesson": [
         {
+          "heading": "Check the exact crate label",
+          "text": "An equipment request has to match a whole label on the crate list. A partial label could send the crew away with the wrong tool. This particular registry preserves case, unlike the movement command parser."
+        },
+        {
           "heading": "The idea",
           "text": "For a list, `in` checks whether an equal element exists. It does not treat each element as a string to search inside. This differs from substring membership in one string.",
-          "code": "print(\"ad\" in \"radio\")       # True\nprint(\"ad\" in [\"radio\"])     # False\nprint(\"radio\" in [\"radio\"])  # True"
+          "code": "print(\"ant\" in \"lantern\")       # True\nprint(\"ant\" in [\"lantern\"])     # False\nprint(\"lantern\" in [\"lantern\"])  # True"
         }
       ],
-      "brief": "Return whether `target` is an exact element of `names`.",
+      "brief": "Return whether the requested crate label `target` exactly matches an element of `names`.",
       "requirements": [
         "`names` is a list of strings and `target` is a string. Matching is case-sensitive; partial words do not count. Leave names unchanged and return a Boolean.",
         "Return the result without printing or reading input inside the helper."
@@ -824,6 +856,10 @@
       ],
       "concepts": "sorted versus sort - mutation and ordering",
       "lesson": [
+        {
+          "heading": "Make a ranked view of the timings",
+          "text": "The crew wants to compare the shortest and longest times without losing the order in which readings were taken. Sort a separate list so the ranked view and the original route log can coexist."
+        },
         {
           "heading": "The idea",
           "text": "`sorted(values)` returns a new sorted list. `values.sort()` changes that list in place and returns `None`. Both use ascending order by default. Choose based on whether callers need the original order preserved.",
@@ -941,9 +977,13 @@
       "concepts": "Copying versus aliasing - shallow copies",
       "lesson": [
         {
+          "heading": "Preview a detour safely",
+          "text": "The cartographer wants to see how the queue would look with a detour at the end. The party should still see the original route until it agrees to take the detour."
+        },
+        {
           "heading": "The idea",
           "text": "`other = items` creates another name for the same list. `items.copy()` creates a separate outer list. With a flat list of strings, this lets a preview add an item without changing the real queue.",
-          "code": "original = [\"A\"]\ncopy = original.copy()\ncopy.append(\"B\")\nprint(original)  # ['A']\nprint(copy)      # ['A', 'B']"
+          "code": "original = [\"Gate\"]\ncopy = original.copy()\ncopy.append(\"Vault\")\nprint(original)  # ['Gate']\nprint(copy)      # ['Gate', 'Vault']"
         }
       ],
       "brief": "Return a preview list containing the existing queue followed by `job`, without changing queue.",
@@ -1034,6 +1074,10 @@
       ],
       "concepts": "List comprehension - expression and iteration",
       "lesson": [
+        {
+          "heading": "Convert each gauge reading",
+          "text": "A field gauge reports in half-units. Double each signed reading to convert the entire log to a common scale. Keep the number and order of readings so each one still corresponds to its original stop."
+        },
         {
           "heading": "The idea",
           "text": "A list comprehension creates a new list from an expression applied to each value. Read `[expression for item in items]` as transform each item. Start with the equivalent loop if that makes the data flow easier to follow.",
@@ -1128,12 +1172,16 @@
       "concepts": "Chapter project - filtering, totals and list contracts",
       "lesson": [
         {
+          "heading": "Approve the survey queue",
+          "text": "The crew has a list of planned survey times and a limited watch. Count the valid jobs, add only their durations, and report whether the whole queue fits. Two jobs taking the same time still use two slots."
+        },
+        {
           "heading": "The idea",
           "text": "Combine a collection rule with a small report. Decide which values represent real jobs before counting and totaling them. Keep the original collection available for the caller.",
           "code": "labels = [\"A\", \"\", \"B\"]\nfor label in labels:\n    if label != \"\":\n        print(label)"
         }
       ],
-      "brief": "Summarize the usable jobs in a duration queue.",
+      "brief": "Report the usable survey jobs in the expedition queue and whether they fit the available time.",
       "requirements": [
         "`lengths` is a list of integers; `available` is a non-negative integer. Only positive lengths represent usable jobs. Keep duplicates as separate jobs.",
         "Return exactly `Queued: N | Total: T min | Fits: B` using the count and sum of usable jobs. Fits includes equality. Empty or all-invalid input means zero jobs and zero total, which fits any supplied budget.",

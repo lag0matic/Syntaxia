@@ -9,12 +9,16 @@
       "id": "py-num-01-checkpoint",
       "version": 1,
       "title": "Quote the whole job",
-      "concepts": "Independent checkpoint \u00b7 arithmetic \u00b7 functions",
+      "concepts": "Independent checkpoint · arithmetic · functions",
       "xp": 10,
       "prerequisites": [
         "py-scope-08-toolkit"
       ],
       "lesson": [
+        {
+          "heading": "Schedule the gear bench",
+          "text": "Preparing several identical tools takes time per item, plus one setup for the bench. An empty order still takes setup time under this desk’s contract, so count it once even when there are no items."
+        },
         {
           "heading": "The idea",
           "text": "Start with a short application of familiar arithmetic and functions. There is no supplied function body to repair. Read the contract, decide what each quantity means, then write a solution. This is a checkpoint on prior material; it does not automatically skip or complete other missions. The `pass` statement is a placeholder that does nothing; it keeps an unfinished function valid Python. Until you replace it with useful behavior, the function returns `None`.",
@@ -114,12 +118,16 @@
       "id": "py-num-02-grouping",
       "version": 1,
       "title": "Price a mixed batch",
-      "concepts": "Precedence \u00b7 grouping \u00b7 specification",
+      "concepts": "Precedence · grouping · specification",
       "xp": 10,
       "prerequisites": [
         "py-num-01-checkpoint"
       ],
       "lesson": [
+        {
+          "heading": "Price the supply shipment",
+          "text": "Each supply item gets its own wrapping, but the cart to the archive is charged once per batch. The invoice should distinguish per-item costs from the fee for the whole shipment."
+        },
         {
           "heading": "The idea",
           "text": "Multiplication and division bind more tightly than addition and subtraction. Parentheses express a group that must be evaluated together. The question is which quantities belong together, not how to force a sample answer.",
@@ -210,12 +218,16 @@
       "id": "py-num-03-division",
       "version": 1,
       "title": "Count complete runs",
-      "concepts": "`True` division \u00b7 floor division \u00b7 complete groups",
+      "concepts": "`True` division · floor division · complete groups",
       "xp": 10,
       "prerequisites": [
         "py-num-02-grouping"
       ],
       "lesson": [
+        {
+          "heading": "Count the full scouting runs",
+          "text": "The watch has 95 minutes left and a scouting run takes 30 minutes. Only full trips count. A fraction of a trip will not get the team back to the archive door in time."
+        },
         {
           "heading": "The idea",
           "text": "`/` returns a quotient that can include a fraction. `//` returns the floored quotient. With non-negative integers, it counts complete groups. Negative floor division rounds down, not toward zero; negative inputs are outside this exercise.",
@@ -310,12 +322,16 @@
       "id": "py-num-04-remainder",
       "version": 1,
       "title": "What is left over?",
-      "concepts": "Remainder \u00b7 units \u00b7 exact multiples",
+      "concepts": "Remainder · units · exact multiples",
       "xp": 10,
       "prerequisites": [
         "py-num-03-division"
       ],
       "lesson": [
+        {
+          "heading": "Find the time between runs",
+          "text": "Once the full scouting runs are scheduled, find the spare minutes for drawing notes. If the watch is too short for even one run, every available minute is spare."
+        },
         {
           "heading": "The idea",
           "text": "`%` gives the remainder after division. For non-negative whole amounts and a positive group size, the remainder is from zero up to one less than the group size. It answers a different question from the number of complete groups.",
@@ -410,12 +426,16 @@
       "id": "py-num-05-duration",
       "version": 1,
       "title": "Make a duration readable",
-      "concepts": "Independent application \u00b7 division and remainder \u00b7 f-strings",
+      "concepts": "Independent application · division and remainder · f-strings",
       "xp": 10,
       "prerequisites": [
         "py-num-04-remainder"
       ],
       "lesson": [
+        {
+          "heading": "Read the door timer",
+          "text": "The archive door reports its timer in seconds, but the watch reads it in minutes and seconds. Keep the leftover seconds so a reading of 125 is distinguishable from exactly two minutes."
+        },
         {
           "heading": "The idea",
           "text": "Units give arithmetic its meaning. A conversion can split one quantity into larger whole units and a smaller remainder. Keep the original unit in mind when choosing divisors. An f-string can display more than one computed value.",
@@ -505,12 +525,16 @@
       "id": "py-num-06-conversion",
       "version": 1,
       "title": "Read numbers as numbers",
-      "concepts": "Text conversion \u00b7 units \u00b7 mixed arithmetic",
+      "concepts": "Text conversion · units · mixed arithmetic",
       "xp": 10,
       "prerequisites": [
         "py-num-05-duration"
       ],
       "lesson": [
+        {
+          "heading": "Read the watch log",
+          "text": "An old watch log stores hours and minutes as text, and one cartographer records 90 minutes without carrying it into the hours column. Convert both fields and count all the minutes they recorded."
+        },
         {
           "heading": "The idea",
           "text": "Text that looks numeric remains text until converted. `int` converts whole-number text; `float` converts decimal text. For example, `int(\"6\")` is a number, whereas `\"6\" * 2` repeats text. This exercise assumes valid whole-number text so conversion-error handling can wait.",
@@ -605,12 +629,16 @@
       "id": "py-num-07-display",
       "version": 1,
       "title": "Display an average",
-      "concepts": "`True` division \u00b7 float display \u00b7 fixed precision",
+      "concepts": "`True` division · float display · fixed precision",
       "xp": 10,
       "prerequisites": [
         "py-num-06-conversion"
       ],
       "lesson": [
+        {
+          "heading": "Estimate the typical survey",
+          "text": "The crew wants a typical survey duration for tomorrow’s route plan. An average can land between two whole minutes. Show two decimal places so the report reads consistently without discarding that fraction."
+        },
         {
           "heading": "The idea",
           "text": "Use `/` when a fractional result is meaningful. Binary floating point cannot represent every decimal exactly. Display formatting chooses how a value appears; it does not make the underlying arithmetic exact. Inside an f-string, `:.2f` displays two digits after the decimal point.",
@@ -705,16 +733,20 @@
       "id": "py-num-08-compare",
       "version": 1,
       "title": "Did you beat the record?",
-      "concepts": "Comparisons \u00b7 Boolean return \u00b7 strict boundary",
+      "concepts": "Comparisons · Boolean return · strict boundary",
       "xp": 10,
       "prerequisites": [
         "py-num-07-display"
       ],
       "lesson": [
         {
+          "heading": "Set a new archive score",
+          "text": "The practice board only marks a new record when the score beats the previous best. A tie deserves the same score on the board, but it does not set a new record."
+        },
+        {
           "heading": "The idea",
           "text": "Comparisons produce Boolean values: `True` or `False`. `<` and `>` are strict; `<=` and `>=` include equality. `==` compares values and `!=` tests inequality. Assignment uses `=`. A comparison can be returned directly from a function; it does not require an `if` statement.",
-          "code": "speed = 12\nlimit = 12\nprint(speed > limit)   # False\nprint(speed >= limit)  # True"
+          "code": "score = 12\nlimit = 12\nprint(score > limit)   # False\nprint(score >= limit)  # True"
         }
       ],
       "brief": "Create `is_new_record(score, previous_record)`, returning whether the score beats the previous record.",
@@ -805,16 +837,20 @@
       "id": "py-num-09-capacity",
       "version": 1,
       "title": "Will it fit?",
-      "concepts": "Inclusive comparison \u00b7 derived quantity \u00b7 boundaries",
+      "concepts": "Inclusive comparison · derived quantity · boundaries",
       "xp": 10,
       "prerequisites": [
         "py-num-08-compare"
       ],
       "lesson": [
         {
+          "heading": "Check the torchlight budget",
+          "text": "A crew can take a route if its setup and all survey sessions finish by the time the lantern goes out. Finishing at the exact limit fits. Being one minute over is enough to change the decision."
+        },
+        {
           "heading": "The idea",
           "text": "A comparison can use a calculated quantity. Name that quantity when it clarifies the requirement. Equality at the boundary is often the difference between a correct test and an off-by-one error. Decide from the contract whether an exact fit succeeds.",
-          "code": "occupied = 4\nnew_arrivals = 3\ncapacity = 7\nprint(occupied + new_arrivals <= capacity)  # True"
+          "code": "loaded = 4\nextra_crates = 3\ncapacity = 7\nprint(loaded + extra_crates <= capacity)  # True"
         }
       ],
       "brief": "Create `fits_slot(length, count, setup, available)`, returning whether a whole planned batch fits in the available minutes.",
@@ -915,16 +951,20 @@
       "id": "py-num-10-alignment",
       "version": 1,
       "title": "Does the batch divide evenly?",
-      "concepts": "Modulo \u00b7 equality \u00b7 Boolean composition of arithmetic",
+      "concepts": "Modulo · equality · Boolean composition of arithmetic",
       "xp": 10,
       "prerequisites": [
         "py-num-09-capacity"
       ],
       "lesson": [
         {
+          "heading": "Pack full supply bundles",
+          "text": "The porter wants to know whether the supplies fill whole bundles. A partly filled bundle needs another tie, and an empty shipment leaves no partial bundle at all."
+        },
+        {
           "heading": "The idea",
           "text": "A remainder is a numeric value that can itself be compared. Equality is written `==`; a single `=` is assignment and is not a substitute. This combines arithmetic with a comparison without requiring new branching syntax.",
-          "code": "pieces = 17\nbox_size = 4\nprint(pieces % box_size)       # 1\nprint(pieces % box_size == 0)  # False"
+          "code": "torches = 17\nbundle_size = 4\nprint(torches % bundle_size)       # 1\nprint(torches % bundle_size == 0)  # False"
         }
       ],
       "brief": "Create `fills_whole_packs(item_count, pack_size)`, returning whether there will be no partially filled pack.",
@@ -1015,12 +1055,16 @@
       "id": "py-num-11-repair",
       "version": 1,
       "title": "Keep the fractional part",
-      "concepts": "Debugging \u00b7 floor versus true division \u00b7 regression examples",
+      "concepts": "Debugging · floor versus true division · regression examples",
       "xp": 10,
       "prerequisites": [
         "py-num-10-alignment"
       ],
       "lesson": [
+        {
+          "heading": "Keep the half hour",
+          "text": "A 90-minute expedition should use an hour and a half of the watch, not just one hour. Test a duration between two whole hours to expose the lost fraction."
+        },
         {
           "heading": "The idea",
           "text": "A plausible whole-number sample can hide a calculation bug. Choose inputs for which the competing interpretations differ. In particular, rounding away a fractional unit too early changes every calculation after it.",
@@ -1110,12 +1154,16 @@
       "id": "py-num-12-boss",
       "version": 1,
       "title": "Build a session budget report",
-      "concepts": "Chapter project \u00b7 units \u00b7 remainder \u00b7 comparison \u00b7 presentation",
+      "concepts": "Chapter project · units · remainder · comparison · presentation",
       "xp": 30,
       "prerequisites": [
         "py-num-11-repair"
       ],
       "lesson": [
+        {
+          "heading": "Write the expedition budget",
+          "text": "Before the gate opens, the crew needs to see both how long the trip will take and whether it fits. Report the planned time in readable units and keep the Boolean decision explicit."
+        },
         {
           "heading": "The idea",
           "text": "A report can present both a calculation and a decision. Keep the units consistent, preserve partial larger units as remainders, and make the fit boundary explicit. All necessary tools have appeared in this chapter; choose your own structure.",

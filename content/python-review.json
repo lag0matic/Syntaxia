@@ -11,24 +11,28 @@
       "title": "A message with a purpose",
       "xp": 10,
       "prerequisites": [],
-      "concepts": "Variables \u00b7 strings \u00b7 print \u00b7 f-strings",
+      "concepts": "Variables · strings · print · f-strings",
       "lesson": [
+        {
+          "heading": "Label the expedition console",
+          "text": "The archive base camp has several tools on one console. Give the one that tracks survey sessions a name, then show the name in its startup message so the party knows which tool is open."
+        },
         {
           "heading": "Give a value a name",
           "text": "A variable is a name attached to a value. Assignment uses one equals sign. Python figures out the value's type, so you do not need a declaration such as STRING or INTEGER first.",
-          "code": "project = \"Radio logbook\"\nprint(project)"
+          "code": "project = \"Archive map\"\nprint(project)"
         },
         {
           "heading": "Put values into a message",
           "text": "A string is text inside quotes. An f-string starts with `f` and substitutes the values inside braces. `print()` sends the result to the output panel.",
-          "code": "project = \"Radio logbook\"\nprint(f\"Working on: {project}\")"
+          "code": "project = \"Archive map\"\nprint(f\"Working on: {project}\")"
         },
         {
           "heading": "A habit worth keeping",
           "text": "Use descriptive lowercase names with underscores: `project_name` tells you more than `x`. You can use single or double quotes; be consistent. A `#` starts a comment for the reader, not an instruction for Python."
         }
       ],
-      "brief": "Introduce the tool you are going to build.",
+      "brief": "Print the startup message that identifies the expedition console tool.",
       "requirements": [
         "Create a variable named `tool_name` with the text Session tracker.",
         "Print exactly `Building: Session tracker` on one line. Do not print quotation marks."
@@ -69,8 +73,12 @@
       "prerequisites": [
         "py-01-message"
       ],
-      "concepts": "Numbers \u00b7 arithmetic \u00b7 debugging",
+      "concepts": "Numbers · arithmetic · debugging",
       "lesson": [
+        {
+          "heading": "Budget the lantern",
+          "text": "The lamp has to last through three survey sessions of the same length. Keep the time per session and the number of sessions separate so the same calculation still works when you plan a different trip."
+        },
         {
           "heading": "Numbers are different from text",
           "text": "The integer 12 can be used in arithmetic. The string `\"12\"` is text. Put quotes around words, but leave them off numbers you intend to calculate with.",
@@ -85,7 +93,7 @@
           "text": "This starter runs, but gives the wrong total. Predict its current result, run it, then repair the calculation. A program that runs is not necessarily a program that is right."
         }
       ],
-      "brief": "Repair the session estimate without hard-coding the final answer.",
+      "brief": "Repair the lantern time estimate without hard-coding the final answer.",
       "requirements": [
         "Keep `minutes_per_session` equal to 25 and sessions equal to 3.",
         "Calculate `total_minutes` by multiplying those two variables.",
@@ -129,8 +137,12 @@
       "prerequisites": [
         "py-02-arithmetic"
       ],
-      "concepts": "input \u00b7 int \u00b7 string methods",
+      "concepts": "input · int · string methods",
       "lesson": [
+        {
+          "heading": "Take the next watch",
+          "text": "Another cartographer takes over and enters their name and the length of one survey session. The console should budget two sessions and clean up extra spaces around the name before printing the handover."
+        },
         {
           "heading": "Ask for a value",
           "text": "`input()` reads one answer and returns a string. In this classroom, type answers into Program input before pressing Run, one answer on each line. Use `input()` without a prompt for these exercises so the output is easy to check.",
@@ -144,10 +156,10 @@
         {
           "heading": "Clean up the edges",
           "text": "A string's `.strip()` method returns a new string with leading and trailing whitespace removed. It does not remove spaces in the middle. Calling a method uses parentheses, just like calling a function.",
-          "code": "label = \"  Field notebook  \"\nclean_label = label.strip()\nprint(clean_label)"
+          "code": "label = \"  East gallery  \"\nclean_label = label.strip()\nprint(clean_label)"
         }
       ],
-      "brief": "Read a learner's name and a session length, then calculate two sessions.",
+      "brief": "Read the cartographer’s name and one survey duration, then calculate the time for two sessions.",
       "requirements": [
         "Read two inputs in order: a name, then a whole-number session length in minutes.",
         "Strip surrounding spaces from the name and convert the minutes to an integer.",
@@ -200,12 +212,16 @@
       "prerequisites": [
         "py-03-input"
       ],
-      "concepts": "if `/` elif `/` else \u00b7 comparisons \u00b7 indentation",
+      "concepts": "if `/` elif `/` else · comparisons · indentation",
       "lesson": [
+        {
+          "heading": "Choose the survey pace",
+          "text": "The crew distinguishes a quick look from a full survey when it plans a trip. A duration of zero or less cannot describe a trip at all. Decide which message to show before anybody spends torchlight."
+        },
         {
           "heading": "Choose a branch",
           "text": "An `if` statement runs its block only when its condition is true. `elif` checks another condition if the earlier one was false. `else` handles what remains. The first matching branch wins.",
-          "code": "temperature = 18\nif temperature < 10:\n    print(\"Cold\")\nelif temperature < 25:\n    print(\"Mild\")\nelse:\n    print(\"Hot\")"
+          "code": "charge = 18\nif charge < 10:\n    print(\"Replace lantern\")\nelif charge < 25:\n    print(\"Short route\")\nelse:\n    print(\"Long route\")"
         },
         {
           "heading": "Indentation is structure",
@@ -216,7 +232,7 @@
           "text": "`<` means less than, `<=` means less than or equal to, and `==` compares equality. A single `=` assigns a value. Test the exact point where behavior changes, not just a value far away from it."
         }
       ],
-      "brief": "Give a useful response to a proposed session length.",
+      "brief": "Classify the proposed survey duration and print the corresponding response.",
       "requirements": [
         "Read one whole-number duration with `input()` and convert it to an integer.",
         "For zero or a negative number, print Enter a positive duration.",
@@ -295,8 +311,12 @@
       "prerequisites": [
         "py-04-conditions"
       ],
-      "concepts": "for \u00b7 range \u00b7 repeated work",
+      "concepts": "for · range · repeated work",
       "lesson": [
+        {
+          "heading": "Write the route checklist",
+          "text": "A cartographer checks off each survey session as they go. Number the checklist for the count they enter so the console can handle a short scouting trip and a longer expedition with the same code."
+        },
         {
           "heading": "Let the loop do the repetition",
           "text": "A `for` loop visits each value in a sequence. `range(start, stop)` supplies integers starting at `start` and stopping before `stop`. That excluded end is a common source of off-by-one mistakes.",
@@ -311,7 +331,7 @@
           "text": "Before trying ten sessions, test one and zero. Small cases are easy to trace by hand. If a program keeps running, use Stop; your code remains in the editor."
         }
       ],
-      "brief": "Generate a numbered checklist for any requested number of sessions.",
+      "brief": "Print a numbered expedition checklist for the requested number of survey sessions.",
       "requirements": [
         "Read a nonnegative integer session count. You do not need to handle negative numbers here.",
         "Print Session 1, Session 2, and so on, through the entered count, one per line.",
@@ -381,8 +401,12 @@
       "prerequisites": [
         "py-05-loops"
       ],
-      "concepts": "def \u00b7 parameters \u00b7 return \u00b7 calling functions",
+      "concepts": "def · parameters · return · calling functions",
       "lesson": [
+        {
+          "heading": "Give the desk a calculator",
+          "text": "The grimoire will need the same time calculation in its route planner and its reports. Put the calculation in a helper that hands the number back so either caller can decide what to do with it."
+        },
         {
           "heading": "Name a reusable operation",
           "text": "`def` defines a function. Parameters are names for the values its caller supplies. The indented body does not run until you call the function.",
@@ -397,7 +421,7 @@
           "text": "The function in this mission should receive numbers, not ask for input itself. That makes it usable from a console, a GUI, or a test. Local parameter names belong to the function; the caller may use completely different names."
         }
       ],
-      "brief": "Build a reusable session-total function.",
+      "brief": "Build a helper the expedition planner can use to calculate total survey minutes.",
       "requirements": [
         "Define a function named `total_minutes` with two parameters, `minutes_per_session` and sessions.",
         "Return their product as a number. Do not use `input()` inside the function.",
@@ -462,9 +486,13 @@
       "prerequisites": [
         "py-06-functions"
       ],
-      "concepts": "Chapter project \u00b7 combine what you know",
+      "concepts": "Chapter project · combine what you know",
       "boss": true,
       "lesson": [
+        {
+          "heading": "Pack for the first expedition",
+          "text": "The first expedition starts at the planning desk. Build a console tool that takes a cartographer’s name, budgets several equal survey sessions, and prints the checklist they will carry into the archive. A missing name is harmless. An impossible duration or count needs a warning."
+        },
         {
           "heading": "A tool you can keep",
           "text": "Combine input, cleanup, decisions, a function, and a loop into a working session planner. Read the requirements, make one piece work, then add the next. Download the finished `.py` file to use with Python on your PC."
@@ -479,7 +507,7 @@
           "text": "Define your calculation function first. Read and clean the inputs. Choose the invalid or valid path. On the valid path, print the total and the checklist. Keep all checklist output inside the valid branch. Automated checks judge behavior. After passing, compare your solution with the reference. The optional tutor can help you reason through a difference."
         }
       ],
-      "brief": "Build a session planner that prints a useful summary and checklist.",
+      "brief": "Build the expedition planning tool. Print a time summary and a numbered survey checklist.",
       "requirements": [
         "Define `total_minutes(minutes_per_session, sessions)` so it returns the numeric product, and use it for your total.",
         "Read three inputs in order: name, minutes per session, number of `sessions`. Numeric inputs will be whole numbers.",

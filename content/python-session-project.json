@@ -23,13 +23,17 @@
       ],
       "lesson": [
         {
+          "heading": "Write a usable log entry",
+          "text": "At base camp, a cartographer needs one compact line describing their trip. A missing name or an empty expedition still needs a readable entry that the rest of the crew can understand."
+        },
+        {
           "heading": "A useful application of familiar tools",
           "text": "This project turns individual calculations into a program you can run and export. Start with its report contract; later you will gather several session durations. Zero sessions is a real case, not a division error to ignore."
         },
         {
           "heading": "Guard a calculation",
           "text": "An `if/else` can choose a calculation before formatting. Only the selected branch executes. Decide what your contract means when a denominator would be zero.",
-          "code": "if boxes == 0:\n    average = 0\nelse:\n    average = items / boxes"
+          "code": "if rooms == 0:\n    average = 0\nelse:\n    average = minutes / rooms"
         }
       ],
       "starter": "def summary_line(name, count, total, available):\n    pass\n\nprint(summary_line(\"  David  \", 3, 85, 90))\n",
@@ -126,6 +130,10 @@
         "Return their sum; print nothing from the helper. When `count` is zero, return zero without reading any input. Session durations can differ."
       ],
       "lesson": [
+        {
+          "heading": "Tally the actual route",
+          "text": "The rooms took different amounts of time, so multiplying one room’s duration by the number of rooms would give the wrong total. Collect the recorded durations and add the minutes actually spent."
+        },
         {
           "heading": "Repeat a known operation",
           "text": "The review chapter introduced `for` and `range()`. Here the repeat count is supplied by the caller. `range(count)` represents `count` repetitions, and `range(0)` has none.",
@@ -249,6 +257,10 @@
         "`collect_minutes` reads durations but prints nothing. `summary_line` reads no input and prints nothing. The outer program prints the returned report. No setup charge is included: these are completed sessions, not planned estimates."
       ],
       "lesson": [
+        {
+          "heading": "Debrief the expedition",
+          "text": "Turn the field notes into a console report the crew can use after any trip. Read the durations, compare them with the lantern budget, and show the summary without asking for an extra duration when the log is empty."
+        },
         {
           "heading": "Bring the pieces together",
           "text": "Reuse your own helpers from this project, then connect their inputs and returned values. This is a program assembly task, not a new algorithm. Keep the report contract available while you work."

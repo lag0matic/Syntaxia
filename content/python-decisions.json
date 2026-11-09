@@ -16,12 +16,16 @@
       "concepts": "Independent checkpoint - branches and equality",
       "lesson": [
         {
+          "heading": "Read the gate gauge",
+          "text": "The inner gate has a gauge with a marked limit. The crew needs different signals for a reading below, exactly on, or above the mark. The middle case matters because the dial can land exactly on the threshold."
+        },
+        {
           "heading": "The idea",
           "text": "Start with a fresh function rather than a repair. A conditional selects behavior from the contract. Explain an exact-boundary example to yourself before writing code.",
           "code": "if temperature < 0:\n    message = \"Below freezing\"\nelse:\n    message = \"Not below freezing\""
         }
       ],
-      "brief": "Return a status label comparing `value` with `limit`.",
+      "brief": "Return the gate gauge status by comparing `value` with `limit`.",
       "requirements": [
         "Both inputs are integers. Return `\"below\"` when `value` is smaller, `\"equal\"` on equality, and `\"above\"` when larger.",
         "Return the result without printing or reading input inside the helper."
@@ -116,12 +120,16 @@
       "concepts": "`and` - inclusive ranges",
       "lesson": [
         {
+          "heading": "Stay in the safe zone",
+          "text": "An old lift only moves when its pressure stays within a safe band. Reaching either endpoint is still safe. Check the bottom and the top of the band before giving the go-ahead."
+        },
+        {
           "heading": "The idea",
           "text": "`and` requires both conditions to be true. Write each comparison as a full expression. Python also supports chained comparisons, such as `low <= value <= high`; both forms are valid.",
-          "code": "age = 18\npaid = True\nprint(age >= 16 and paid)  # True"
+          "code": "charge = 18\nhas_fuel = True\nprint(charge >= 16 and has_fuel)  # True"
         }
       ],
-      "brief": "Return whether `value` falls inside the inclusive interval from `low` to `high`.",
+      "brief": "Return whether the lift pressure `value` falls within the inclusive safe band from `low` to `high`.",
       "requirements": [
         "All inputs are integers and `low <= high`. Both endpoints belong to the interval. Return a Boolean.",
         "Return the result without printing or reading input inside the helper."
@@ -234,9 +242,13 @@
       "concepts": "`or` - Boolean flags",
       "lesson": [
         {
+          "heading": "Open a side gate",
+          "text": "A survey ticket or staff access can admit a visitor to the side gallery. Either credential is enough, and a visitor carrying both is still allowed through."
+        },
+        {
           "heading": "The idea",
           "text": "`or` requires at least one condition to be true. Its inclusive meaning includes the case where both are true. For this task the supplied flags are actual Boolean values.",
-          "code": "is_weekend = False\nis_holiday = True\nprint(is_weekend or is_holiday)  # True"
+          "code": "has_stairway = False\nhas_lift = True\nprint(has_stairway or has_lift)  # True"
         }
       ],
       "brief": "Return whether a visitor may enter using a ticket or staff access.",
@@ -322,12 +334,16 @@
       "concepts": "`not` - negating a condition",
       "lesson": [
         {
+          "heading": "Hold a lift for repairs",
+          "text": "The archive lift must be connected before it can start. If the repair crew puts it in maintenance mode, even a connected lift must stay put."
+        },
+        {
           "heading": "The idea",
           "text": "`not` reverses a truth value. Naming a flag clearly helps you decide whether the requirement needs it directly or negated. Parentheses can make combinations easier to read.",
-          "code": "muted = True\nprint(not muted)  # False"
+          "code": "sealed = True\nprint(not sealed)  # False"
         }
       ],
-      "brief": "Return whether a connected device may start while respecting maintenance mode.",
+      "brief": "Return whether the lift may start, given whether it is connected and whether maintenance mode is active.",
       "requirements": [
         "Inputs are Booleans. Starting requires connection and requires maintenance to be off. Return a Boolean.",
         "Return the result without printing or reading input inside the helper."
@@ -410,12 +426,16 @@
       "concepts": "`elif` - branch order and thresholds",
       "lesson": [
         {
+          "heading": "Read the lantern charge",
+          "text": "A lantern gauge sends a battery percentage. Turn that reading into a band the cartographer can act on. Each band gets its own response, and the boundaries decide when it changes."
+        },
+        {
           "heading": "The idea",
           "text": "An `if/elif/else` chain runs the first matching branch. Broad conditions placed too early can swallow more specific cases. A small set of boundary examples helps establish the order.",
           "code": "if points < 10:\n    rank = \"Starter\"\nelif points < 30:\n    rank = \"Growing\"\nelse:\n    rank = \"Experienced\""
         }
       ],
-      "brief": "Return the battery band for a supplied percentage.",
+      "brief": "Return the lantern’s battery band for the supplied percentage.",
       "requirements": [
         "`percent` is an integer from 0 through 100. Values below 20 are `\"low\"`; 20 through 79 are `\"usable\"`; 80 through 100 are `\"full\"`.",
         "Return the result without printing or reading input inside the helper."
@@ -516,12 +536,16 @@
       "concepts": "Grouped `and/or` - precedence",
       "lesson": [
         {
+          "heading": "Protect the master map",
+          "text": "A map’s owner or an assigned editor can normally mark it up. Once the archive locks the map for preservation, both lose editing access. The lock applies to both routes to permission."
+        },
+        {
           "heading": "The idea",
           "text": "When rules mix alternatives and blockers, group the alternatives before applying the shared blocker. Parentheses document the policy, even when another expression could produce the same answer.",
           "code": "member = True\nguest_pass = False\nclosed = True\nprint((member or guest_pass) and not closed)  # False"
         }
       ],
-      "brief": "Return whether someone may edit a document.",
+      "brief": "Return whether someone may edit the archive’s master map.",
       "requirements": [
         "Inputs are Booleans. An owner or editor may edit only when the document is not locked. A lock blocks everyone, including owners.",
         "Return the result without printing or reading input inside the helper."
@@ -634,12 +658,16 @@
       "concepts": "Guard clauses - early returns",
       "lesson": [
         {
+          "heading": "Screen a scouting request",
+          "text": "A scout asks for time on the lift. Reject impossible requests first, then check whether a valid request fits the remaining watch. Exactly enough time counts as ready."
+        },
+        {
           "heading": "The idea",
           "text": "A guard clause handles a special case and returns early. The remaining code can then assume the guard did not apply. This often makes exceptional cases easier to see.",
           "code": "def price_label(quantity):\n    if quantity < 0:\n        return \"Invalid\"\n    return f\"Quantity: {quantity}\""
         }
       ],
-      "brief": "Classify a requested duration as invalid, too long, or ready.",
+      "brief": "Classify a request for lift time as invalid, too long, or ready.",
       "requirements": [
         "Inputs are integers and `available` is non-negative. `minutes <= 0` returns `\"invalid\"`. Otherwise `minutes > available` returns `\"too long\"`; all other requests return `\"ready\"`.",
         "Return the result without printing or reading input inside the helper."
@@ -734,12 +762,16 @@
       "concepts": "String normalization - membership",
       "lesson": [
         {
+          "heading": "Read one move at a time",
+          "text": "A cartographer can move north, south, east, or west on a turn. Accept a direction typed with extra spaces or capitals. Reject a fragment or two directions on one line so the game never has to guess where to move."
+        },
+        {
           "heading": "The idea",
           "text": "`lower()` returns lowercase text. The `in` operator checks membership: for strings it checks whether one string occurs inside another. Exact command choices are better expressed as explicit equality alternatives here, since a substring is not necessarily a whole command.",
-          "code": "word = \"  RADIO  \"\nprint(word.strip().lower())  # radio\nprint(\"ad\" in \"radio\")    # True"
+          "code": "word = \"  LANTERN  \"\nprint(word.strip().lower())  # lantern\nprint(\"ant\" in \"lantern\")    # True"
         }
       ],
-      "brief": "Return whether a command names a direction.",
+      "brief": "Return whether the command names one valid direction for the cartographer’s next move.",
       "requirements": [
         "`command` is text. Ignore surrounding whitespace and letter case. Only `\"north\"`, `\"south\"`, `\"east\"`, and `\"west\"` count. Empty text and partial words are not valid. Return a Boolean.",
         "Return the result without printing or reading input inside the helper."
@@ -840,12 +872,16 @@
       "concepts": "Interval overlap - inclusive endpoints",
       "lesson": [
         {
+          "heading": "Check two watch windows",
+          "text": "Two survey teams can exchange notes if their windows share any time. A handover at the exact instant one window ends and the other begins counts under the archive’s rules."
+        },
+        {
           "heading": "The idea",
           "text": "Some decisions involve two ranges instead of one value. Draw simple intervals on paper before coding, including one that just touches another. The contract decides whether touching counts.",
           "code": "left = 3\nright = 8\npoint = 8\nprint(left <= point <= right)  # True"
         }
       ],
-      "brief": "Return whether two inclusive intervals overlap.",
+      "brief": "Return whether the survey teams’ two inclusive watch windows overlap.",
       "requirements": [
         "All inputs are integers; `start_a <= end_a` and `start_b <= end_b`. Sharing one endpoint counts as overlap. Single-point intervals are valid. Return a Boolean.",
         "Return the result without printing or reading input inside the helper."
@@ -964,12 +1000,16 @@
       "concepts": "Chapter project - priorities and Boolean policy",
       "lesson": [
         {
+          "heading": "Run the lift dispatch desk",
+          "text": "The survey desk has to decide whether to dispatch a lift while several warning lights may be on. The order matters because a single request can fail more than one check and the console must report one status."
+        },
+        {
           "heading": "The idea",
           "text": "A useful policy defines what happens when several conditions apply at once. Priority is part of the specification. Test combinations, not only one blocker at a time.",
           "code": "def queue_label(count, paused):\n    if paused:\n        return \"paused\"\n    if count == 0:\n        return \"empty\"\n    return \"waiting\""
         }
       ],
-      "brief": "Build the status decision for a simulated session dispatcher.",
+      "brief": "Return the lift dispatcher’s status for a proposed survey session.",
       "requirements": [
         "`minutes` is an integer; `available` is a non-negative integer; connected and `maintenance` are Booleans.",
         "Return one label using this priority: invalid duration (`minutes <= 0`) -`>` `\"invalid\"`; maintenance on -`>` `\"maintenance\"`; disconnected -`>` `\"offline\"`; duration above available -`>` `\"over budget\"`; otherwise -`>` `\"ready\"`.",

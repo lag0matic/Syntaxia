@@ -9,12 +9,16 @@
       "id": "py-scope-01-route",
       "version": 1,
       "title": "Follow the value, not the name",
-      "concepts": "Trace a call \u00b7 parameter binding \u00b7 unchanged caller",
+      "concepts": "Trace a call · parameter binding · unchanged caller",
       "xp": 10,
       "prerequisites": [
         "py-fn-16-toolkit"
       ],
       "lesson": [
+        {
+          "heading": "Trace the lantern estimate",
+          "text": "The desk should add setup time to the number the cartographer entered while keeping their original estimate available for comparison. Trace what goes into the helper and what comes back."
+        },
         {
           "heading": "A call lends a value to a local name",
           "text": "At a call, the argument supplies the parameter value. An assignment to that parameter inside the function does not reassign the caller's integer variable. Before Run, predict all three output lines in the starter.",
@@ -82,12 +86,16 @@
       "id": "py-scope-02-locals",
       "version": 1,
       "title": "Same spelling, separate locals",
-      "concepts": "Local scope \u00b7 separate function calls",
+      "concepts": "Local scope · separate function calls",
       "xp": 10,
       "prerequisites": [
         "py-scope-01-route"
       ],
       "lesson": [
+        {
+          "heading": "Keep two clocks separate",
+          "text": "The survey and the rest stop each calculate a duration. They can both call their local answer “result” without overwriting the other clock. The desk also has a reading of its own."
+        },
         {
           "heading": "Each call has its own workspace",
           "text": "A variable assigned inside a function is local to that call. Two functions can use the same local name without overwriting each other. This makes it possible to understand one function at a time.",
@@ -167,16 +175,20 @@
       "id": "py-scope-03-boundary",
       "version": 1,
       "title": "Bring the value across the boundary",
-      "concepts": "Local names \u00b7 return values \u00b7 `NameError`",
+      "concepts": "Local names · return values · `NameError`",
       "xp": 10,
       "prerequisites": [
         "py-scope-02-locals"
       ],
       "lesson": [
         {
+          "heading": "Bring the reading to the desk",
+          "text": "The survey helper finishes its calculation inside its own work area. The desk needs to take the returned number before it can show the total on the expedition board."
+        },
+        {
           "heading": "A local name stays inside",
           "text": "Returning a value gives the caller that value; it does not make every local name in the helper available outside. Referring to a name that Python cannot find raises `NameError`.",
-          "code": "def label_length(text):\n    length = len(text)\n    return length\n\nsize = label_length(\"Radio\")\nprint(size)\n# print(length) would fail here: length is local."
+          "code": "def label_length(text):\n    length = len(text)\n    return length\n\nsize = label_length(\"Lantern\")\nprint(size)\n# print(length) would fail here: length is local."
         },
         {
           "heading": "A useful failure",
@@ -245,12 +257,16 @@
       "id": "py-scope-04-dependency",
       "version": 1,
       "title": "Make the dependency visible",
-      "concepts": "Parameters \u00b7 accidental global dependency",
+      "concepts": "Parameters · accidental global dependency",
       "xp": 10,
       "prerequisites": [
         "py-scope-03-boundary"
       ],
       "lesson": [
+        {
+          "heading": "Take the toolkit on the road",
+          "text": "A planner that secretly reads the base camp’s session count can look right at the desk and fail on a different expedition. Make each call supply the count that applies to its own route."
+        },
         {
           "heading": "Reading outside is possible",
           "text": "Python can read a name from the surrounding module when it is not a local name. That can hide a dependency: a helper appears to accept one value, but secretly calculates with another.",
@@ -332,12 +348,16 @@
       "id": "py-scope-05-chain",
       "version": 1,
       "title": "Trace the whole journey",
-      "concepts": "Call chain \u00b7 intermediate values \u00b7 data flow",
+      "concepts": "Call chain · intermediate values · data flow",
       "xp": 10,
       "prerequisites": [
         "py-scope-04-dependency"
       ],
       "lesson": [
+        {
+          "heading": "Follow the time through camp",
+          "text": "The desk first estimates the survey and then adds preparation time. Trace the number through both steps to see where it changes before the final result comes back."
+        },
         {
           "heading": "Follow one value through stages",
           "text": "A call chain is a sequence of small transformations. Write an intermediate value beside each step before running. The function name tells you the action; its return tells you what travels to the next stage.",
@@ -420,12 +440,16 @@
       "id": "py-scope-06-traceback",
       "version": 1,
       "title": "Read the error from the bottom",
-      "concepts": "Traceback \u00b7 application frames \u00b7 misspelled name",
+      "concepts": "Traceback · application frames · misspelled name",
       "xp": 10,
       "prerequisites": [
         "py-scope-05-chain"
       ],
       "lesson": [
+        {
+          "heading": "Find the fault in the grimoire",
+          "text": "The planning tool stops before it can show the estimate. Follow the traceback to the specific line that failed rather than replacing every helper in the chain."
+        },
         {
           "heading": "The last line names the failure",
           "text": "A traceback shows the chain of calls that led to an exception. Start at the final line for the error type and message, then look just above for the failing line in `mission.py`. Earlier frames show how execution arrived there. The workshop adds harness frames; focus on your application frames.",
@@ -509,12 +533,16 @@
       "id": "py-scope-07-first-wrong",
       "version": 1,
       "title": "Find the first wrong value",
-      "concepts": "Logic bug \u00b7 trace table \u00b7 minimal repair",
+      "concepts": "Logic bug · trace table · minimal repair",
       "xp": 10,
       "prerequisites": [
         "py-scope-06-traceback"
       ],
       "lesson": [
+        {
+          "heading": "Catch a bad route estimate",
+          "text": "A report can add setup correctly and still be wrong because it started with the wrong survey time. Compare the intermediate values and find the first place the numbers stop matching."
+        },
         {
           "heading": "No exception does not mean correct",
           "text": "A logic bug can produce a perfectly valid number that breaks the requirement. Compare the intended stages with the actual stages. Start with the first mismatch, because later values may simply inherit the earlier mistake."
@@ -611,12 +639,16 @@
       "id": "py-scope-08-toolkit",
       "version": 1,
       "title": "Repair the planning desk",
-      "concepts": "Chapter boss \u00b7 scope \u00b7 calls \u00b7 diagnosis",
+      "concepts": "Chapter boss · scope · calls · diagnosis",
       "xp": 30,
       "prerequisites": [
         "py-scope-07-first-wrong"
       ],
       "lesson": [
+        {
+          "heading": "Repair the planning desk",
+          "text": "The expedition is ready to leave, but the desk toolkit lost its way between the input, the helpers, and the final label. Trace one small sample through the whole route to find the breaks."
+        },
         {
           "heading": "A small program, several boundaries",
           "text": "This boss combines the same names, calls and returned values you have practiced. The intended flow is input -`>` repeated work -`>` setup -`>` label -`>` output. Read each helper contract below, then trace the supplied inputs before fixing code."

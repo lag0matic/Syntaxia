@@ -13,15 +13,15 @@
     "badges/python-session-project.png": "d8ad153ff9ecf05c56c5f7f31ac0d3bd36b940303d413ddcdadcf558af5cf7a3",
     "catalog.json": "37e30fd020f35438006412ed185069bd55d7a390b26c827271c0cf5511ee2371",
     "grimoire.json": "2e74323f6ee6b3241728ff94f5a4e09c17fdf1746b5d52c35acd984d90603486",
-    "python-decisions.json": "58a7299512b87f394e017def2b0cb3ed46202bb0d19733656f80f6b71427f180",
-    "python-dictionaries.json": "8107b125c2c2ebf3734bc098e15937af86c50a3749a9f9ee7ce09393fe9d2b07",
-    "python-functions.json": "6eb5e7cfa96da92dc5bb9a874f1721bc65776a77dfdcf3ecb88c0671e95bfad5",
-    "python-lists.json": "9ccabb99566365f647b061abea35874f628d3eb680a0f72d508dd34f9f3294aa",
-    "python-numbers.json": "553ec3e829790b6bb7fc1960aef8d9fb2274f29c4846776b062a7a30b42d0cb2",
-    "python-orientation.json": "d8fb65e5bb716c667a9872b31305c4c1375418cc853f2873b634469c56d75896",
-    "python-repetition.json": "de0e5ccb8e00f66ac3156ab2472bfc060dc5a5396ca2e83b56dd7763340f6ccc",
-    "python-review.json": "a1f6935ef852ee03be13d9b075840b9ac1a7d3f4d1a870a0c4a6bdb2d05e2a6c",
-    "python-scope.json": "fb0bcc656b8ea45274aa118efbe2daf1dd1c96a67d223eb65f098d729831af02",
-    "python-session-project.json": "23a821ff7a4a17c3947840217f5ac25088b1c37fa0699dad86c49036032a4d0c"
+    "python-decisions.json": "efb827e98d80ddf64aa1de866c08b2b59b2c4335ee39622b709af77f5b360e88",
+    "python-dictionaries.json": "41ac0cd698b14207de845ab1d79a0b84bbeab1d4decdbbab24985704a3f4a402",
+    "python-functions.json": "522a6f38e0c19f1606deb08036db6ccd366e22122d1d62ee600e97586a81ff00",
+    "python-lists.json": "0fc753d4b16e2f4a6254ca406e4282d0b8873020b5bd5d287390f1d6ae381898",
+    "python-numbers.json": "dd9b70f329a080fcb3b72e9d6688f7cb3baa7d013b309a19b0422f70e59d573c",
+    "python-orientation.json": "2739389584a04cd2ed1d938df3e942f0100902e4457fb20027cfaaf3f91ae058",
+    "python-repetition.json": "ad2a6422f16b1cf3d5f38954cf477b57db67192c89f087d3a24a84be045f8bc1",
+    "python-review.json": "340fe53290215b1349f1f87e7791f0491f084a6798da4fd13f9c8ec321ff67cf",
+    "python-scope.json": "76408137171245e3a8621f9fd2c41ec659428ca3ea17e91c5bf8a65a3fc51df2",
+    "python-session-project.json": "2ee4707187491bd66a582c5d61d471091a0f44a88de206062f06d84b1fd7fd8b"
   }
 }

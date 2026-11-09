@@ -16,12 +16,16 @@
       "concepts": "Dictionaries - named fields and literals",
       "lesson": [
         {
+          "heading": "Catalog a tool",
+          "text": "The quartermaster records each expedition tool with a name and a category. Named fields let another part of the grimoire read the category without remembering a position in a list."
+        },
+        {
           "heading": "The idea",
           "text": "A dictionary maps keys to values. A literal uses braces and `key: value` pairs. Reading `record[\"name\"]` retrieves the value under that key, not a numeric position. These first records use string keys.",
-          "code": "record = {\"label\": \"Sensor\", \"count\": 2}\nprint(record[\"label\"])  # Sensor"
+          "code": "record = {\"label\": \"Lantern\", \"count\": 2}\nprint(record[\"label\"])  # Lantern"
         }
       ],
-      "brief": "Return a device record with named fields.",
+      "brief": "Return an expedition tool record with the supplied name and category.",
       "requirements": [
         "name and `category` are strings. Return a dictionary with exactly the keys `\"name\"` and `\"category\"`, holding the supplied values unchanged.",
         "Return the result without printing or reading input inside the helper."
@@ -101,9 +105,13 @@
       "concepts": "get - missing-key default",
       "lesson": [
         {
+          "heading": "Look up a spare",
+          "text": "A scout asks how many of a particular supply are in camp. A missing entry means there are zero to hand out. Looking it up should not add a new row to the inventory."
+        },
+        {
           "heading": "The idea",
           "text": "`dict.get(key, default)` returns a stored value when the key exists, otherwise the default. It does not insert the default into the dictionary. With no explicit default, it returns `None` for missing keys.",
-          "code": "settings = {\"volume\": 0}\nprint(settings.get(\"volume\", 5))  # 0\nprint(settings.get(\"speed\", 5))   # 5"
+          "code": "stock = {\"chalk\": 0}\nprint(stock.get(\"chalk\", 5))  # 0\nprint(stock.get(\"rope\", 5))   # 5"
         }
       ],
       "brief": "Return the stock quantity for name, using zero when that `name` is absent.",
@@ -199,9 +207,13 @@
       "concepts": "Dictionary assignment - mutation",
       "lesson": [
         {
+          "heading": "Record the new stock count",
+          "text": "After a supply run, enter the current count for one item. This is a recount, so replace the old quantity rather than adding to it. The rest of the shared inventory stays as it was."
+        },
+        {
           "heading": "The idea",
           "text": "Assignment to `dictionary[key]` adds or replaces that key's value in place. Existing unrelated keys remain. Like list mutation, the caller sees the changed object.",
-          "code": "record = {\"status\": \"old\", \"name\": \"A\"}\nrecord[\"status\"] = \"new\"\nrecord[\"location\"] = \"Desk\""
+          "code": "record = {\"status\": \"old\", \"name\": \"A\"}\nrecord[\"status\"] = \"new\"\nrecord[\"location\"] = \"Base camp\""
         }
       ],
       "brief": "Store quantity under name in the supplied stock dictionary.",
@@ -303,6 +315,10 @@
       ],
       "concepts": "Dictionary membership - keys with `None` or zero",
       "lesson": [
+        {
+          "heading": "Tell a blank field from a missing field",
+          "text": "A gear record can contain a field whose value is still unknown. That is different from a record that never defined the field. Check whether the key exists so the two cases stay distinct."
+        },
         {
           "heading": "The idea",
           "text": "`key in dictionary` checks whether the key exists. It does not check the stored value's truth value. A field can be present with `None`, `0`, `False` or empty text.",
@@ -417,12 +433,16 @@
       "concepts": "Dictionary values - aggregation",
       "lesson": [
         {
+          "heading": "Count the supplies in camp",
+          "text": "The supply ledger stores a name and a quantity for each item. To get the total units in camp, add the quantities. The item names identify the bins but contribute nothing to the total."
+        },
+        {
           "heading": "The idea",
           "text": "Iterating a dictionary directly gives keys. `values()` supplies its values. Use the view that matches the information needed; a total does not need the associated names.",
           "code": "scores = {\"A\": 4, \"B\": 7}\nfor score in scores.values():\n    print(score)"
         }
       ],
-      "brief": "Return the sum of all quantities in stock.",
+      "brief": "Return the total number of supply units in `stock`.",
       "requirements": [
         "`stock` maps string names to non-negative integers. Empty stock totals zero. Do not change the dictionary.",
         "Return the result without printing or reading input inside the helper."
@@ -499,12 +519,16 @@
       "concepts": "items - key/value pairs - insertion order",
       "lesson": [
         {
+          "heading": "Write the restock list",
+          "text": "The crew needs the names of items that fall below the restock threshold. Read each name together with its quantity. A bin at exactly the threshold can wait."
+        },
+        {
           "heading": "The idea",
           "text": "`items()` supplies key/value pairs. A loop can unpack each pair into two names, like `enumerate`. Dictionaries preserve insertion order, so iteration can return names in that order.",
-          "code": "ages = {\"Oak\": 8, \"Pine\": 3}\nfor name, age in ages.items():\n    print(name, age)"
+          "code": "supplies = {\"Oil\": 8, \"Chalk\": 3}\nfor name, quantity in supplies.items():\n    print(name, quantity)"
         }
       ],
-      "brief": "Return the names whose `stock` is strictly below threshold.",
+      "brief": "Return the supply names with stock strictly below the restock threshold.",
       "requirements": [
         "`stock` maps strings to non-negative integers; `threshold` is a non-negative integer. Return a list of qualifying names in dictionary insertion order, without changing stock. Equality does not qualify.",
         "Return the result without printing or reading input inside the helper."
@@ -604,6 +628,10 @@
       ],
       "concepts": "Frequency dictionary - get and update",
       "lesson": [
+        {
+          "heading": "Count marks in the route log",
+          "text": "The grimoire has a transcription of survey marks that can repeat. Count each distinct text value as recorded. An empty entry is still an entry in this raw tally, and two differently cased marks remain distinct."
+        },
         {
           "heading": "The idea",
           "text": "A dictionary can accumulate a separate count for each distinct key. The first occurrence needs an initial count; later occurrences update it. This is the same accumulator idea applied per key.",
@@ -714,12 +742,16 @@
       "concepts": "Lists of dictionaries - first-match lookup",
       "lesson": [
         {
+          "heading": "Find the first matching tool",
+          "text": "A cartographer needs the full record for the first tool matching a name. Keep the extra fields attached to the record because the caller may need its settings or location after the lookup."
+        },
+        {
           "heading": "The idea",
           "text": "A list of records separates order from named fields. A loop visits each dictionary, then key lookup reads the field needed for a decision. An early return naturally selects the first match.",
           "code": "records = [{\"label\": \"A\", \"score\": 3}, {\"label\": \"B\", \"score\": 5}]\nfor record in records:\n    print(record[\"label\"])"
         }
       ],
-      "brief": "Return the first device record whose name field equals `name`, or `None` when absent.",
+      "brief": "Return the first tool record whose name equals `name`, or `None` when absent.",
       "requirements": [
         "`records` is a list of dictionaries, each containing a string `\"name\"` field. Other fields may vary and must be retained in the returned record.",
         "Matching is case-sensitive. Preserve the input list and every record. Return the first match if names repeat. A copied matching record is also acceptable.",
@@ -835,12 +867,16 @@
       "concepts": "Dictionary `pop` - optional deletion",
       "lesson": [
         {
+          "heading": "Check equipment out of camp",
+          "text": "When a tool is taken into the archive, remove just its entry from the camp registry and report its former location. A recorded empty location is still a value, while a missing tool has no entry to remove."
+        },
+        {
           "heading": "The idea",
           "text": "`dict.pop(key, default)` removes a present key and returns its old value. When the key is absent it returns the default without changing anything. Unlike `list.pop`, its argument identifies a key rather than an index.",
           "code": "settings = {\"mode\": \"quiet\"}\nold = settings.pop(\"mode\", None)\nprint(old, settings)  # quiet {}"
         }
       ],
-      "brief": "Remove name from `devices` and return its stored location, or `None` if absent.",
+      "brief": "Remove the checked-out tool named `name` from `devices` and return its stored location, or `None` if absent.",
       "requirements": [
         "`devices` maps string device names to string locations. Change only the requested entry; keep other entries. Return an empty string if that was the stored location.",
         "The helper prints nothing. Checks verify the remaining mapping as well as the returned value."
@@ -950,12 +986,16 @@
       "concepts": "Chapter project - filtering records and aggregation",
       "lesson": [
         {
+          "heading": "Build the supply ledger report",
+          "text": "The next expedition needs to know how much gear is in one category. Gather the matching names and total quantities without altering the ledger so the same records can answer a different crew’s query."
+        },
+        {
           "heading": "The idea",
           "text": "A small inventory combines the collection techniques you have practiced: named fields, record filtering and totals. A report dictionary lets other code choose how to display the result later.",
           "code": "summary = {\"count\": 2, \"labels\": [\"A\", \"B\"]}\nprint(summary[\"count\"])\nprint(summary[\"labels\"][0])"
         }
       ],
-      "brief": "Return a structured summary of the records in one category.",
+      "brief": "Summarize the expedition supply records in one category.",
       "requirements": [
         "Each record has a string `\"name\"`, string `\"category\"`, and non-negative integer `\"quantity\"`. category matching is case-sensitive. Extra record fields should not affect the result.",
         "Return exactly `{\"items\": N, \"units\": T, \"names\": [...]}`. N is the number of matching records, T is their quantity sum, and names is their name list in input order, including duplicate names and zero-quantity records.",

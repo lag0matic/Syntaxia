@@ -9,20 +9,24 @@
       "id": "py-fn-01-call",
       "version": 1,
       "title": "A definition is not a call",
-      "concepts": "Reading code \u00b7 def \u00b7 execution order",
+      "concepts": "Reading code · def · execution order",
       "xp": 10,
       "prerequisites": [
         "py-07-session-tool"
       ],
       "lesson": [
         {
+          "heading": "Sound the ready signal",
+          "text": "Before opening the archive door, the base-camp console announces that it is ready. The signal belongs between the startup and finish messages. Defining the signal tells Python what it does; the expedition still needs to trigger it."
+        },
+        {
           "heading": "Predict before running",
           "text": "A `def` statement creates a function. Its indented body is saved for later; it does not run just because Python reaches the definition. A call uses parentheses to ask the function to run.",
-          "code": "def sound_check():\n    print(\"Testing audio\")\n\nprint(\"Before\")\nsound_check()\nprint(\"After\")"
+          "code": "def test_beacon():\n    print(\"Beacon lit\")\n\nprint(\"Before\")\ntest_beacon()\nprint(\"After\")"
         },
         {
           "heading": "Follow the detour",
-          "text": "At `sound_check()`, execution enters the function, prints its message, then returns to the next line after the call. Predict the starter output before running it. Add only the missing call; this first mission is about reading the route through the code."
+          "text": "At `test_beacon()`, execution enters the function, prints its message, then returns to the next line after the call. Predict the starter output before running it. Add only the missing call; this first mission is about reading the route through the code."
         }
       ],
       "brief": "Call `announce_ready` between the two existing outer print statements.",
@@ -70,12 +74,16 @@
       "id": "py-fn-02-define",
       "version": 1,
       "title": "Package a repeated action",
-      "concepts": "Define a function \u00b7 call it twice",
+      "concepts": "Define a function · call it twice",
       "xp": 10,
       "prerequisites": [
         "py-fn-01-call"
       ],
       "lesson": [
+        {
+          "heading": "Reuse the tool prompt",
+          "text": "At the equipment rack, the cartographer sees the same prompt whenever they can pick another tool. Give the prompt one home so both callers get the same wording."
+        },
         {
           "heading": "Give an action a name",
           "text": "A function can group an action you want to repeat. Start with `def`, a descriptive name, parentheses, and a colon. Its body is indented four spaces.",
@@ -131,16 +139,20 @@
       "id": "py-fn-03-parameter",
       "version": 1,
       "title": "One function, different values",
-      "concepts": "One parameter \u00b7 supplied arguments",
+      "concepts": "One parameter · supplied arguments",
       "xp": 10,
       "prerequisites": [
         "py-fn-02-define"
       ],
       "lesson": [
         {
+          "heading": "Greet the next cartographer",
+          "text": "The console welcomes whoever signs in for the next watch. Give the greeting a name to use on each call so it works just as well for the second cartographer as the first."
+        },
+        {
           "heading": "A parameter is a local name",
           "text": "A parameter appears inside the definition parentheses. Each call supplies an argument: the actual value the parameter will refer to during that call.",
-          "code": "def announce_station(station):\n    print(f\"Station: {station}\")\n\nannounce_station(\"North\")\nannounce_station(\"West\")"
+          "code": "def announce_gate(gate):\n    print(f\"Gate: {gate}\")\n\nannounce_gate(\"North\")\nannounce_gate(\"West\")"
         },
         {
           "heading": "Read the contract",
@@ -210,16 +222,20 @@
       "id": "py-fn-04-names",
       "version": 1,
       "title": "The caller can use another name",
-      "concepts": "Arguments by value \u00b7 caller names",
+      "concepts": "Arguments by value · caller names",
       "xp": 10,
       "prerequisites": [
         "py-fn-03-parameter"
       ],
       "lesson": [
         {
+          "heading": "Mark the selected gear",
+          "text": "The desk can call the thing it picked “selected equipment” while the label printer calls it a device. What matters is the value passed across the boundary. If the desk switches gear, the printed label should switch too."
+        },
+        {
           "heading": "Names do not need to match",
           "text": "An argument can be a variable with a completely different name. Python evaluates that argument and binds the resulting value to the parameter.",
-          "code": "def show_project(title):\n    print(f\"Project: {title}\")\n\ncurrent_project = \"Radio logger\"\nshow_project(current_project)"
+          "code": "def show_project(title):\n    print(f\"Project: {title}\")\n\ncurrent_project = \"Archive map\"\nshow_project(current_project)"
         },
         {
           "heading": "Find the boundary",
@@ -290,16 +306,20 @@
       "id": "py-fn-05-order",
       "version": 1,
       "title": "Two arguments, two jobs",
-      "concepts": "Positional arguments \u00b7 parameter order",
+      "concepts": "Positional arguments · parameter order",
       "xp": 10,
       "prerequisites": [
         "py-fn-04-names"
       ],
       "lesson": [
         {
+          "heading": "Put the gear where it belongs",
+          "text": "The cartographer labels equipment at base camp so a teammate can find it after dark. Putting the shelf name where the equipment name belongs gives a perfectly formatted label that sends them to the wrong place."
+        },
+        {
           "heading": "Position establishes the match",
           "text": "With ordinary positional arguments, the first value goes to the first parameter, the second to the second. Meaningful parameter names help you remember the order.",
-          "code": "def show_route(origin, destination):\n    print(f\"{origin} -> {destination}\")\n\nshow_route(\"Home\", \"Workshop\")"
+          "code": "def show_route(origin, destination):\n    print(f\"{origin} -> {destination}\")\n\nshow_route(\"Base camp\", \"East gallery\")"
         },
         {
           "heading": "Trace before fixing",
@@ -353,12 +373,16 @@
       "id": "py-fn-06-two",
       "version": 1,
       "title": "Build a two-parameter action",
-      "concepts": "Independent practice \u00b7 two parameters",
+      "concepts": "Independent practice · two parameters",
       "xp": 10,
       "prerequisites": [
         "py-fn-05-order"
       ],
       "lesson": [
+        {
+          "heading": "Request copies of a map",
+          "text": "The copying desk receives the name of a job and the number of sheets needed. One helper should announce both the map for a solo scout and a larger batch for a whole expedition."
+        },
         {
           "heading": "A small variation",
           "text": "Use the same parameter-and-argument pattern in a new context. The checks will supply both values. Nothing inside the function needs to ask for input.",
@@ -435,12 +459,16 @@
       "id": "py-fn-07-return",
       "version": 1,
       "title": "Give a value back",
-      "concepts": "return \u00b7 calculation versus display",
+      "concepts": "return · calculation versus display",
       "xp": 10,
       "prerequisites": [
         "py-fn-06-two"
       ],
       "lesson": [
+        {
+          "heading": "Hand the time to the planner",
+          "text": "The route planner needs a number it can compare with remaining torchlight. A number printed on screen is useful to a person, but a number returned by the helper is usable by the planner."
+        },
         {
           "heading": "A returned value belongs to the caller",
           "text": "`print` sends text to the output panel. `return` hands a value back to the calling expression. The caller can then print it, store it, or calculate with it.",
@@ -517,12 +545,16 @@
       "id": "py-fn-08-none",
       "version": 1,
       "title": "It printed correctly. What came back?",
-      "concepts": "Debugging \u00b7 implicit `None`",
+      "concepts": "Debugging · implicit `None`",
       "xp": 10,
       "prerequisites": [
         "py-fn-07-return"
       ],
       "lesson": [
+        {
+          "heading": "Fix the reading that never arrives",
+          "text": "A helper prints the total time for a survey and its setup, yet the caller receives nothing it can put in the schedule. Watch for the difference between seeing a number and receiving it."
+        },
         {
           "heading": "Two different channels",
           "text": "A function can display a number and still return no useful value. If it reaches its end without `return`, the returned value is `None`, representing the absence of a value.",
@@ -606,12 +638,16 @@
       "id": "py-fn-09-store",
       "version": 1,
       "title": "Use the result again",
-      "concepts": "Store a returned value \u00b7 reuse",
+      "concepts": "Store a returned value · reuse",
       "xp": 10,
       "prerequisites": [
         "py-fn-08-none"
       ],
       "lesson": [
+        {
+          "heading": "Keep the supply quote",
+          "text": "The supply desk quotes the same subtotal on two lines, then adds a one-time packing fee to the second line. The first subtotal still needs to be available after the packing calculation."
+        },
         {
           "heading": "A call is an expression",
           "text": "A function call can appear on the right side of an assignment. The returned value, not the function, becomes the value of that variable.",
@@ -680,16 +716,20 @@
       "id": "py-fn-10-inline",
       "version": 1,
       "title": "Call it inside the message",
-      "concepts": "Calls inside expressions \u00b7 f-strings",
+      "concepts": "Calls inside expressions · f-strings",
       "xp": 10,
       "prerequisites": [
         "py-fn-09-store"
       ],
       "lesson": [
         {
+          "heading": "Print the route estimate",
+          "text": "The desk needs one line with the planned minutes and has no further use for the number. This is a good place to see how a small calculation can fit into the message that uses it."
+        },
+        {
           "heading": "Braces can contain expressions",
           "text": "An f-string can evaluate a function call directly. That is useful when the result is simple and only needed once.",
-          "code": "def square(number):\n    return number * number\n\nprint(f\"Area: {square(5)}\")"
+          "code": "def square(number):\n    return number * number\n\nprint(f\"Map area: {square(5)}\")"
         },
         {
           "heading": "Same call, different location",
@@ -744,12 +784,16 @@
       "id": "py-fn-11-clarity",
       "version": 1,
       "title": "Give an intermediate result a name",
-      "concepts": "Readable expressions \u00b7 refactoring",
+      "concepts": "Readable expressions · refactoring",
       "xp": 10,
       "prerequisites": [
         "py-fn-10-inline"
       ],
       "lesson": [
+        {
+          "heading": "Show the quote in stages",
+          "text": "A buyer wants to see what the expedition costs before packing and verify that repeated printing gives the same packed cost. Name the stages so another cartographer can follow what changed between them."
+        },
         {
           "heading": "A name can explain an expression",
           "text": "A long expression can be correct yet difficult to follow. A meaningful intermediate variable gives its result a name and makes reuse straightforward.",
@@ -813,12 +857,16 @@
       "id": "py-fn-12-missing-call",
       "version": 1,
       "title": "A function is not its answer",
-      "concepts": "Debugging \u00b7 function versus call",
+      "concepts": "Debugging · function versus call",
       "xp": 10,
       "prerequisites": [
         "py-fn-11-clarity"
       ],
       "lesson": [
+        {
+          "heading": "Reserve time for a breather",
+          "text": "Before the crew enters the archive, the planner adds a short break to the survey estimate. It needs the estimate itself, not the helper that could calculate it when called."
+        },
         {
           "heading": "Two valid assignments, different meanings",
           "text": "A function is itself a value. Assigning its name to another variable is legal, but it does not run the function. Assigning a call stores what the function returns.",
@@ -877,12 +925,16 @@
       "id": "py-fn-13-compose",
       "version": 1,
       "title": "Connect two small functions",
-      "concepts": "Composition \u00b7 returned input to another call",
+      "concepts": "Composition · returned input to another call",
       "xp": 10,
       "prerequisites": [
         "py-fn-12-missing-call"
       ],
       "lesson": [
+        {
+          "heading": "Connect the planning tools",
+          "text": "One desk tool measures the survey time and another adds a break. Connect them in the same order the crew plans the route so each tool can still be reused on its own."
+        },
         {
           "heading": "One result can become another argument",
           "text": "Functions compose when one function supplies a value that another can use. Read nested calls from the inside out, or name the intermediate result.",
@@ -960,12 +1012,16 @@
       "id": "py-fn-14-keywords",
       "version": 1,
       "title": "Make the arguments explicit",
-      "concepts": "Keyword arguments \u00b7 named calls",
+      "concepts": "Keyword arguments · named calls",
       "xp": 10,
       "prerequisites": [
         "py-fn-13-compose"
       ],
       "lesson": [
+        {
+          "heading": "Label gear without guessing",
+          "text": "A gear label has two text fields, and both a device and a place can be called “Beacon.” Name the fields at the call site so somebody reading the call can tell which value goes where."
+        },
         {
           "heading": "Name the destination parameter",
           "text": "Keyword arguments use `parameter=value` in a call. Their order can differ from the definition because the names make the mapping explicit.",
@@ -1042,12 +1098,16 @@
       "id": "py-fn-15-defaults",
       "version": 1,
       "title": "A useful default, not a hidden assumption",
-      "concepts": "Default arguments \u00b7 omitted values",
+      "concepts": "Default arguments · omitted values",
       "xp": 10,
       "prerequisites": [
         "py-fn-14-keywords"
       ],
       "lesson": [
+        {
+          "heading": "Allow a longer setup",
+          "text": "Most survey trips need five minutes to set up. A crew that is already packed can use zero, and an unfamiliar route might need longer. Give the common case a default and let callers supply a different value."
+        },
         {
           "heading": "Let a caller omit one value",
           "text": "A default in the definition is used when the caller leaves out that argument. Required parameters come before parameters with defaults.",
@@ -1137,12 +1197,16 @@
       "id": "py-fn-16-toolkit",
       "version": 1,
       "title": "Build a session calculation toolkit",
-      "concepts": "Chapter project \u00b7 functions working together",
+      "concepts": "Chapter project · functions working together",
       "xp": 30,
       "prerequisites": [
         "py-fn-15-defaults"
       ],
       "lesson": [
+        {
+          "heading": "Assemble the planning desk",
+          "text": "The grimoire’s first toolkit should work for any cartographer at the desk. Separate the survey time, setup time, and display label so each part can be checked or reused independently."
+        },
         {
           "heading": "Small contracts, one application",
           "text": "Build three reusable functions, then a short console caller that combines them. You have already practiced every operation: multiplication, adding a default amount, cleaning text, and returning a formatted string."
