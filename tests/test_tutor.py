@@ -1,5 +1,6 @@
 import json
 import os
+import sqlite3
 from pathlib import Path
 import sys
 import tempfile
@@ -81,6 +82,42 @@ class TutorTests(unittest.TestCase):
         with connect(self.db) as db:
             self.assertEqual(db.execute('SELECT count(*) FROM completions').fetchone()[0], 0)
             self.assertEqual(db.execute('SELECT count(*) FROM drafts').fetchone()[0], 0)
+
+    def test_follow_up_keeps_the_original_code_separate_from_the_fix(self):
+        self.configure()
+        broken = {**self.body, 'code': 'return number', 'results': 'Expected 9, got 4',
+                  'results_match_code': True}
+        fixed = {'message': 'The print was just for debugging.', 'code': 'return total',
+                 'results': 'All checks passed.', 'results_match_code': True}
+        with patch('tutor.call_api', return_value=('Try returning the accumulator.', {})) as request:
+            self.tutor.chat(broken, self.mission, self.db)
+            reopened = Tutor(self.db)
+            result = reopened.chat(fixed, self.mission, self.db)
+            payload = request.call_args.args[2]
+        previous = payload['input'][1]['content'].splitlines()
+        self.assertEqual(json.loads(previous[1])['code'], 'return number')
+        self.assertEqual(previous[-1], broken['message'])
+        current = json.loads(payload['input'][-2]['content'].split('\n', 1)[1])
+        self.assertEqual(current, {'code': 'return total', 'run_or_test_results': 'All checks passed.',
+                                   'results_apply_to_code': True})
+        self.assertEqual(payload['input'][-1]['content'], fixed['message'])
+        self.assertNotIn('reference', json.loads(payload['input'][0]['content'].split('\n', 1)[1]))
+        self.assertEqual(set(result['messages'][0]), {'role', 'content'})
+
+    def test_legacy_chat_history_remains_readable(self):
+        old_path = Path(self.temp.name) / 'older.sqlite3'
+        history_path = old_path.with_suffix('.tutor.sqlite3')
+        db = sqlite3.connect(history_path)
+        try:
+            with db:
+                db.execute('CREATE TABLE messages (id INTEGER PRIMARY KEY, mission TEXT NOT NULL, role TEXT NOT NULL, content TEXT NOT NULL, usage TEXT, created TEXT DEFAULT CURRENT_TIMESTAMP)')
+                db.execute('INSERT INTO messages(mission,role,content) VALUES(?,?,?)', (self.mission['id'], 'user', 'Earlier conversation'))
+        finally:
+            db.close()
+        tutor = Tutor(old_path)
+        history = [{'role': 'user', 'content': 'Earlier conversation'}]
+        self.assertEqual(tutor.history(self.mission['id']), history)
+        self.assertEqual(tutor.context_history(self.mission['id'], 'new snapshot'), history)
 
     def test_comparison_requires_completion_and_failures_do_not_save(self):
         self.configure()

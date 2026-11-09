@@ -26,6 +26,7 @@ let course, state, token, current, editor, busy = false, loadingCode = false;
 let dirty = false, saveError = false, saveTimer, worker, runTimer, loadTimer, pending, generation = 0;
 let saveQueue = Promise.resolve();
 let comparisonViews = [], comparisonRequest = 0;
+let latestResult;
 const editable = new Compartment();
 const runners = { python: '/worker.js' };
 let lessonUpdates;
@@ -36,8 +37,16 @@ const tutor = createTutor({
       await saveDraft();
     });
   },
-  api, getContext: () => ({ mission: current?.id, code: editor ? getCode() : '',
-    results: [$('#feedback').textContent, $('#output').textContent, $('#test-results').textContent].join('\n').slice(0,10000) }),
+  api,
+  getContext() {
+    const code = editor ? getCode() : '';
+    return {
+      mission: current?.id,
+      code,
+      results: latestResult?.text || '',
+      results_match_code: latestResult ? latestResult.code === code : null,
+    };
+  },
 });
 createGrimoire({ api, getState: () => state, openLesson: id => selectMission(id) });
 const journey = createJourney({
@@ -235,6 +244,7 @@ async function selectMission(id) {
   journey.hide();
   closeComparison();
   current = mission;
+  latestResult = undefined;
   tutor.selectMission(id);
   $('#compare').hidden = !state.completions[id];
   dirty = false;
@@ -294,7 +304,16 @@ function startWorker() {
       clearTimeout(runTimer);
       const job = pending;
       disposeWorker();
-      try { await displayResult(data.result, job); }
+      const resultGeneration = generation;
+      try {
+        await displayResult(data.result, job);
+        if (job && resultGeneration === generation) {
+          latestResult = {
+            code: job.request.code,
+            text: [$('#feedback'), $('#output'), $('#test-results')].map(node => node.innerText).join('\n').slice(0, 10000),
+          };
+        }
+      }
       catch (error) { showSaveError(error); }
       finally { finishRun(); }
     }
@@ -307,6 +326,7 @@ async function execute(mode) {
   try {
     await saveDraft();
     if (activeGeneration !== generation) return;
+    latestResult = undefined;
     $('#output').textContent = ''; $('#test-results').replaceChildren(); $('#next').hidden = true;
     feedback(mode === 'run' ? 'Running your program…' : 'Checking your code…');
     const request = { mode, code: getCode(), stdin: $('#stdin').value === '' ? [] : $('#stdin').value.replace(/\r\n/g, '\n').split('\n'), tests: mode === 'test' ? current.tests.filter(t => t.public) : current.tests };

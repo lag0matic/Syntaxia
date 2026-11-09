@@ -43,7 +43,7 @@ The Tutor panel appears below the lesson. Open **Settings**, enter your OpenAI A
 
 Ask in natural language, or choose **Give me a hint**. Enter sends and Shift+Enter adds a line. Replies are instructed to be concise and hint-first. To request a full solution explicitly, say **Show me the full solution**. After passing, **Explain these differences** opens a prefilled comparison question; press Send when ready. No automatic reviews or background API requests occur.
 
-Each lesson keeps its own chat history. Sending shares the current lesson, editor code, displayed results, and recent conversation with your configured provider. The key is encrypted for your Windows account, remains on the host, and is excluded from progress exports. Moving to another PC/account requires re-entering it. Tutor access is local to this computer.
+Each lesson keeps its own chat history. Sending shares the current lesson, editor code, the latest run results and whether they apply to the current code, and recent conversation with your configured provider. Recent editor snapshots are kept with the chat so the tutor can distinguish earlier code from later edits. The key is encrypted for your Windows account, remains on the host, and is excluded from progress exports. Moving to another PC/account requires re-entering it. Tutor access is local to this computer.
 
 The existing progress export covers code/completions, not chat. Copy the data folder with the app closed to retain chat history too.
 
