@@ -1,0 +1,27 @@
+{
+  "course": "python-workshop",
+  "files": {
+    "badges/python-decisions.png": "c3d578a86b84e777f9932d9d8cfde72df2edfd231a1ca1ce47674e6055efe255",
+    "badges/python-dictionaries.png": "fa0996d050eca7e8a72d4e2b1767887817aa4c5bda0eb72ef08400eaeb87877b",
+    "badges/python-foundations.png": "362fa001e30391f5f143fcf553ff82675eba9769508b223232c30ca92e1c8bb7",
+    "badges/python-functions.png": "3e679c0f63545ca67a88ffaa105f80fb03d118f023e11ede220a8c76b005b8fe",
+    "badges/python-lists.png": "60d554ee3a1813a51eaf71604301717c7017463f13a891220dbae57e72b71f2d",
+    "badges/python-numbers.png": "845391ec5da50c7ac8d3a7eb78f6e30115e6574bf2b50efcd79c26fc55788323",
+    "badges/python-orientation.png": "8cf2e22bebe24d03a3efec9e086dd0d8938326066cefd4b58876fc48d8a6a664",
+    "badges/python-repetition.png": "d4e48ac1c9de8f8933656b71f54ac2174560646e8354be2466b122edd3e481d7",
+    "badges/python-scope.png": "3082b733c663c9b600fa523fb5766c74a57d14bbbdcfb692cfec9eda0c019edf",
+    "badges/python-session-project.png": "d8ad153ff9ecf05c56c5f7f31ac0d3bd36b940303d413ddcdadcf558af5cf7a3",
+    "catalog.json": "37e30fd020f35438006412ed185069bd55d7a390b26c827271c0cf5511ee2371",
+    "grimoire.json": "2e74323f6ee6b3241728ff94f5a4e09c17fdf1746b5d52c35acd984d90603486",
+    "python-decisions.json": "58a7299512b87f394e017def2b0cb3ed46202bb0d19733656f80f6b71427f180",
+    "python-dictionaries.json": "8107b125c2c2ebf3734bc098e15937af86c50a3749a9f9ee7ce09393fe9d2b07",
+    "python-functions.json": "6eb5e7cfa96da92dc5bb9a874f1721bc65776a77dfdcf3ecb88c0671e95bfad5",
+    "python-lists.json": "9ccabb99566365f647b061abea35874f628d3eb680a0f72d508dd34f9f3294aa",
+    "python-numbers.json": "553ec3e829790b6bb7fc1960aef8d9fb2274f29c4846776b062a7a30b42d0cb2",
+    "python-orientation.json": "d8fb65e5bb716c667a9872b31305c4c1375418cc853f2873b634469c56d75896",
+    "python-repetition.json": "de0e5ccb8e00f66ac3156ab2472bfc060dc5a5396ca2e83b56dd7763340f6ccc",
+    "python-review.json": "a1f6935ef852ee03be13d9b075840b9ac1a7d3f4d1a870a0c4a6bdb2d05e2a6c",
+    "python-scope.json": "fb0bcc656b8ea45274aa118efbe2daf1dd1c96a67d223eb65f098d729831af02",
+    "python-session-project.json": "23a821ff7a4a17c3947840217f5ac25088b1c37fa0699dad86c49036032a4d0c"
+  }
+}

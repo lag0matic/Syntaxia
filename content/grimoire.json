@@ -1,0 +1,1274 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "first-program",
+      "title": "Your first Python program",
+      "mission": "py-orientation-first-run",
+      "text": [
+        "Python runs the instructions in a program. `print()` displays a value. A `#` outside a string starts a comment, which Python ignores."
+      ],
+      "code": "# This comment is for a reader.\nprint(\"Hello!\")",
+      "pitfall": "Keep paired quotes and parentheses. `print` and `Print` are different names.",
+      "related": [
+        "string-literals",
+        "workshop-controls",
+        "names",
+        "traceback"
+      ],
+      "aliases": [
+        "hello",
+        "beginner",
+        "print",
+        "comment",
+        "syntax",
+        "program"
+      ]
+    },
+    {
+      "id": "string-literals",
+      "title": "Strings and quotation marks",
+      "mission": "py-orientation-first-run",
+      "text": [
+        "A string is text. Matching single or double quotes mark a string literal in Python. The delimiters are not displayed by `print()`."
+      ],
+      "code": "print(\"12\")\nprint(12)",
+      "pitfall": "The outputs can look the same while `\"12\"` is text and `12` is a number.",
+      "related": [
+        "first-program",
+        "strings",
+        "input",
+        "fstrings"
+      ],
+      "aliases": [
+        "quotes",
+        "literal",
+        "text",
+        "string",
+        "str"
+      ]
+    },
+    {
+      "id": "workshop-controls",
+      "title": "Run, Test and Submit",
+      "mission": "py-orientation-first-run",
+      "text": [
+        "Run shows what your program does. Test runs examples. Submit checks the full mission and records a pass. Your draft saves as you work; the Grimoire unlocks by completion."
+      ],
+      "code": "print(\"Ready to try!\")",
+      "pitfall": "Run alone does not mark a lesson complete. Use Program input only for code that calls `input()`.",
+      "related": [
+        "first-program",
+        "input",
+        "logic-bugs"
+      ],
+      "aliases": [
+        "syntaxia",
+        "editor",
+        "run",
+        "test",
+        "submit",
+        "results",
+        "save"
+      ]
+    },
+    {
+      "id": "names",
+      "title": "Names and assignment",
+      "mission": "py-01-message",
+      "text": [
+        "Assignment binds a name to a value. Reassigning it does not recalculate values you created earlier. Descriptive names make units and responsibilities visible."
+      ],
+      "code": "minutes = 12\nmessage = f\"{minutes} min\"\nminutes = 20\nprint(message)  # 12 min",
+      "pitfall": "Use `=` for assignment and `==` for equality.",
+      "related": [
+        "strings",
+        "scope",
+        "comparisons",
+        "first-program",
+        "fstrings"
+      ],
+      "aliases": [
+        "variables",
+        "reassignment",
+        "="
+      ]
+    },
+    {
+      "id": "strings",
+      "title": "Strings and cleaning text",
+      "mission": "py-03-input",
+      "text": [
+        "Strings are text. Methods such as strip return a new string; use the returned value. `strip` removes whitespace at both ends, not spaces inside a name."
+      ],
+      "code": "name = \"  Radio room  \"\nclean = name.strip()\nprint(clean)  # Radio room",
+      "pitfall": "Calling `name.strip()` alone does not update name.",
+      "related": [
+        "names",
+        "input",
+        "formatting",
+        "string-literals"
+      ],
+      "aliases": [
+        "str",
+        "whitespace",
+        "strip"
+      ]
+    },
+    {
+      "id": "input",
+      "title": "Input and numeric conversion",
+      "mission": "py-03-input",
+      "text": [
+        "`input()` returns text. `int` converts whole-number text and `float` converts decimal text. Conversion failures raise exceptions; robust recovery is a later topic. The workshop supplies one input answer per line in Program input."
+      ],
+      "code": "count = int(\" 3 \")\nlength = float(\"2.5\")\nprint(count * length)  # 7.5",
+      "pitfall": "`\"3\" * 2` repeats text. Conversion is different from display formatting.",
+      "related": [
+        "strings",
+        "arithmetic",
+        "traceback"
+      ],
+      "aliases": [
+        "int",
+        "float",
+        "stdin",
+        "input"
+      ]
+    },
+    {
+      "id": "arithmetic",
+      "title": "Arithmetic and grouping",
+      "mission": "py-02-arithmetic",
+      "text": [
+        "Multiplication and division bind more tightly than addition and subtraction. Parentheses group quantities. Keep units consistent before combining them."
+      ],
+      "code": "per_item = 8\npacking = 2\nprint((per_item + packing) * 3)  # 30",
+      "pitfall": "A one-time fee belongs outside per-item repetition.",
+      "related": [
+        "division",
+        "remainder",
+        "comparisons"
+      ],
+      "aliases": [
+        "precedence",
+        "parentheses",
+        "+",
+        "*"
+      ]
+    },
+    {
+      "id": "division",
+      "title": "`True` and floor division",
+      "mission": "py-num-03-division",
+      "text": [
+        "`/` preserves a fractional quotient. `//` gives a floored quotient. With non-negative integers, floor division counts complete groups. For negative values it rounds down rather than toward zero."
+      ],
+      "code": "print(17 / 4)   # 4.25\nprint(17 // 4)  # 4\nprint(-17 // 4) # -5",
+      "pitfall": "Do not floor a value when the remaining fraction still matters.",
+      "related": [
+        "remainder",
+        "arithmetic",
+        "formatting"
+      ],
+      "aliases": [
+        "quotient",
+        "/",
+        "//"
+      ]
+    },
+    {
+      "id": "remainder",
+      "title": "Remainder and unit splitting",
+      "mission": "py-num-04-remainder",
+      "text": [
+        "`%` gives the remainder. For non-negative amounts and a positive divisor, it is from zero to less than the divisor. Combine quotient and remainder to split units."
+      ],
+      "code": "seconds = 143\nprint(seconds // 60)  # 2 minutes\nprint(seconds % 60)   # 23 seconds",
+      "pitfall": "Remainder and number of complete groups answer different questions.",
+      "related": [
+        "division",
+        "comparisons",
+        "arithmetic"
+      ],
+      "aliases": [
+        "modulo",
+        "%",
+        "leftovers"
+      ]
+    },
+    {
+      "id": "formatting",
+      "title": "F-strings and decimal display",
+      "mission": "py-num-07-display",
+      "text": [
+        "An f-string substitutes expressions inside braces. `:.2f` displays two decimal places, including trailing zeros. Formatting changes presentation, not the precision of the underlying calculation."
+      ],
+      "code": "average = 7 / 2\nprint(f\"Average: {average:.2f}\")  # Average: 3.50",
+      "pitfall": "round alone does not guarantee two displayed decimal places; binary floats are not exact for every decimal.",
+      "related": [
+        "strings",
+        "division",
+        "returns",
+        "fstrings"
+      ],
+      "aliases": [
+        "format",
+        "precision",
+        "rounding",
+        "decimals",
+        "f-string"
+      ]
+    },
+    {
+      "id": "comparisons",
+      "title": "Comparisons and Boolean values",
+      "mission": "py-04-conditions",
+      "text": [
+        "Comparisons `return True` or `False`. `<` and `>` exclude equality; `<=` and `>=` include it. `==` means equal and `!=` means not equal. Return a comparison directly when it already answers the question."
+      ],
+      "code": "needed = 30\navailable = 30\nprint(needed < available)   # False\nprint(needed <= available)  # True",
+      "pitfall": "Test the exact boundary as well as values on either side. The strings `\"False\"` and `\"True\"` are text, not Boolean values.",
+      "related": [
+        "conditions",
+        "returns",
+        "remainder"
+      ],
+      "aliases": [
+        "bool",
+        "boolean",
+        "boundary",
+        "==",
+        "!=",
+        "<=",
+        ">="
+      ]
+    },
+    {
+      "id": "conditions",
+      "title": "Choosing a branch",
+      "mission": "py-04-conditions",
+      "text": [
+        "`if` tests a condition; `elif` provides another choice and `else` is the fallback. In one chain, only the first matching branch runs. Independent `if` statements are separate decisions."
+      ],
+      "code": "if score > 10:\n    label = \"High\"\nelse:\n    label = \"Low\"",
+      "pitfall": "Indentation decides what belongs to a branch. A zero denominator must be handled before division.",
+      "related": [
+        "comparisons",
+        "indentation",
+        "returns"
+      ],
+      "aliases": [
+        "if",
+        "else",
+        "elif",
+        "branching"
+      ]
+    },
+    {
+      "id": "loops",
+      "title": "`for` loops and `range()`",
+      "mission": "py-05-loops",
+      "text": [
+        "A `for` loop repeats its indented body for each value supplied by range. `range(stop)` starts at zero and excludes stop. `range(start, stop)` also excludes stop. An empty range performs no iterations."
+      ],
+      "code": "for number in range(1, 4):\n    print(number)  # 1, then 2, then 3",
+      "pitfall": "Use `sessions + 1` as the stop only when you intentionally need labels 1 through sessions.",
+      "related": [
+        "accumulator",
+        "indentation",
+        "functions"
+      ],
+      "aliases": [
+        "for",
+        "range",
+        "iteration",
+        "repetition"
+      ]
+    },
+    {
+      "id": "accumulator",
+      "title": "Accumulating a total",
+      "mission": "py-session-02-collect",
+      "text": [
+        "An accumulator holds state across loop iterations. Initialize it before the loop, update it inside, and return the final value after the loop. A zero-iteration loop leaves the initial total."
+      ],
+      "code": "total = 0\nfor turn in range(3):\n    total = total + 4\nprint(total)  # 12",
+      "pitfall": "Initializing inside the loop resets the total. Returning inside the loop ends the function early.",
+      "related": [
+        "loops",
+        "returns",
+        "scope"
+      ],
+      "aliases": [
+        "sum",
+        "running",
+        "total",
+        "accumulator"
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Defining and calling functions",
+      "mission": "py-06-functions",
+      "text": [
+        "`def` creates a function; the body runs when you call it. Parentheses distinguish a call from referring to the function itself. The caller continues after the call when the function finishes."
+      ],
+      "code": "def twice(value):\n    return value * 2\n\nresult = twice(6)\nprint(result)  # 12",
+      "pitfall": "`result = twice` stores the function, not its calculated return value.",
+      "related": [
+        "arguments",
+        "returns",
+        "scope",
+        "parameters",
+        "function-chain"
+      ],
+      "aliases": [
+        "def",
+        "call",
+        "parentheses"
+      ]
+    },
+    {
+      "id": "arguments",
+      "title": "Parameters, arguments and defaults",
+      "mission": "py-fn-15-defaults",
+      "text": [
+        "Parameters are names in a definition; arguments are values supplied by a caller. Positional arguments follow order. Keyword arguments identify the parameter by name. A default supplies a value when its argument is omitted."
+      ],
+      "code": "def add_fee(amount, fee=2):\n    return amount + fee\n\nprint(add_fee(10))\nprint(add_fee(amount=10, fee=0))",
+      "pitfall": "Caller variable names need not match parameter names. Mutable default values require care in a later topic; these examples use numbers.",
+      "related": [
+        "functions",
+        "scope",
+        "returns",
+        "parameters",
+        "keyword-calls"
+      ],
+      "aliases": [
+        "parameters",
+        "keyword",
+        "positional",
+        "default"
+      ]
+    },
+    {
+      "id": "returns",
+      "title": "Return, print and `None`",
+      "mission": "py-06-functions",
+      "text": [
+        "`return` sends a value back and ends the current call. `print` displays text. A function that reaches the end without returning a value returns `None`. Store a result when you need to inspect or reuse it."
+      ],
+      "code": "def add_two(number):\n    return number + 2\n\nresult = add_two(5)\nprint(result)  # 7",
+      "pitfall": "Printing a number inside a helper does not return that number to its caller.",
+      "related": [
+        "functions",
+        "scope",
+        "formatting"
+      ],
+      "aliases": [
+        "None",
+        "return",
+        "print",
+        "result"
+      ]
+    },
+    {
+      "id": "scope",
+      "title": "Local scope and explicit dependencies",
+      "mission": "py-scope-04-dependency",
+      "text": [
+        "Parameters and names assigned inside a function are local to that call. Returning a value does not export local names. Python can read module names, but using explicit parameters makes changing inputs easier to trace."
+      ],
+      "code": "def adjust(value):\n    value = value + 3\n    return value\n\noriginal = 5\nchanged = adjust(original)\nprint(original)  # 5",
+      "pitfall": "Rebinding an integer parameter does not reassign the caller name. Mutable objects need a fuller model when we reach collections.",
+      "related": [
+        "arguments",
+        "names",
+        "returns",
+        "traceback",
+        "local-bindings"
+      ],
+      "aliases": [
+        "local",
+        "global",
+        "binding",
+        "namespace"
+      ]
+    },
+    {
+      "id": "traceback",
+      "title": "Reading a traceback",
+      "mission": "py-scope-06-traceback",
+      "text": [
+        "Start at the last line for the exception type and message. Then find the nearby `mission.py` frame that points to your code. Earlier frames show which calls led there."
+      ],
+      "code": "def plus_one(number):\n    return numbr + 1\n# A call raises NameError mentioning numbr.",
+      "pitfall": "A failing test is evidence of a mismatch, not always an exception. Do not hide a typo by adding an unrelated outside variable.",
+      "related": [
+        "scope",
+        "functions",
+        "logic-bugs",
+        "first-program"
+      ],
+      "aliases": [
+        "debug",
+        "debugging",
+        "NameError",
+        "exception",
+        "trace"
+      ]
+    },
+    {
+      "id": "indentation",
+      "title": "Indentation and blocks",
+      "mission": "py-04-conditions",
+      "text": [
+        "Indentation groups statements inside a function, branch or loop. Put a colon after the block header and indent its body by four spaces. Returning to the original indentation ends the block."
+      ],
+      "code": "if temperature < 0:\n    print(\"Freezing\")\nprint(\"Check complete\")",
+      "pitfall": "The indented line belongs to the branch. The final `print()` is outside it and runs either way.",
+      "related": [
+        "conditions",
+        "loops",
+        "functions",
+        "pass-placeholder"
+      ],
+      "aliases": [
+        "pass",
+        "whitespace",
+        "syntax"
+      ]
+    },
+    {
+      "id": "boolean-and",
+      "title": "Both conditions: `and`",
+      "mission": "py-decisions-02-and",
+      "text": [
+        "and combines requirements that must all hold. Chained comparisons are another readable form for numeric intervals. In these examples every operand is a Boolean comparison."
+      ],
+      "code": "print(3 <= 5 and 5 <= 8)\nprint(3 <= 5 <= 8)",
+      "pitfall": "`value >= low and high` does not compare value with high; write the second comparison.",
+      "related": [
+        "comparisons",
+        "conditions",
+        "boolean-or"
+      ],
+      "aliases": [
+        "and",
+        "interval",
+        "bounds",
+        "chained"
+      ]
+    },
+    {
+      "id": "boolean-or",
+      "title": "Either condition: `or`",
+      "mission": "py-07-session-tool",
+      "text": [
+        "`or` accepts either condition, including both. It is useful when either of two situations leads to the same decision."
+      ],
+      "code": "print(False or True)  # True\nprint(True or True)   # True",
+      "pitfall": "`or` is inclusive: two true conditions still pass.",
+      "related": [
+        "boolean-and",
+        "comparisons",
+        "negation"
+      ],
+      "aliases": [
+        "or",
+        "either",
+        "grouping"
+      ]
+    },
+    {
+      "id": "negation",
+      "title": "Reverse a condition: `not`",
+      "mission": "py-decisions-04-not",
+      "text": [
+        "not turns a true condition false and a false condition true. With well-named Boolean flags it can express a blocker naturally."
+      ],
+      "code": "online = True\nblocked = False\nready = online and not blocked",
+      "pitfall": "Do not confuse negating one flag with negating an entire grouped condition.",
+      "related": [
+        "boolean-and",
+        "boolean-or",
+        "conditions"
+      ],
+      "aliases": [
+        "not",
+        "negation",
+        "blockers",
+        "flags"
+      ]
+    },
+    {
+      "id": "guard-clauses",
+      "title": "Guard clauses and early return",
+      "mission": "py-decisions-07-guards",
+      "text": [
+        "A `return` ends the current call, including when it occurs inside an `if` or loop. Guard clauses handle special cases before the main calculation."
+      ],
+      "code": "def half_positive(number):\n    if number <= 0:\n        return 0\n    return number / 2",
+      "pitfall": "A `return` inside a loop ends the entire function, not just the current iteration.",
+      "related": [
+        "returns",
+        "conditions",
+        "loops"
+      ],
+      "aliases": [
+        "guard",
+        "early",
+        "return",
+        "validation"
+      ]
+    },
+    {
+      "id": "text-normalization",
+      "title": "Normalize text and compare whole choices",
+      "mission": "py-decisions-08-choices",
+      "text": [
+        "`strip` removes surrounding whitespace and lower normalizes letter case. Both return new strings. String membership checks substrings; list membership will check complete elements."
+      ],
+      "code": "command = \"  STOP  \".strip().lower()\nprint(command == \"stop\")  # True\nprint(\"st\" in command)   # True",
+      "pitfall": "A substring is not a complete command. Do not let an empty string or partial word pass a whole-command contract.",
+      "related": [
+        "strings",
+        "comparisons",
+        "boolean-or",
+        "membership"
+      ],
+      "aliases": [
+        "lower",
+        "case",
+        "strip",
+        "normalization",
+        "substring"
+      ]
+    },
+    {
+      "id": "while-loops",
+      "title": "While loops and termination",
+      "mission": "py-repetition-04-while",
+      "text": [
+        "`while` checks its condition before each iteration. It may run zero times. Update the state so the condition eventually becomes false, or exit deliberately with `break`."
+      ],
+      "code": "fuel = 7\nwhile fuel > 0:\n    fuel = fuel - 2",
+      "pitfall": "A forgotten update can create an infinite loop. Syntaxia Stop terminates the worker without discarding the draft.",
+      "related": [
+        "loops",
+        "accumulator",
+        "break",
+        "guard-clauses"
+      ],
+      "aliases": [
+        "while",
+        "termination",
+        "infinite",
+        "stop"
+      ]
+    },
+    {
+      "id": "break",
+      "title": "`break` versus `return`",
+      "mission": "py-repetition-06-break",
+      "text": [
+        "`break` exits the nearest loop and execution continues after it. `return` exits the current function. In nested loops, break affects only the inner loop it belongs to."
+      ],
+      "code": "for number in range(5):\n    if number == 2:\n        break\nprint(\"After the loop\")",
+      "pitfall": "Breaking a loop is not the same as ending a function or stopping all surrounding loops.",
+      "related": [
+        "loops",
+        "while-loops",
+        "returns",
+        "continue"
+      ],
+      "aliases": [
+        "break",
+        "early",
+        "first",
+        "search"
+      ]
+    },
+    {
+      "id": "continue",
+      "title": "Skip an iteration: `continue`",
+      "mission": "py-repetition-07-continue",
+      "text": [
+        "`continue` moves to the next iteration of the nearest loop. It is useful for filtering without deep nesting. In a `while` loop, ensure necessary state updates are not accidentally skipped."
+      ],
+      "code": "for n in range(4):\n    if n == 1:\n        continue\n    print(n)",
+      "pitfall": "`continue` does not end the loop. A skipped while-loop update can prevent termination.",
+      "related": [
+        "break",
+        "while-loops",
+        "loops"
+      ],
+      "aliases": [
+        "continue",
+        "skip",
+        "filtering"
+      ]
+    },
+    {
+      "id": "nested-loops",
+      "title": "Nested loops and grids",
+      "mission": "py-repetition-08-nested",
+      "text": [
+        "An inner loop runs for each outer iteration. Two range loops can visit every coordinate of a rectangle. Keep whole-grid accumulators outside both loops."
+      ],
+      "code": "for row in range(2):\n    for column in range(2):\n        print(row, column)",
+      "pitfall": "A `return` inside the inner loop ends the function before most coordinates are visited.",
+      "related": [
+        "loops",
+        "accumulator",
+        "break",
+        "remainder"
+      ],
+      "aliases": [
+        "nested",
+        "row",
+        "column",
+        "grid"
+      ]
+    },
+    {
+      "id": "command-loops",
+      "title": "Command loops and persistent in-memory state",
+      "mission": "py-repetition-10-menu",
+      "text": [
+        "A command loop repeatedly accepts an action. Initialize session state before the loop. Consume only the input required by that action. The state lasts while the process runs; it is not saved to disk."
+      ],
+      "code": "while True:\n    action = input().strip().lower()\n    if action == \"exit\":\n        break",
+      "pitfall": "Forgetting which commands read extra lines shifts every later input. Workshop Program input is a finite prepared stream, not a live terminal.",
+      "related": [
+        "while-loops",
+        "break",
+        "accumulator",
+        "input",
+        "text-normalization"
+      ],
+      "aliases": [
+        "commands",
+        "console",
+        "menu",
+        "stdin",
+        "state"
+      ]
+    },
+    {
+      "id": "list-indexes",
+      "title": "Lists, length and indexes",
+      "mission": "py-lists-01-first",
+      "text": [
+        "Lists are ordered and mutable. `len(items)` gives their length, and `items[0]` reads the first element. Indexes refer to positions, not values. Lists may be empty."
+      ],
+      "code": "devices = [\"Radio\", \"Printer\"]\nprint(len(devices))\nprint(devices[0])",
+      "pitfall": "A list of length n has last positive index `n - 1`. Accessing an absent index raises `IndexError`.",
+      "related": [
+        "list-slices",
+        "list-mutation",
+        "loops",
+        "guard-clauses"
+      ],
+      "aliases": [
+        "list",
+        "len",
+        "index",
+        "indexing",
+        "sequence",
+        "[]"
+      ]
+    },
+    {
+      "id": "negative-indexes",
+      "title": "Negative list indexes",
+      "mission": "py-lists-02-last",
+      "text": [
+        "Negative indexes count backward. `-1` means the last element and `-len(items)` means the first when the list is nonempty."
+      ],
+      "code": "letters = [\"A\", \"B\", \"C\"]\nprint(letters[-1])  # C",
+      "pitfall": "An empty list still has no last element; a negative index can also be out of range.",
+      "related": [
+        "list-indexes",
+        "list-slices",
+        "guard-clauses"
+      ],
+      "aliases": [
+        "negative",
+        "last",
+        "-1",
+        "index"
+      ]
+    },
+    {
+      "id": "list-slices",
+      "title": "List slices",
+      "mission": "py-lists-03-slice",
+      "text": [
+        "`items[start:stop]` includes start and excludes stop. Missing bounds mean the beginning or end. A slice creates a new outer list and tolerates bounds beyond its length."
+      ],
+      "code": "numbers = [1, 2, 3, 4]\nprint(numbers[1:3])\nprint(numbers[:2])",
+      "pitfall": "Indexing returns an element; slicing returns a list. A shallow slice does not recursively copy nested objects.",
+      "related": [
+        "list-indexes",
+        "negative-indexes",
+        "copying"
+      ],
+      "aliases": [
+        "slice",
+        "prefix",
+        "start",
+        "stop",
+        "shallow"
+      ]
+    },
+    {
+      "id": "list-mutation",
+      "title": "Mutating a list with `append`",
+      "mission": "py-lists-04-append",
+      "text": [
+        "List mutation changes an existing object. `append` adds one element at the end and returns `None`. Different names can refer to that same mutable object."
+      ],
+      "code": "items = [\"A\"]\nother = items\nitems.append(\"B\")\nprint(other)  # ['A', 'B']",
+      "pitfall": "Do not assign the result of `append()` back to the list name.",
+      "related": [
+        "names",
+        "scope",
+        "copying",
+        "returns"
+      ],
+      "aliases": [
+        "append",
+        "mutation",
+        "mutable",
+        "in-place",
+        "alias"
+      ]
+    },
+    {
+      "id": "list-pop",
+      "title": "Removing and returning an element",
+      "mission": "py-lists-05-pop",
+      "text": [
+        "`list.pop()` removes and returns the last element. `list.pop(index)` selects another position. It mutates the list and raises `IndexError` when the index is absent."
+      ],
+      "code": "queue = [\"A\", \"B\"]\njob = queue.pop()\nprint(job, queue)",
+      "pitfall": "`pop` returns an element, not the remaining list. Check the empty case when the contract permits it.",
+      "related": [
+        "list-mutation",
+        "negative-indexes",
+        "returns",
+        "guard-clauses"
+      ],
+      "aliases": [
+        "pop",
+        "remove",
+        "removed",
+        "element"
+      ]
+    },
+    {
+      "id": "list-filtering",
+      "title": "Iterate and filter list values",
+      "mission": "py-lists-06-filter",
+      "text": [
+        "`for item in items` visits each value in order. Build a new output list to filter without changing the collection being traversed."
+      ],
+      "code": "values = [-1, 2, 0, 3]\npositive = []\nfor value in values:\n    if value > 0:\n        positive.append(value)",
+      "pitfall": "Removing elements from the list being iterated can shift positions and skip work.",
+      "related": [
+        "loops",
+        "list-mutation",
+        "list-indexes",
+        "copying"
+      ],
+      "aliases": [
+        "iterate",
+        "direct",
+        "filter",
+        "preserve"
+      ]
+    },
+    {
+      "id": "enumerate",
+      "title": "Position and value with `enumerate`",
+      "mission": "py-lists-07-enumerate",
+      "text": [
+        "`enumerate(items)` yields index/value pairs. A loop can unpack each pair into two names. Use `start=1` for human-facing numbering while remembering actual list indexes still begin at zero."
+      ],
+      "code": "for number, label in enumerate([\"A\", \"B\"], start=1):\n    print(number, label)",
+      "pitfall": "The display number is not necessarily a valid list index when `start=1`.",
+      "related": [
+        "list-indexes",
+        "loops",
+        "formatting",
+        "dict-iteration"
+      ],
+      "aliases": [
+        "enumerate",
+        "unpack",
+        "pair",
+        "numbering"
+      ]
+    },
+    {
+      "id": "membership",
+      "title": "Membership in strings and lists",
+      "mission": "py-lists-08-membership",
+      "text": [
+        "in has a collection-specific meaning. A string contains substrings; a list contains elements that compare equal. `not in` negates membership."
+      ],
+      "code": "print(\"a\" in \"cat\")      # True\nprint(\"a\" in [\"cat\"])    # False\nprint(\"cat\" in [\"cat\"])  # True",
+      "pitfall": "Whole-command choices should not accidentally use substring matching.",
+      "related": [
+        "text-normalization",
+        "list-indexes",
+        "comparisons",
+        "dict-presence"
+      ],
+      "aliases": [
+        "in",
+        "not",
+        "membership",
+        "exact",
+        "substring"
+      ]
+    },
+    {
+      "id": "sorting",
+      "title": "Sorting with and without mutation",
+      "mission": "py-lists-09-sort",
+      "text": [
+        "`sorted` returns a new list. `list.sort` changes that list and returns `None`. Both keep duplicate values. Numeric sorting compares numbers; textual sorting follows string ordering."
+      ],
+      "code": "values = [3, 1, 2]\nnew_values = sorted(values)\nprint(values, new_values)",
+      "pitfall": "Assigning `values = values.sort()` loses the local list reference by assigning `None`.",
+      "related": [
+        "copying",
+        "list-mutation",
+        "returns"
+      ],
+      "aliases": [
+        "sorted",
+        "sort",
+        "ordering",
+        "ascending"
+      ]
+    },
+    {
+      "id": "copying",
+      "title": "Copies, aliases and shared objects",
+      "mission": "py-lists-10-copy",
+      "text": [
+        "Assignment shares an object reference. copy or a full slice produces a separate outer list. Shallow copies still share nested objects, so they are enough for these flat strings and numbers but not every future structure."
+      ],
+      "code": "a = [1, 2]\nb = a\nc = a.copy()\nb.append(3)\nprint(a)  # [1, 2, 3]\nprint(c)  # [1, 2]",
+      "pitfall": "Do not treat rebinding a name and mutating a shared object as the same operation.",
+      "related": [
+        "names",
+        "scope",
+        "list-mutation",
+        "list-slices",
+        "sorting"
+      ],
+      "aliases": [
+        "copy",
+        "alias",
+        "shallow",
+        "reference",
+        "shared"
+      ]
+    },
+    {
+      "id": "comprehensions",
+      "title": "Simple list comprehensions",
+      "mission": "py-lists-11-comprehension",
+      "text": [
+        "`[expression for item in items]` builds a list from a transformation. An optional if condition filters items. Use this for a compact, readable operation, not to compress every multi-step loop."
+      ],
+      "code": "values = [-1, 2, 3]\npositive_squares = [value * value for value in values if value > 0]",
+      "pitfall": "A comprehension creates a new list; it should not be used just to hide side effects.",
+      "related": [
+        "list-filtering",
+        "loops",
+        "list-mutation"
+      ],
+      "aliases": [
+        "comprehension",
+        "transform",
+        "expression",
+        "filter"
+      ]
+    },
+    {
+      "id": "dictionaries",
+      "title": "Dictionary records and key lookup",
+      "mission": "py-dictionaries-01-record",
+      "text": [
+        "A dictionary maps keys to values. Use braces for a literal and square brackets with a key for required lookup. Insertion order is preserved in Python dictionaries."
+      ],
+      "code": "device = {\"name\": \"Radio\", \"quantity\": 2}\nprint(device[\"name\"])",
+      "pitfall": "A missing required key raises `KeyError`. Dictionaries use keys rather than list positions.",
+      "related": [
+        "dict-get",
+        "dict-presence",
+        "dict-updates",
+        "list-indexes"
+      ],
+      "aliases": [
+        "dict",
+        "dictionary",
+        "record",
+        "key",
+        "value",
+        "{}"
+      ]
+    },
+    {
+      "id": "dict-get",
+      "title": "Optional lookup with `get`",
+      "mission": "py-dictionaries-02-get",
+      "text": [
+        "get retrieves a dictionary value with a fallback for a missing key. It does not mutate the dictionary. An existing value of zero, `False` or `None` is still an existing value."
+      ],
+      "code": "options = {\"retries\": 0}\nprint(options.get(\"retries\", 3))  # 0\nprint(options.get(\"delay\", 3))    # 3",
+      "pitfall": "get does not insert its default. Do not confuse a false-like stored value with an absent key.",
+      "related": [
+        "dictionaries",
+        "dict-presence",
+        "comparisons"
+      ],
+      "aliases": [
+        "get",
+        "default",
+        "fallback",
+        "missing",
+        "KeyError"
+      ]
+    },
+    {
+      "id": "dict-updates",
+      "title": "Add and update dictionary entries",
+      "mission": "py-dictionaries-03-update",
+      "text": [
+        "`mapping[key] = value` changes the supplied dictionary in place. It inserts a missing key or replaces an existing value. Replacing an existing key does not move its position."
+      ],
+      "code": "counts = {\"A\": 1}\ncounts[\"A\"] = 4\ncounts[\"B\"] = 2",
+      "pitfall": "Assigning `mapping = {...}` only rebinds the local name; it does not update the caller's original mapping.",
+      "related": [
+        "dictionaries",
+        "list-mutation",
+        "scope",
+        "dict-pop"
+      ],
+      "aliases": [
+        "update",
+        "insert",
+        "assignment",
+        "mapping",
+        "mutation"
+      ]
+    },
+    {
+      "id": "dict-presence",
+      "title": "Dictionary key presence",
+      "mission": "py-dictionaries-04-presence",
+      "text": [
+        "`key in mapping` checks keys. It is independent of the associated value. Use membership when you need to distinguish absent keys from keys with `None` or zero."
+      ],
+      "code": "record = {\"count\": 0}\nprint(\"count\" in record)\nprint(\"missing\" in record)",
+      "pitfall": "`for value in mapping` iterates keys by default, not values.",
+      "related": [
+        "dict-get",
+        "dictionaries",
+        "membership",
+        "dict-iteration"
+      ],
+      "aliases": [
+        "presence",
+        "key",
+        "in",
+        "None",
+        "zero",
+        "false"
+      ]
+    },
+    {
+      "id": "dict-values",
+      "title": "Dictionary value views",
+      "mission": "py-dictionaries-05-values",
+      "text": [
+        "`values()` supplies the values in dictionary insertion order. Iterating a dictionary without a view supplies keys instead. A view reflects the mapping; it is not a detached snapshot."
+      ],
+      "code": "stock = {\"A\": 2, \"B\": 3}\nfor quantity in stock.values():\n    print(quantity)",
+      "pitfall": "A numeric total needs the stored quantities, not the string keys.",
+      "related": [
+        "dictionaries",
+        "dict-iteration",
+        "accumulator"
+      ],
+      "aliases": [
+        "values",
+        "view",
+        "quantities",
+        "totals"
+      ]
+    },
+    {
+      "id": "dict-iteration",
+      "title": "Iterating keys, values and items",
+      "mission": "py-dictionaries-06-items",
+      "text": [
+        "Iterating a dictionary directly gives keys. values supplies values; items supplies key/value pairs. Dictionaries preserve insertion order. Choose the view your calculation needs."
+      ],
+      "code": "stock = {\"A\": 2, \"B\": 5}\nfor name, quantity in stock.items():\n    print(name, quantity)",
+      "pitfall": "Do not add or remove keys while iterating that same dictionary. Build a separate result or plan the changes first.",
+      "related": [
+        "dictionaries",
+        "dict-presence",
+        "enumerate",
+        "accumulator"
+      ],
+      "aliases": [
+        "items",
+        "values",
+        "keys",
+        "unpack",
+        "insertion",
+        "order"
+      ]
+    },
+    {
+      "id": "frequency-counts",
+      "title": "Counting occurrences with dictionaries",
+      "mission": "py-dictionaries-07-count",
+      "text": [
+        "Use each distinct value as a key and its frequency as the mapped value. A missing-key default of zero supports one increment pattern for both new and repeated keys."
+      ],
+      "code": "counts = {}\nfor letter in \"abba\":\n    counts[letter] = counts.get(letter, 0) + 1",
+      "pitfall": "Normalize text only if the specification wants different spellings treated as the same key.",
+      "related": [
+        "dict-get",
+        "dict-updates",
+        "accumulator",
+        "dict-iteration"
+      ],
+      "aliases": [
+        "frequency",
+        "histogram",
+        "count",
+        "counts",
+        "occurrences"
+      ]
+    },
+    {
+      "id": "record-collections",
+      "title": "Lists of records",
+      "mission": "py-dictionaries-08-records",
+      "text": [
+        "A list can hold dictionaries with named fields. Iterate the list to choose a record, then use keys to read that record. The list controls order; the dictionary explains each field."
+      ],
+      "code": "records = [{\"name\": \"A\", \"quantity\": 2}]\nfor record in records:\n    print(record[\"name\"], record[\"quantity\"])",
+      "pitfall": "A shallow copy of the outer list still shares the dictionaries inside it.",
+      "related": [
+        "dictionaries",
+        "list-indexes",
+        "copying",
+        "guard-clauses"
+      ],
+      "aliases": [
+        "records",
+        "nested",
+        "list",
+        "dictionary",
+        "search"
+      ]
+    },
+    {
+      "id": "dict-pop",
+      "title": "Remove a dictionary entry with `pop`",
+      "mission": "py-dictionaries-09-remove",
+      "text": [
+        "`mapping.pop(key, default)` removes and returns a value. A supplied default handles absence without insertion or deletion. `list.pop` uses positions; `dict.pop` uses keys."
+      ],
+      "code": "record = {\"mode\": \"quiet\"}\nmode = record.pop(\"mode\", None)\nprint(record, mode)",
+      "pitfall": "An empty stored value is still present and must be returned faithfully.",
+      "related": [
+        "dict-updates",
+        "dict-get",
+        "list-pop",
+        "dict-presence"
+      ],
+      "aliases": [
+        "pop",
+        "delete",
+        "remove",
+        "optional",
+        "missing"
+      ]
+    },
+    {
+      "id": "fstrings",
+      "title": "Insert values with f-strings",
+      "mission": "py-01-message",
+      "text": [
+        "Put `f` before a quoted string and surround an expression with braces to include its value. The expression is evaluated when that string is built."
+      ],
+      "code": "device = \"Radio\"\nprint(f\"Ready: {device}\")",
+      "pitfall": "Without the `f`, `{device}` is displayed as literal text.",
+      "related": [
+        "names",
+        "strings",
+        "formatting",
+        "returns"
+      ],
+      "aliases": [
+        "fstring",
+        "f-string",
+        "braces",
+        "interpolation",
+        "format"
+      ]
+    },
+    {
+      "id": "logic-bugs",
+      "title": "Find a wrong result",
+      "mission": "py-02-arithmetic",
+      "text": [
+        "Code can run successfully and still calculate the wrong thing. Compare a small input and expected result with the actual output. Trace intermediate values to find the first disagreement."
+      ],
+      "code": "length = 3\ncount = 4\nprint(length + count)  # 7, not the intended product 12",
+      "pitfall": "Changing the final message cannot repair a wrong calculation upstream.",
+      "related": [
+        "arithmetic",
+        "traceback",
+        "function-chain",
+        "workshop-controls"
+      ],
+      "aliases": [
+        "debug",
+        "logic",
+        "wrong",
+        "output",
+        "test",
+        "trace"
+      ]
+    },
+    {
+      "id": "parameters",
+      "title": "Parameters and arguments",
+      "mission": "py-fn-03-parameter",
+      "text": [
+        "A parameter is a name in a function definition. An argument supplies the value at a call. A caller name does not need to match the parameter name."
+      ],
+      "code": "def double(value):\n    return value * 2\n\namount = 6\nprint(double(amount))",
+      "pitfall": "A function object and a call are different: `double` names the function; `double(amount)` runs it.",
+      "related": [
+        "functions",
+        "returns",
+        "arguments",
+        "keyword-calls",
+        "local-bindings"
+      ],
+      "aliases": [
+        "parameter",
+        "argument",
+        "binding",
+        "positional",
+        "call"
+      ]
+    },
+    {
+      "id": "keyword-calls",
+      "title": "Keyword arguments",
+      "mission": "py-fn-14-keywords",
+      "text": [
+        "A keyword argument uses `parameter=value` inside a call. The keyword must match the definition. Naming arguments can make a call clearer when their meanings are easy to swap."
+      ],
+      "code": "def label(item, location):\n    return f\"{item}: {location}\"\n\nprint(label(location=\"Desk\", item=\"Radio\"))",
+      "pitfall": "If you mix positional and keyword arguments, positional ones come first.",
+      "related": [
+        "parameters",
+        "arguments",
+        "functions",
+        "fstrings"
+      ],
+      "aliases": [
+        "keyword",
+        "named",
+        "argument"
+      ]
+    },
+    {
+      "id": "function-chain",
+      "title": "Follow a result through helpers",
+      "mission": "py-fn-13-compose",
+      "text": [
+        "A returned value can become an argument to another call. A named intermediate value makes the handoff easier to inspect. Read nested calls from the inside out."
+      ],
+      "code": "def double(value):\n    return value * 2\n\ndef add_one(value):\n    return value + 1\n\ndoubled = double(4)\nprint(add_one(doubled))",
+      "pitfall": "Returning one value does not automatically pass it to the next function. The caller chooses where it goes.",
+      "related": [
+        "returns",
+        "functions",
+        "parameters",
+        "logic-bugs",
+        "local-bindings"
+      ],
+      "aliases": [
+        "compose",
+        "composition",
+        "intermediate",
+        "data",
+        "flow"
+      ]
+    },
+    {
+      "id": "local-bindings",
+      "title": "Local names during a call",
+      "mission": "py-scope-01-route",
+      "text": [
+        "Each call gives its parameters local bindings. Assigning a different integer to a local parameter does not reassign the caller name. `return` sends the value back across the boundary."
+      ],
+      "code": "def plus_one(number):\n    number = number + 1\n    return number\n\noriginal = 4\nchanged = plus_one(original)",
+      "pitfall": "Rebinding a name and mutating a shared list are different operations.",
+      "related": [
+        "scope",
+        "names",
+        "parameters",
+        "returns",
+        "copying"
+      ],
+      "aliases": [
+        "scope",
+        "local",
+        "parameter",
+        "reassign",
+        "binding"
+      ]
+    },
+    {
+      "id": "pass-placeholder",
+      "title": "The `pass` placeholder",
+      "mission": "py-num-01-checkpoint",
+      "text": [
+        "`pass` does nothing. Use it when a syntactically required block is not implemented yet. A function with only `pass` reaches the end and returns `None`."
+      ],
+      "code": "def unfinished():\n    pass\n\nprint(unfinished())",
+      "pitfall": "A `pass` is not a successful calculation; replace it with behavior that meets the contract.",
+      "related": [
+        "indentation",
+        "functions",
+        "returns"
+      ],
+      "aliases": [
+        "pass",
+        "placeholder",
+        "stub",
+        "unfinished",
+        "None"
+      ]
+    }
+  ]
+}

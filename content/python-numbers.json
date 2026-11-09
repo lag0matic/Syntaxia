@@ -1,0 +1,1251 @@
+{
+  "id": "python-numbers",
+  "title": "Numbers and comparisons",
+  "language": "python",
+  "version": 1,
+  "badge": "Number Navigator",
+  "missions": [
+    {
+      "id": "py-num-01-checkpoint",
+      "version": 1,
+      "title": "Quote the whole job",
+      "concepts": "Independent checkpoint \u00b7 arithmetic \u00b7 functions",
+      "xp": 10,
+      "prerequisites": [
+        "py-scope-08-toolkit"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Start with a short application of familiar arithmetic and functions. There is no supplied function body to repair. Read the contract, decide what each quantity means, then write a solution. This is a checkpoint on prior material; it does not automatically skip or complete other missions. The `pass` statement is a placeholder that does nothing; it keeps an unfinished function valid Python. Until you replace it with useful behavior, the function returns `None`.",
+          "code": "def perimeter(width, height):\n    return 2 * (width + height)"
+        }
+      ],
+      "brief": "Create `job_quote(minutes_per_item, item_count, setup_minutes)`, returning the total minutes needed for a batch.",
+      "requirements": [
+        "Each item needs `minutes_per_item` minutes; the batch contains `item_count` items. Setup happens once for the whole batch.",
+        "All arguments are non-negative integers. A batch with zero items still needs its supplied setup. Return a number and do not print inside the helper."
+      ],
+      "starter": "def job_quote(minutes_per_item, item_count, setup_minutes):\n    pass\n\nprint(job_quote(12, 4, 7))\n",
+      "example": "job_quote(12, 4, 7) -> 55\njob_quote(12, 0, 7) -> 7",
+      "input": "",
+      "hints": [
+        "Which work repeats for each item, and which work happens only once?",
+        "Work out the repeated part without setup first.",
+        "Multiplication describes the repeated work; the setup belongs outside that repetition."
+      ],
+      "tests": [
+        {
+          "label": "job_quote(12, 4, 7) -> 55",
+          "public": true,
+          "function": "job_quote",
+          "args": [
+            12,
+            4,
+            7
+          ],
+          "expected": 55,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "job_quote(12, 0, 7) -> 7",
+          "public": true,
+          "function": "job_quote",
+          "args": [
+            12,
+            0,
+            7
+          ],
+          "expected": 7,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "job_quote(3, 9, 2) -> 29",
+          "public": false,
+          "function": "job_quote",
+          "args": [
+            3,
+            9,
+            2
+          ],
+          "expected": 29,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "job_quote(0, 5, 6) -> 6",
+          "public": false,
+          "function": "job_quote",
+          "args": [
+            0,
+            5,
+            6
+          ],
+          "expected": 6,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "job_quote(8, 2, 0) -> 16",
+          "public": false,
+          "function": "job_quote",
+          "args": [
+            8,
+            2,
+            0
+          ],
+          "expected": 16,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def job_quote(minutes_per_item, item_count, setup_minutes):\n    return minutes_per_item * item_count + setup_minutes\n\nprint(job_quote(12, 4, 7))\n",
+        "notes": [
+          "The expression follows the two responsibilities in the contract: repeated work and one-time setup.",
+          "Intermediate variables are equally reasonable if they make those quantities easier to explain."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-02-grouping",
+      "version": 1,
+      "title": "Price a mixed batch",
+      "concepts": "Precedence \u00b7 grouping \u00b7 specification",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-01-checkpoint"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Multiplication and division bind more tightly than addition and subtraction. Parentheses express a group that must be evaluated together. The question is which quantities belong together, not how to force a sample answer.",
+          "code": "base = 10\nextra = 2\nprint(base + extra * 3)    # 16\nprint((base + extra) * 3)  # 36"
+        }
+      ],
+      "brief": "Create `batch_cost(item_cost, packing_cost, quantity, delivery_cost)`, returning the full cost in whole-number credits.",
+      "requirements": [
+        "Every item needs its own packing. Delivery is charged once per batch, even if `quantity` is zero.",
+        "Inputs are non-negative integers. Return the total as a number without printing."
+      ],
+      "starter": "def batch_cost(item_cost, packing_cost, quantity, delivery_cost):\n    pass\n\nprint(batch_cost(8, 2, 3, 5))\n",
+      "example": "batch_cost(8, 2, 3, 5) -> 35\nbatch_cost(8, 2, 0, 5) -> 5",
+      "input": "",
+      "hints": [
+        "Which two charges occur for every item?",
+        "Describe the cost of one packed item before considering quantity.",
+        "Group the per-item charges, repeat that group, then include the one-time charge."
+      ],
+      "tests": [
+        {
+          "label": "batch_cost(8, 2, 3, 5) -> 35",
+          "public": true,
+          "function": "batch_cost",
+          "args": [
+            8,
+            2,
+            3,
+            5
+          ],
+          "expected": 35,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "batch_cost(8, 2, 0, 5) -> 5",
+          "public": true,
+          "function": "batch_cost",
+          "args": [
+            8,
+            2,
+            0,
+            5
+          ],
+          "expected": 5,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "batch_cost(4, 3, 2, 0) -> 14",
+          "public": false,
+          "function": "batch_cost",
+          "args": [
+            4,
+            3,
+            2,
+            0
+          ],
+          "expected": 14,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "batch_cost(0, 2, 4, 1) -> 9",
+          "public": false,
+          "function": "batch_cost",
+          "args": [
+            0,
+            2,
+            4,
+            1
+          ],
+          "expected": 9,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def batch_cost(item_cost, packing_cost, quantity, delivery_cost):\n    return (item_cost + packing_cost) * quantity + delivery_cost\n\nprint(batch_cost(8, 2, 3, 5))\n",
+        "notes": [
+          "Parentheses encode the per-item group; delivery stays outside it.",
+          "Separate named subtotals can communicate the same structure."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-03-division",
+      "version": 1,
+      "title": "Count complete runs",
+      "concepts": "`True` division \u00b7 floor division \u00b7 complete groups",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-02-grouping"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`/` returns a quotient that can include a fraction. `//` returns the floored quotient. With non-negative integers, it counts complete groups. Negative floor division rounds down, not toward zero; negative inputs are outside this exercise.",
+          "code": "print(17 / 4)   # 4.25\nprint(17 // 4)  # 4"
+        }
+      ],
+      "brief": "Create `complete_runs(available_minutes, run_minutes)`, returning how many whole runs fit in the available time.",
+      "requirements": [
+        "`available_minutes` is a non-negative integer; `run_minutes` is a positive integer.",
+        "A partial run does not count. Exact fits count fully. Return a number without printing."
+      ],
+      "starter": "def complete_runs(available_minutes, run_minutes):\n    pass\n\nprint(complete_runs(95, 30))\n",
+      "example": "complete_runs(95, 30) -> 3\ncomplete_runs(20, 30) -> 0",
+      "input": "",
+      "hints": [
+        "Can a fraction of a run satisfy the goal?",
+        "Compare the two division operators from the lesson with a non-exact fit.",
+        "You need the number of whole groups, rather than the fractional quotient."
+      ],
+      "tests": [
+        {
+          "label": "complete_runs(95, 30) -> 3",
+          "public": true,
+          "function": "complete_runs",
+          "args": [
+            95,
+            30
+          ],
+          "expected": 3,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "complete_runs(20, 30) -> 0",
+          "public": true,
+          "function": "complete_runs",
+          "args": [
+            20,
+            30
+          ],
+          "expected": 0,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "complete_runs(90, 30) -> 3",
+          "public": false,
+          "function": "complete_runs",
+          "args": [
+            90,
+            30
+          ],
+          "expected": 3,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "complete_runs(0, 7) -> 0",
+          "public": false,
+          "function": "complete_runs",
+          "args": [
+            0,
+            7
+          ],
+          "expected": 0,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "complete_runs(29, 7) -> 4",
+          "public": false,
+          "function": "complete_runs",
+          "args": [
+            29,
+            7
+          ],
+          "expected": 4,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def complete_runs(available_minutes, run_minutes):\n    return available_minutes // run_minutes\n\nprint(complete_runs(95, 30))\n",
+        "notes": [
+          "Floor division states the complete-group operation directly for these non-negative inputs.",
+          "`int(a / b)` involves a floating-point division first and has different behavior for negative values; `//` expresses the intended operation."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-04-remainder",
+      "version": 1,
+      "title": "What is left over?",
+      "concepts": "Remainder \u00b7 units \u00b7 exact multiples",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-03-division"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`%` gives the remainder after division. For non-negative whole amounts and a positive group size, the remainder is from zero up to one less than the group size. It answers a different question from the number of complete groups.",
+          "code": "print(17 // 4)  # 4 complete groups\nprint(17 % 4)   # 1 left over"
+        }
+      ],
+      "brief": "Create `leftover_minutes(available_minutes, run_minutes)`, returning unused time after as many whole runs as possible.",
+      "requirements": [
+        "`available_minutes` is a non-negative integer; `run_minutes` is a positive integer.",
+        "An exact fit leaves zero. If no run fits, all available time remains. Return a number without printing."
+      ],
+      "starter": "def leftover_minutes(available_minutes, run_minutes):\n    pass\n\nprint(leftover_minutes(95, 30))\n",
+      "example": "leftover_minutes(95, 30) -> 5\nleftover_minutes(20, 30) -> 20",
+      "input": "",
+      "hints": [
+        "How much time is consumed by the complete runs?",
+        "Subtracting the consumed time would work. Which operator directly describes the same result?",
+        "Remainder answers what remains, while floor division counts the groups."
+      ],
+      "tests": [
+        {
+          "label": "leftover_minutes(95, 30) -> 5",
+          "public": true,
+          "function": "leftover_minutes",
+          "args": [
+            95,
+            30
+          ],
+          "expected": 5,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "leftover_minutes(20, 30) -> 20",
+          "public": true,
+          "function": "leftover_minutes",
+          "args": [
+            20,
+            30
+          ],
+          "expected": 20,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "leftover_minutes(90, 30) -> 0",
+          "public": false,
+          "function": "leftover_minutes",
+          "args": [
+            90,
+            30
+          ],
+          "expected": 0,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "leftover_minutes(0, 6) -> 0",
+          "public": false,
+          "function": "leftover_minutes",
+          "args": [
+            0,
+            6
+          ],
+          "expected": 0,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "leftover_minutes(29, 7) -> 1",
+          "public": false,
+          "function": "leftover_minutes",
+          "args": [
+            29,
+            7
+          ],
+          "expected": 1,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def leftover_minutes(available_minutes, run_minutes):\n    return available_minutes % run_minutes\n\nprint(leftover_minutes(95, 30))\n",
+        "notes": [
+          "Modulo expresses the remainder directly.",
+          "Subtracting `complete_runs * run_minutes` also works, but requires more arithmetic and names."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-05-duration",
+      "version": 1,
+      "title": "Make a duration readable",
+      "concepts": "Independent application \u00b7 division and remainder \u00b7 f-strings",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-04-remainder"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Units give arithmetic its meaning. A conversion can split one quantity into larger whole units and a smaller remainder. Keep the original unit in mind when choosing divisors. An f-string can display more than one computed value.",
+          "code": "boxes = 4\nloose = 2\nprint(f\"{boxes} boxes, {loose} loose\")"
+        }
+      ],
+      "brief": "Create `split_duration(total_seconds)`, returning a readable duration in whole minutes and remaining seconds.",
+      "requirements": [
+        "`total_seconds` is a non-negative integer. Return exactly `M minutes, S seconds`, using digits for M and S.",
+        "Remaining seconds must be between 0 and 59. Keep the literal words minutes and seconds even for 1. Do not print inside the helper."
+      ],
+      "starter": "def split_duration(total_seconds):\n    pass\n\nprint(split_duration(125))\n",
+      "example": "split_duration(125) -> \"2 minutes, 5 seconds\"\nsplit_duration(0) -> \"0 minutes, 0 seconds\"",
+      "input": "",
+      "hints": [
+        "How many seconds make one minute?",
+        "You need both the count of complete larger units and the remainder.",
+        "Find those two quantities separately, then format the required text."
+      ],
+      "tests": [
+        {
+          "label": "split_duration(125,) -> '2 minutes, 5 seconds'",
+          "public": true,
+          "function": "split_duration",
+          "args": [
+            125
+          ],
+          "expected": "2 minutes, 5 seconds",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "split_duration(0,) -> '0 minutes, 0 seconds'",
+          "public": true,
+          "function": "split_duration",
+          "args": [
+            0
+          ],
+          "expected": "0 minutes, 0 seconds",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "split_duration(59,) -> '0 minutes, 59 seconds'",
+          "public": false,
+          "function": "split_duration",
+          "args": [
+            59
+          ],
+          "expected": "0 minutes, 59 seconds",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "split_duration(60,) -> '1 minutes, 0 seconds'",
+          "public": false,
+          "function": "split_duration",
+          "args": [
+            60
+          ],
+          "expected": "1 minutes, 0 seconds",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "split_duration(3661,) -> '61 minutes, 1 seconds'",
+          "public": false,
+          "function": "split_duration",
+          "args": [
+            3661
+          ],
+          "expected": "61 minutes, 1 seconds",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def split_duration(total_seconds):\n    minutes = total_seconds // 60\n    seconds = total_seconds % 60\n    return f\"{minutes} minutes, {seconds} seconds\"\n\nprint(split_duration(125))\n",
+        "notes": [
+          "The quotient and remainder describe different parts of the same duration.",
+          "Named values document the units. Hours and grammatical singulars are intentionally outside this contract."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-06-conversion",
+      "version": 1,
+      "title": "Read numbers as numbers",
+      "concepts": "Text conversion \u00b7 units \u00b7 mixed arithmetic",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-05-duration"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Text that looks numeric remains text until converted. `int` converts whole-number text; `float` converts decimal text. For example, `int(\"6\")` is a number, whereas `\"6\" * 2` repeats text. This exercise assumes valid whole-number text so conversion-error handling can wait.",
+          "code": "length_text = \"9\"\nprint(length_text * 2)       # 99\nprint(int(length_text) * 2)  # 18"
+        }
+      ],
+      "brief": "Create `elapsed_minutes(hours_text, minutes_text)`, returning the total whole minutes represented by two text inputs.",
+      "requirements": [
+        "Both arguments contain valid non-negative whole numbers, optionally surrounded by whitespace. `minutes_text` may be greater than 59; include its full value.",
+        "Return a number, not a numeric string. Do not call input or print inside the helper."
+      ],
+      "starter": "def elapsed_minutes(hours_text, minutes_text):\n    pass\n\nprint(elapsed_minutes(\"2\", \"15\"))\n",
+      "example": "elapsed_minutes(\"2\", \"15\") -> 135\nelapsed_minutes(\"0\", \"90\") -> 90",
+      "input": "",
+      "hints": [
+        "What types arrive at the function boundary?",
+        "Arithmetic should happen after numeric conversion.",
+        "Convert each supplied whole-number text, and remember that hours and minutes have different units."
+      ],
+      "tests": [
+        {
+          "label": "elapsed_minutes('2', '15') -> 135",
+          "public": true,
+          "function": "elapsed_minutes",
+          "args": [
+            "2",
+            "15"
+          ],
+          "expected": 135,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "elapsed_minutes('0', '90') -> 90",
+          "public": true,
+          "function": "elapsed_minutes",
+          "args": [
+            "0",
+            "90"
+          ],
+          "expected": 90,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "elapsed_minutes(' 1 ', ' 5 ') -> 65",
+          "public": false,
+          "function": "elapsed_minutes",
+          "args": [
+            " 1 ",
+            " 5 "
+          ],
+          "expected": 65,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "elapsed_minutes('0', '0') -> 0",
+          "public": false,
+          "function": "elapsed_minutes",
+          "args": [
+            "0",
+            "0"
+          ],
+          "expected": 0,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "elapsed_minutes('12', '3') -> 723",
+          "public": false,
+          "function": "elapsed_minutes",
+          "args": [
+            "12",
+            "3"
+          ],
+          "expected": 723,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def elapsed_minutes(hours_text, minutes_text):\n    return int(hours_text) * 60 + int(minutes_text)\n\nprint(elapsed_minutes(\"2\", \"15\"))\n",
+        "notes": [
+          "`int` handles surrounding whitespace for this valid-input contract.",
+          "A separate input-reading layer can call this helper later; the conversion function itself does not need to prompt."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-07-display",
+      "version": 1,
+      "title": "Display an average",
+      "concepts": "`True` division \u00b7 float display \u00b7 fixed precision",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-06-conversion"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Use `/` when a fractional result is meaningful. Binary floating point cannot represent every decimal exactly. Display formatting chooses how a value appears; it does not make the underlying arithmetic exact. Inside an f-string, `:.2f` displays two digits after the decimal point.",
+          "code": "distance = 7\ntrips = 2\nprint(f\"Average distance: {distance / trips:.2f}\")  # Average distance: 3.50"
+        }
+      ],
+      "brief": "Create `average_label(total_minutes, session_count)`, returning the average session duration as a short label.",
+      "requirements": [
+        "`total_minutes` is a non-negative integer and `session_count` is a positive integer.",
+        "Return exactly `Average: N.NN minutes` with two decimal places, using Python fixed-point formatting. Return text without printing."
+      ],
+      "starter": "def average_label(total_minutes, session_count):\n    pass\n\nprint(average_label(50, 4))\n",
+      "example": "average_label(50, 4) -> \"Average: 12.50 minutes\"\naverage_label(0, 3) -> \"Average: 0.00 minutes\"",
+      "input": "",
+      "hints": [
+        "Should a partial minute disappear from the calculation?",
+        "The number of displayed decimal digits is a presentation choice.",
+        "The fixed-point format in the example preserves trailing zeros as well as rounding the display."
+      ],
+      "tests": [
+        {
+          "label": "average_label(50, 4) -> 'Average: 12.50 minutes'",
+          "public": true,
+          "function": "average_label",
+          "args": [
+            50,
+            4
+          ],
+          "expected": "Average: 12.50 minutes",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "average_label(0, 3) -> 'Average: 0.00 minutes'",
+          "public": true,
+          "function": "average_label",
+          "args": [
+            0,
+            3
+          ],
+          "expected": "Average: 0.00 minutes",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "average_label(10, 3) -> 'Average: 3.33 minutes'",
+          "public": false,
+          "function": "average_label",
+          "args": [
+            10,
+            3
+          ],
+          "expected": "Average: 3.33 minutes",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "average_label(2, 3) -> 'Average: 0.67 minutes'",
+          "public": false,
+          "function": "average_label",
+          "args": [
+            2,
+            3
+          ],
+          "expected": "Average: 0.67 minutes",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "average_label(30, 2) -> 'Average: 15.00 minutes'",
+          "public": false,
+          "function": "average_label",
+          "args": [
+            30,
+            2
+          ],
+          "expected": "Average: 15.00 minutes",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def average_label(total_minutes, session_count):\n    average = total_minutes / session_count\n    return f\"Average: {average:.2f} minutes\"\n\nprint(average_label(50, 4))\n",
+        "notes": [
+          "`True` division keeps the fractional average; formatting specifies its display.",
+          "round alone does not guarantee two displayed decimal places. Decimal arithmetic for exact monetary calculations is a separate topic."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-08-compare",
+      "version": 1,
+      "title": "Did you beat the record?",
+      "concepts": "Comparisons \u00b7 Boolean return \u00b7 strict boundary",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-07-display"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Comparisons produce Boolean values: `True` or `False`. `<` and `>` are strict; `<=` and `>=` include equality. `==` compares values and `!=` tests inequality. Assignment uses `=`. A comparison can be returned directly from a function; it does not require an `if` statement.",
+          "code": "speed = 12\nlimit = 12\nprint(speed > limit)   # False\nprint(speed >= limit)  # True"
+        }
+      ],
+      "brief": "Create `is_new_record(score, previous_record)`, returning whether the score beats the previous record.",
+      "requirements": [
+        "Inputs are non-negative integers. Beating a record requires a strictly greater score; a tie is not a new record.",
+        "Return a Boolean, not the text `\"True\"` or `\"False\"`. Do not print inside the helper."
+      ],
+      "starter": "def is_new_record(score, previous_record):\n    pass\n\nprint(is_new_record(42, 40))\n",
+      "example": "is_new_record(42, 40) -> True\nis_new_record(40, 40) -> False",
+      "input": "",
+      "hints": [
+        "Which direction counts as improvement for a score?",
+        "What must happen on an exact tie?",
+        "A strict comparison already produces the kind of value the caller needs."
+      ],
+      "tests": [
+        {
+          "label": "is_new_record(42, 40) -> True",
+          "public": true,
+          "function": "is_new_record",
+          "args": [
+            42,
+            40
+          ],
+          "expected": true,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "is_new_record(40, 40) -> False",
+          "public": true,
+          "function": "is_new_record",
+          "args": [
+            40,
+            40
+          ],
+          "expected": false,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "is_new_record(39, 40) -> False",
+          "public": false,
+          "function": "is_new_record",
+          "args": [
+            39,
+            40
+          ],
+          "expected": false,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "is_new_record(0, 0) -> False",
+          "public": false,
+          "function": "is_new_record",
+          "args": [
+            0,
+            0
+          ],
+          "expected": false,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "is_new_record(1, 0) -> True",
+          "public": false,
+          "function": "is_new_record",
+          "args": [
+            1,
+            0
+          ],
+          "expected": true,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def is_new_record(score, previous_record):\n    return score > previous_record\n\nprint(is_new_record(42, 40))\n",
+        "notes": [
+          "Returning the comparison directly states the Boolean contract.",
+          "An `if/else` implementation can also work; extra branches are unnecessary when they just repeat `True` and `False`."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-09-capacity",
+      "version": 1,
+      "title": "Will it fit?",
+      "concepts": "Inclusive comparison \u00b7 derived quantity \u00b7 boundaries",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-08-compare"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A comparison can use a calculated quantity. Name that quantity when it clarifies the requirement. Equality at the boundary is often the difference between a correct test and an off-by-one error. Decide from the contract whether an exact fit succeeds.",
+          "code": "occupied = 4\nnew_arrivals = 3\ncapacity = 7\nprint(occupied + new_arrivals <= capacity)  # True"
+        }
+      ],
+      "brief": "Create `fits_slot(length, count, setup, available)`, returning whether a whole planned batch fits in the available minutes.",
+      "requirements": [
+        "Total duration is length minutes per session for count sessions, plus one setup. All inputs are non-negative integers.",
+        "An exact fit succeeds. Zero sessions still incur the supplied setup. Return a Boolean without printing."
+      ],
+      "starter": "def fits_slot(length, count, setup, available):\n    pass\n\nprint(fits_slot(12, 3, 4, 40))\n",
+      "example": "fits_slot(12, 3, 4, 40) -> True\nfits_slot(12, 3, 4, 39) -> False",
+      "input": "",
+      "hints": [
+        "Translate the time requirement before choosing a comparison.",
+        "Does the batch finish in time when needed and `available` are equal?",
+        "Compare the whole duration against the available slot, not against one session's length."
+      ],
+      "tests": [
+        {
+          "label": "fits_slot(12, 3, 4, 40) -> True",
+          "public": true,
+          "function": "fits_slot",
+          "args": [
+            12,
+            3,
+            4,
+            40
+          ],
+          "expected": true,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "fits_slot(12, 3, 4, 39) -> False",
+          "public": true,
+          "function": "fits_slot",
+          "args": [
+            12,
+            3,
+            4,
+            39
+          ],
+          "expected": false,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "fits_slot(8, 2, 0, 20) -> True",
+          "public": false,
+          "function": "fits_slot",
+          "args": [
+            8,
+            2,
+            0,
+            20
+          ],
+          "expected": true,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "fits_slot(7, 0, 5, 4) -> False",
+          "public": false,
+          "function": "fits_slot",
+          "args": [
+            7,
+            0,
+            5,
+            4
+          ],
+          "expected": false,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "fits_slot(0, 0, 0, 0) -> True",
+          "public": false,
+          "function": "fits_slot",
+          "args": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "expected": true,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def fits_slot(length, count, setup, available):\n    needed = length * count + setup\n    return needed <= available\n\nprint(fits_slot(12, 3, 4, 40))\n",
+        "notes": [
+          "The intermediate needed documents what is being compared.",
+          "An inclusive comparison matches the exact-fit contract. Test values on both sides of the boundary."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-10-alignment",
+      "version": 1,
+      "title": "Does the batch divide evenly?",
+      "concepts": "Modulo \u00b7 equality \u00b7 Boolean composition of arithmetic",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-09-capacity"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A remainder is a numeric value that can itself be compared. Equality is written `==`; a single `=` is assignment and is not a substitute. This combines arithmetic with a comparison without requiring new branching syntax.",
+          "code": "pieces = 17\nbox_size = 4\nprint(pieces % box_size)       # 1\nprint(pieces % box_size == 0)  # False"
+        }
+      ],
+      "brief": "Create `fills_whole_packs(item_count, pack_size)`, returning whether there will be no partially filled pack.",
+      "requirements": [
+        "`item_count` is a non-negative integer and `pack_size` is a positive integer.",
+        "Zero items counts as dividing evenly: it leaves no partial pack. Return a Boolean without printing."
+      ],
+      "starter": "def fills_whole_packs(item_count, pack_size):\n    pass\n\nprint(fills_whole_packs(24, 6))\n",
+      "example": "fills_whole_packs(24, 6) -> True\nfills_whole_packs(25, 6) -> False\nfills_whole_packs(0, 6) -> True",
+      "input": "",
+      "hints": [
+        "Which arithmetic operation tells you about leftovers?",
+        "What leftover amount means the division was exact?",
+        "Compare the remainder with the exact-fit remainder rather than returning the remainder itself."
+      ],
+      "tests": [
+        {
+          "label": "fills_whole_packs(24, 6) -> True",
+          "public": true,
+          "function": "fills_whole_packs",
+          "args": [
+            24,
+            6
+          ],
+          "expected": true,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "fills_whole_packs(25, 6) -> False",
+          "public": true,
+          "function": "fills_whole_packs",
+          "args": [
+            25,
+            6
+          ],
+          "expected": false,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "fills_whole_packs(0, 6) -> True",
+          "public": false,
+          "function": "fills_whole_packs",
+          "args": [
+            0,
+            6
+          ],
+          "expected": true,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "fills_whole_packs(3, 8) -> False",
+          "public": false,
+          "function": "fills_whole_packs",
+          "args": [
+            3,
+            8
+          ],
+          "expected": false,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "fills_whole_packs(7, 1) -> True",
+          "public": false,
+          "function": "fills_whole_packs",
+          "args": [
+            7,
+            1
+          ],
+          "expected": true,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def fills_whole_packs(item_count, pack_size):\n    return item_count % pack_size == 0\n\nprint(fills_whole_packs(24, 6))\n",
+        "notes": [
+          "The remainder tests exact divisibility without constructing a floating-point quotient.",
+          "Zero is divisible by every positive pack size under the explicit no-partial-pack rule."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-11-repair",
+      "version": 1,
+      "title": "Keep the fractional part",
+      "concepts": "Debugging \u00b7 floor versus true division \u00b7 regression examples",
+      "xp": 10,
+      "prerequisites": [
+        "py-num-10-alignment"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A plausible whole-number sample can hide a calculation bug. Choose inputs for which the competing interpretations differ. In particular, rounding away a fractional unit too early changes every calculation after it.",
+          "code": "print(8 // 2)  # 4\nprint(8 / 2)   # 4.0\nprint(9 // 2)  # 4\nprint(9 / 2)   # 4.5"
+        }
+      ],
+      "brief": "Repair `hours_used(total_minutes)`, returning the duration in hours while preserving fractional hours.",
+      "requirements": [
+        "`total_minutes` is a non-negative integer. The result must represent the full duration, including a fractional hour when needed.",
+        "Do not round or format the returned number, and do not print from the helper."
+      ],
+      "starter": "def hours_used(total_minutes):\n    return total_minutes // 60\n\nprint(hours_used(90))\n",
+      "example": "hours_used(90) -> 1.5\nhours_used(30) -> 0.5",
+      "input": "",
+      "hints": [
+        "Find an input that exposes the lost fraction.",
+        "Does floor division preserve partial larger units?",
+        "The conversion factor is right; reconsider the kind of division."
+      ],
+      "tests": [
+        {
+          "label": "hours_used(90,) -> 1.5",
+          "public": true,
+          "function": "hours_used",
+          "args": [
+            90
+          ],
+          "expected": 1.5,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "hours_used(30,) -> 0.5",
+          "public": true,
+          "function": "hours_used",
+          "args": [
+            30
+          ],
+          "expected": 0.5,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "hours_used(0,) -> 0.0",
+          "public": false,
+          "function": "hours_used",
+          "args": [
+            0
+          ],
+          "expected": 0.0,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "hours_used(120,) -> 2.0",
+          "public": false,
+          "function": "hours_used",
+          "args": [
+            120
+          ],
+          "expected": 2.0,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "hours_used(15,) -> 0.25",
+          "public": false,
+          "function": "hours_used",
+          "args": [
+            15
+          ],
+          "expected": 0.25,
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def hours_used(total_minutes):\n    return total_minutes / 60\n\nprint(hours_used(90))\n",
+        "notes": [
+          "`True` division preserves fractional hours.",
+          "Checking only multiples of 60 would let the starter bug survive. Fractional cases are useful regression tests."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-num-12-boss",
+      "version": 1,
+      "title": "Build a session budget report",
+      "concepts": "Chapter project \u00b7 units \u00b7 remainder \u00b7 comparison \u00b7 presentation",
+      "xp": 30,
+      "prerequisites": [
+        "py-num-11-repair"
+      ],
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A report can present both a calculation and a decision. Keep the units consistent, preserve partial larger units as remainders, and make the fit boundary explicit. All necessary tools have appeared in this chapter; choose your own structure.",
+          "code": "def parcel_label(weight, limit):\n    allowed = weight <= limit\n    return f\"Allowed: {allowed}\""
+        }
+      ],
+      "brief": "Build `session_report(length, count, setup, available)`, returning one readable report for a planned session batch.",
+      "requirements": [
+        "All inputs are non-negative integers measured in whole minutes except count, which is a number of sessions.",
+        "Planned duration includes count sessions of `length` minutes plus one setup, even when `count` is zero.",
+        "Return exactly `Planned: Hh Mm | Fits: B`, where H is whole hours, M is remaining minutes from 0 to 59, and B is `True` or `False`.",
+        "Fits is `True` when planned duration is at most available; equality succeeds. Do not print from the helper. You may add helpers if useful."
+      ],
+      "starter": "def session_report(length, count, setup, available):\n    pass\n\nprint(session_report(25, 3, 10, 90))\n",
+      "example": "session_report(25, 3, 10, 90) -> \"Planned: 1h 25m | Fits: True\"\nsession_report(25, 3, 10, 84) -> \"Planned: 1h 25m | Fits: False\"",
+      "input": "",
+      "hints": [
+        "Which single quantity drives both the displayed duration and the fit decision?",
+        "Separate the total duration, its display units, and the comparison mentally before combining the report.",
+        "Whole hours and leftover minutes describe the same total. Compare that original total with the available time."
+      ],
+      "tests": [
+        {
+          "label": "session_report(25, 3, 10, 90) -> 'Planned: 1h 25m | Fits: True'",
+          "public": true,
+          "function": "session_report",
+          "args": [
+            25,
+            3,
+            10,
+            90
+          ],
+          "expected": "Planned: 1h 25m | Fits: True",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "session_report(25, 3, 10, 84) -> 'Planned: 1h 25m | Fits: False'",
+          "public": true,
+          "function": "session_report",
+          "args": [
+            25,
+            3,
+            10,
+            84
+          ],
+          "expected": "Planned: 1h 25m | Fits: False",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "session_report(25, 3, 10, 85) -> 'Planned: 1h 25m | Fits: True'",
+          "public": false,
+          "function": "session_report",
+          "args": [
+            25,
+            3,
+            10,
+            85
+          ],
+          "expected": "Planned: 1h 25m | Fits: True",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "session_report(7, 0, 5, 4) -> 'Planned: 0h 5m | Fits: False'",
+          "public": false,
+          "function": "session_report",
+          "args": [
+            7,
+            0,
+            5,
+            4
+          ],
+          "expected": "Planned: 0h 5m | Fits: False",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "session_report(0, 0, 0, 0) -> 'Planned: 0h 0m | Fits: True'",
+          "public": false,
+          "function": "session_report",
+          "args": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "expected": "Planned: 0h 0m | Fits: True",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "session_report(60, 2, 0, 120) -> 'Planned: 2h 0m | Fits: True'",
+          "public": false,
+          "function": "session_report",
+          "args": [
+            60,
+            2,
+            0,
+            120
+          ],
+          "expected": "Planned: 2h 0m | Fits: True",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        },
+        {
+          "label": "session_report(100, 2, 1, 200) -> 'Planned: 3h 21m | Fits: False'",
+          "public": false,
+          "function": "session_report",
+          "args": [
+            100,
+            2,
+            1,
+            200
+          ],
+          "expected": "Planned: 3h 21m | Fits: False",
+          "call_stdout": "",
+          "hint": "Compare the actual result with the contract, including units and boundary cases."
+        }
+      ],
+      "reference": {
+        "code": "def session_report(length, count, setup, available):\n    planned = length * count + setup\n    hours = planned // 60\n    minutes = planned % 60\n    fits = planned <= available\n    return f\"Planned: {hours}h {minutes}m | Fits: {fits}\"\n\nprint(session_report(25, 3, 10, 90))\n",
+        "notes": [
+          "The calculation stays in minutes until display, so the comparison uses consistent units.",
+          "Named intermediate values clarify the report without requiring a separate helper for every expression.",
+          "The tests accept alternate working implementations; they do not assess whether you can explain the choices. Try a post-pass walkthrough and change an input independently."
+        ]
+      },
+      "boss": true
+    }
+  ]
+}

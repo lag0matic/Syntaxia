@@ -1,0 +1,368 @@
+{
+  "id": "python-session-project",
+  "title": "Project: session summary tool",
+  "language": "python",
+  "version": 1,
+  "badge": "Session Scribe",
+  "missions": [
+    {
+      "id": "py-session-01-report",
+      "title": "Describe a completed session",
+      "version": 1,
+      "xp": 10,
+      "prerequisites": [
+        "py-num-12-boss"
+      ],
+      "concepts": "Guided project - functions, loops and session reports",
+      "brief": "Build `summary_line(name, count, total, available)`, returning one compact summary of completed work.",
+      "requirements": [
+        "`name` is text; strip surrounding spaces and use Learner if it becomes empty.",
+        "`count`, `total` and `available` are non-negative integers. `count` is the number of sessions; total and `available` are minutes. When `count` is zero, `total` is also zero.",
+        "Return exactly `NAME | N sessions | Hh Mm | Average: A.AA min | Fits: B`. H and M split total into whole hours and remaining minutes; average is total/count with two decimal places, or 0.00 for zero sessions. Fits is `True` when `total <= available`.",
+        "Do not print or read input inside this helper. Keep sessions plural even for one."
+      ],
+      "lesson": [
+        {
+          "heading": "A useful application of familiar tools",
+          "text": "This project turns individual calculations into a program you can run and export. Start with its report contract; later you will gather several session durations. Zero sessions is a real case, not a division error to ignore."
+        },
+        {
+          "heading": "Guard a calculation",
+          "text": "An `if/else` can choose a calculation before formatting. Only the selected branch executes. Decide what your contract means when a denominator would be zero.",
+          "code": "if boxes == 0:\n    average = 0\nelse:\n    average = items / boxes"
+        }
+      ],
+      "starter": "def summary_line(name, count, total, available):\n    pass\n\nprint(summary_line(\"  David  \", 3, 85, 90))\n",
+      "example": "summary_line(\"  David  \", 3, 85, 90) -> \"David | 3 sessions | 1h 25m | Average: 28.33 min | Fits: True\"\nsummary_line(\" \", 0, 0, 0) -> \"Learner | 0 sessions | 0h 0m | Average: 0.00 min | Fits: True\"",
+      "input": "",
+      "tests": [
+        {
+          "label": "summary_line('  David  ', 3, 85, 90)",
+          "function": "summary_line",
+          "args": [
+            "  David  ",
+            3,
+            85,
+            90
+          ],
+          "expected": "David | 3 sessions | 1h 25m | Average: 28.33 min | Fits: True",
+          "call_stdout": "",
+          "public": true,
+          "stdin": [],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        },
+        {
+          "label": "summary_line(' ', 0, 0, 0)",
+          "function": "summary_line",
+          "args": [
+            " ",
+            0,
+            0,
+            0
+          ],
+          "expected": "Learner | 0 sessions | 0h 0m | Average: 0.00 min | Fits: True",
+          "call_stdout": "",
+          "public": true,
+          "stdin": [],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        },
+        {
+          "label": "summary_line('Radio', 2, 60, 59)",
+          "function": "summary_line",
+          "args": [
+            "Radio",
+            2,
+            60,
+            59
+          ],
+          "expected": "Radio | 2 sessions | 1h 0m | Average: 30.00 min | Fits: False",
+          "call_stdout": "",
+          "public": false,
+          "stdin": [],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        },
+        {
+          "label": "summary_line('A', 1, 5, 5)",
+          "function": "summary_line",
+          "args": [
+            "A",
+            1,
+            5,
+            5
+          ],
+          "expected": "A | 1 sessions | 0h 5m | Average: 5.00 min | Fits: True",
+          "call_stdout": "",
+          "public": false,
+          "stdin": [],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        }
+      ],
+      "hints": [
+        "Separate quantities from their final display.",
+        "Which calculation has no valid denominator when count is zero?",
+        "Use the explicit zero-session rule before formatting the average. The total remains in minutes for the fit comparison."
+      ],
+      "reference": {
+        "code": "def summary_line(name, count, total, available):\n    clean_name = name.strip()\n    if clean_name == \"\":\n        clean_name = \"Learner\"\n    if count == 0:\n        average = 0\n    else:\n        average = total / count\n    hours = total // 60\n    minutes = total % 60\n    fits = total <= available\n    return f\"{clean_name} | {count} sessions | {hours}h {minutes}m | Average: {average:.2f} min | Fits: {fits}\"\n\nprint(summary_line(\"  David  \", 3, 85, 90))\n",
+        "notes": [
+          "Calculations and formatting share one small contract. Named quantities make the result easy to trace.",
+          "The zero case is handled before division. An exact budget fit succeeds."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-session-02-collect",
+      "title": "Gather different session lengths",
+      "version": 1,
+      "xp": 10,
+      "prerequisites": [
+        "py-session-01-report"
+      ],
+      "concepts": "Guided project - functions, loops and session reports",
+      "brief": "Build `collect_minutes(count)`, which reads one duration for each session and returns their total minutes.",
+      "requirements": [
+        "`count` is a non-negative integer. Read exactly count lines with `input()` and no prompts. Each line is a valid non-negative whole-number duration in minutes.",
+        "Return their sum; print nothing from the helper. When `count` is zero, return zero without reading any input. Session durations can differ."
+      ],
+      "lesson": [
+        {
+          "heading": "Repeat a known operation",
+          "text": "The review chapter introduced `for` and `range()`. Here the repeat count is supplied by the caller. `range(count)` represents `count` repetitions, and `range(0)` has none.",
+          "code": "for turn in range(3):\n    print(\"Ready\")"
+        },
+        {
+          "heading": "Keep state across repetitions",
+          "text": "A running total starts before a loop and changes inside it. Assigning it inside the loop would reset it each time. In this project, this helper deliberately owns console input; the report helper owns formatting. These are different responsibilities, so not every helper should be pure.",
+          "code": "points = 0\nfor turn in range(3):\n    points = points + 2\nprint(points)"
+        }
+      ],
+      "starter": "def collect_minutes(count):\n    pass\n\nprint(collect_minutes(3))\n",
+      "example": "For collect_minutes(3), input lines 10, 25, 5 -> return 40\ncollect_minutes(0) -> return 0 without input",
+      "input": "10\n25\n5",
+      "tests": [
+        {
+          "label": "Three different durations",
+          "public": true,
+          "stdin": [
+            "10",
+            "25",
+            "5"
+          ],
+          "stdout": "40",
+          "hint": "Read each duration once."
+        },
+        {
+          "label": "Includes zero duration",
+          "public": true,
+          "stdin": [
+            "0",
+            "12",
+            "8"
+          ],
+          "stdout": "20",
+          "hint": "Zero contributes no minutes."
+        },
+        {
+          "label": "collect_minutes(0,)",
+          "function": "collect_minutes",
+          "args": [
+            0
+          ],
+          "expected": 0,
+          "call_stdout": "",
+          "public": false,
+          "stdin": [
+            "1",
+            "2",
+            "3"
+          ],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        },
+        {
+          "label": "collect_minutes(2,)",
+          "function": "collect_minutes",
+          "args": [
+            2
+          ],
+          "expected": 12,
+          "call_stdout": "",
+          "public": false,
+          "stdin": [
+            "1",
+            "2",
+            "3",
+            "12",
+            "0"
+          ],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        },
+        {
+          "label": "collect_minutes(4,)",
+          "function": "collect_minutes",
+          "args": [
+            4
+          ],
+          "expected": 10,
+          "call_stdout": "",
+          "public": false,
+          "stdin": [
+            "1",
+            "2",
+            "3",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        }
+      ],
+      "hints": [
+        "Think about what must survive from one session to the next.",
+        "The zero-session case should work without a special input read.",
+        "An accumulator outside the loop can collect the converted duration from each repetition."
+      ],
+      "reference": {
+        "code": "def collect_minutes(count):\n    total = 0\n    for session in range(count):\n        total = total + int(input())\n    return total\n\nprint(collect_minutes(3))\n",
+        "notes": [
+          "The helper is an input boundary: its callers choose how many values it reads.",
+          "A list is unnecessary when only the total is needed. Later chapters will keep individual durations for richer reports."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-session-03-tool",
+      "title": "Build the session summary tool",
+      "version": 1,
+      "xp": 30,
+      "prerequisites": [
+        "py-session-02-collect"
+      ],
+      "concepts": "Guided project - functions, loops and session reports",
+      "brief": "Build a console tool that reads a session log and prints its summary.",
+      "requirements": [
+        "Read `name`, `count` and available minutes on separate lines in that order, then exactly count durations (one per line). No prompts. All numeric text is valid non-negative whole numbers.",
+        "Use `collect_minutes(count)` to return the sum of the durations and `summary_line(name, count, total, available)` to return the report. Implement both helpers and the outer program; you may reuse your own previous submissions.",
+        "Print exactly one line: `NAME | N sessions | Hh Mm | Average: A.AA min | Fits: B`. Trim name, falling back to Learner; split total into hours/remainder minutes; average is zero for zero sessions; Fits includes equality.",
+        "`collect_minutes` reads durations but prints nothing. `summary_line` reads no input and prints nothing. The outer program prints the returned report. No setup charge is included: these are completed sessions, not planned estimates."
+      ],
+      "lesson": [
+        {
+          "heading": "Bring the pieces together",
+          "text": "Reuse your own helpers from this project, then connect their inputs and returned values. This is a program assembly task, not a new algorithm. Keep the report contract available while you work."
+        },
+        {
+          "heading": "Take it with you",
+          "text": "After passing, Download `.py` gives you a real Python source file. On a machine with Python installed, run it as a console program and enter the values one at a time. It reads `stdin` and prints a summary; it does not yet save a log file. We will guide local environment setup before larger projects."
+        }
+      ],
+      "starter": "# Add your summary_line and collect_minutes helpers.\n\n# Read the header, gather the sessions, and print the report.\n",
+      "example": "Input lines: David, 3, 90, 20, 25, 40\nOutput: David | 3 sessions | 1h 25m | Average: 28.33 min | Fits: True\n\nInput lines: \" \", 0, 0\nOutput: Learner | 0 sessions | 0h 0m | Average: 0.00 min | Fits: True",
+      "input": "David\n3\n90\n20\n25\n40",
+      "tests": [
+        {
+          "label": "Input: 'David', '3', '90', '20', '25', '40'",
+          "public": true,
+          "stdin": [
+            "David",
+            "3",
+            "90",
+            "20",
+            "25",
+            "40"
+          ],
+          "stdout": "David | 3 sessions | 1h 25m | Average: 28.33 min | Fits: True",
+          "hint": "Check input order, the number of duration reads, zero sessions, and the report contract."
+        },
+        {
+          "label": "Input: ' ', '0', '0'",
+          "public": true,
+          "stdin": [
+            " ",
+            "0",
+            "0"
+          ],
+          "stdout": "Learner | 0 sessions | 0h 0m | Average: 0.00 min | Fits: True",
+          "hint": "Check input order, the number of duration reads, zero sessions, and the report contract."
+        },
+        {
+          "label": "Input: '  Cassia  ', '2', '59', '30', '30'",
+          "public": false,
+          "stdin": [
+            "  Cassia  ",
+            "2",
+            "59",
+            "30",
+            "30"
+          ],
+          "stdout": "Cassia | 2 sessions | 1h 0m | Average: 30.00 min | Fits: False",
+          "hint": "Check input order, the number of duration reads, zero sessions, and the report contract."
+        },
+        {
+          "label": "Input: 'A', '1', '5', '5'",
+          "public": false,
+          "stdin": [
+            "A",
+            "1",
+            "5",
+            "5"
+          ],
+          "stdout": "A | 1 sessions | 0h 5m | Average: 5.00 min | Fits: True",
+          "hint": "Check input order, the number of duration reads, zero sessions, and the report contract."
+        },
+        {
+          "label": "summary_line('B', 0, 0, 0)",
+          "function": "summary_line",
+          "args": [
+            "B",
+            0,
+            0,
+            0
+          ],
+          "expected": "B | 0 sessions | 0h 0m | Average: 0.00 min | Fits: True",
+          "call_stdout": "",
+          "public": false,
+          "stdin": [
+            "A",
+            "0",
+            "0"
+          ],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        },
+        {
+          "label": "collect_minutes(2,)",
+          "function": "collect_minutes",
+          "args": [
+            2
+          ],
+          "expected": 7,
+          "call_stdout": "",
+          "public": false,
+          "stdin": [
+            "A",
+            "0",
+            "0",
+            "3",
+            "4"
+          ],
+          "hint": "Check the stated contract and boundary cases. Use Run to inspect a smaller example."
+        }
+      ],
+      "hints": [
+        "Separate the header inputs from the repeated duration inputs.",
+        "The two helpers have different jobs: gathering work and describing it.",
+        "Capture the collected total and supply it to the report helper. Only the outer program prints the final line."
+      ],
+      "reference": {
+        "code": "def summary_line(name, count, total, available):\n    clean_name = name.strip()\n    if clean_name == \"\":\n        clean_name = \"Learner\"\n    if count == 0:\n        average = 0\n    else:\n        average = total / count\n    hours = total // 60\n    minutes = total % 60\n    fits = total <= available\n    return f\"{clean_name} | {count} sessions | {hours}h {minutes}m | Average: {average:.2f} min | Fits: {fits}\"\n\ndef collect_minutes(count):\n    total = 0\n    for session in range(count):\n        total = total + int(input())\n    return total\n\nname = input()\ncount = int(input())\navailable = int(input())\ntotal = collect_minutes(count)\nprint(summary_line(name, count, total, available))\n",
+        "notes": [
+          "The outer program connects input to collection to formatting; each stage has an explicit contract.",
+          "This is a usable console utility. File persistence, arbitrary invalid input and an interactive menu are future extensions, not hidden requirements."
+        ]
+      },
+      "boss": true
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "python-orientation",
+  "title": "Start here",
+  "orientation": true,
+  "language": "python",
+  "version": 1,
+  "badge": "First Page",
+  "missions": [
+    {
+      "id": "py-orientation-first-run",
+      "title": "Your first Python program",
+      "orientation": true,
+      "version": 1,
+      "xp": 10,
+      "prerequisites": [],
+      "concepts": "Optional beginner tutorial - `print()` - strings - Run, Test and Submit",
+      "lesson": [
+        {
+          "heading": "A program is a set of instructions",
+          "text": "Python reads your instructions and carries them out. In this example, `print()` displays a value. Text in quotes, such as `\"Hello, world!\"`, is a string. The quotes tell Python where the text begins and ends; they do not appear in the output. A line that starts with `#` is a comment for the reader.",
+          "code": "# This is a comment.\nprint(\"Hello, world!\")"
+        },
+        {
+          "heading": "Try the editor",
+          "text": "Click Run and look at the Results panel. Then change the text between the quotes in the editor and run it again. Keep the parentheses and quotes paired. Python distinguishes uppercase from lowercase, so `print` and `Print` are different names. You do not need to enter anything in Program input for this program."
+        },
+        {
+          "heading": "Check your work",
+          "text": "Run shows what your program does. Test checks the examples. Submit runs the required checks and records completion when they pass. Your edits save as you work. If something goes wrong, read the last line of the error and look at the line number it mentions. A missing quote or parenthesis is a good first thing to check."
+        },
+        {
+          "heading": "A place to look things up",
+          "text": "The Grimoire in the header opens your offline reference book. Completing this lesson unlocks a few quick reminders. The Tutor is optional; you can do every lesson without an API key. Already comfortable with Python basics? You can open Console foundations directly."
+        }
+      ],
+      "brief": "Make the program greet you with `Hello, Syntaxia!`.",
+      "requirements": [
+        "Print exactly one line: `Hello, Syntaxia!`",
+        "Keep the capitalization, comma, space and exclamation mark. No program input is needed."
+      ],
+      "starter": "# Change the message, then run the program.\nprint(\"Hello, world!\")\n",
+      "input": "",
+      "example": "Hello, Syntaxia!",
+      "hints": [
+        "Run the starter first and compare its message with the goal.",
+        "The string is the text between the quotes in `print()`.",
+        "Change that string. The quotes and parentheses are Python syntax, not part of the printed line."
+      ],
+      "tests": [
+        {
+          "label": "Prints the greeting",
+          "public": true,
+          "stdin": [],
+          "stdout": "Hello, Syntaxia!",
+          "hint": "Check the exact message and punctuation in the output."
+        }
+      ],
+      "reference": {
+        "code": "print(\"Hello, Syntaxia!\")\n",
+        "notes": [
+          "`print()` displays the string and ends the output line. The quotes identify the string in the source, but do not print.",
+          "Comments are for humans and do not change what this program does."
+        ]
+      }
+    }
+  ]
+}

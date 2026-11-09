@@ -1,0 +1,992 @@
+{
+  "id": "python-repetition",
+  "title": "Loops and accumulated state",
+  "badge": "Loop Wrangler",
+  "language": "python",
+  "version": 1,
+  "missions": [
+    {
+      "id": "py-repetition-01-checkpoint",
+      "version": 1,
+      "title": "Grow a counter",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-10-boss"
+      ],
+      "concepts": "Independent checkpoint - repeated updates",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A loop applies an action repeatedly. Track the state before the first iteration and after each update. This checkpoint revisits the review loop using a general contract.",
+          "code": "level = 2\nfor turn in range(3):\n    level = level + 4\nprint(level)  # 14"
+        }
+      ],
+      "brief": "Return the value reached after steps equal updates to a starting counter.",
+      "requirements": [
+        "start and `increment` are integers; `steps` is a non-negative integer. Each update adds increment. Zero steps leaves start unchanged.",
+        "Practice aim: trace repeated state with a loop. Equivalent arithmetic is accepted by behavioral checks.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def after_steps(start, increment, steps):\n    pass\n\nprint(after_steps(10, 3, 4))\n",
+      "input": "",
+      "example": "after_steps(10, 3, 4) -> 22\nafter_steps(10, 3, 0) -> 10",
+      "hints": [
+        "What is the value before any updates?",
+        "Zero iterations must preserve the initial state.",
+        "Change the running value inside the loop, then `return` after repetition finishes."
+      ],
+      "tests": [
+        {
+          "function": "after_steps",
+          "args": [
+            10,
+            3,
+            4
+          ],
+          "expected": 22,
+          "public": true,
+          "label": "after_steps example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "after_steps",
+          "args": [
+            10,
+            3,
+            0
+          ],
+          "expected": 10,
+          "public": true,
+          "label": "after_steps example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "after_steps",
+          "args": [
+            8,
+            -2,
+            3
+          ],
+          "expected": 2,
+          "public": false,
+          "label": "after_steps example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "after_steps",
+          "args": [
+            0,
+            0,
+            5
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "after_steps example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def after_steps(start, increment, steps):\n    value = start\n    for step in range(steps):\n        value = value + increment\n    return value\n\nprint(after_steps(10, 3, 4))\n",
+        "notes": [
+          "The loop makes each update visible.",
+          "A direct formula is shorter for this simple constant increment; the loop becomes useful when updates depend on state."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-02-range",
+      "version": 1,
+      "title": "Add an interval",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-01-checkpoint"
+      ],
+      "concepts": "range endpoints - empty ranges",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`range(start, stop)` includes `start` and excludes `stop`. With its default positive step, it is empty when `start >= stop`. An accumulator initialized to zero naturally handles an empty interval.",
+          "code": "for number in range(3, 6):\n    print(number)  # 3, 4, 5"
+        }
+      ],
+      "brief": "Return the sum of integers from `start` up to, but not including, stop.",
+      "requirements": [
+        "Both inputs are integers. If `start >= stop`, return zero. Negative integers are valid. Practice aim: use range and an accumulator; equivalent valid implementations are accepted.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def interval_total(start, stop):\n    pass\n\nprint(interval_total(2, 5))\n",
+      "input": "",
+      "example": "interval_total(2, 5) -> 9\ninterval_total(5, 5) -> 0",
+      "hints": [
+        "List the included integers for the first example.",
+        "The stop value is not part of the range.",
+        "The initial total should already be the correct empty-interval answer."
+      ],
+      "tests": [
+        {
+          "function": "interval_total",
+          "args": [
+            2,
+            5
+          ],
+          "expected": 9,
+          "public": true,
+          "label": "interval_total example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "interval_total",
+          "args": [
+            5,
+            5
+          ],
+          "expected": 0,
+          "public": true,
+          "label": "interval_total example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "interval_total",
+          "args": [
+            7,
+            3
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "interval_total example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "interval_total",
+          "args": [
+            -3,
+            1
+          ],
+          "expected": -6,
+          "public": false,
+          "label": "interval_total example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def interval_total(start, stop):\n    total = 0\n    for number in range(start, stop):\n        total = total + number\n    return total\n\nprint(interval_total(2, 5))\n",
+        "notes": [
+          "Using the range contract avoids a special case for an empty interval.",
+          "`sum(range(...))` is a useful later shorthand, while the explicit loop exposes the accumulation."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-03-filtered",
+      "version": 1,
+      "title": "Count qualifying turns",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-02-range"
+      ],
+      "concepts": "Loop conditions - counting matches",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A loop can count only values that meet a condition. A counter and a running sum look similar, but their updates answer different questions. Keep the meaning of the accumulator clear.",
+          "code": "count = 0\nfor number in range(1, 5):\n    if number > 2:\n        count = count + 1\nprint(count)  # 2"
+        }
+      ],
+      "brief": "Return how many integers from 1 through `stop` are divisible by `factor`.",
+      "requirements": [
+        "`stop` is a non-negative integer; `factor` is a positive integer. Include stop when it qualifies. Zero stop means zero candidates.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def count_multiples(stop, factor):\n    pass\n\nprint(count_multiples(10, 3))\n",
+      "input": "",
+      "example": "count_multiples(10, 3) -> 3\ncount_multiples(9, 3) -> 3",
+      "hints": [
+        "This asks for a count, not the sum of the qualifying numbers.",
+        "Use the remainder to decide whether a candidate qualifies.",
+        "Check both the range endpoint and where the counter changes."
+      ],
+      "tests": [
+        {
+          "function": "count_multiples",
+          "args": [
+            10,
+            3
+          ],
+          "expected": 3,
+          "public": true,
+          "label": "count_multiples example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "count_multiples",
+          "args": [
+            9,
+            3
+          ],
+          "expected": 3,
+          "public": true,
+          "label": "count_multiples example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "count_multiples",
+          "args": [
+            0,
+            4
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "count_multiples example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "count_multiples",
+          "args": [
+            3,
+            8
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "count_multiples example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "count_multiples",
+          "args": [
+            4,
+            1
+          ],
+          "expected": 4,
+          "public": false,
+          "label": "count_multiples example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def count_multiples(stop, factor):\n    count = 0\n    for number in range(1, stop + 1):\n        if number % factor == 0:\n            count = count + 1\n    return count\n\nprint(count_multiples(10, 3))\n",
+        "notes": [
+          "The increment is one per match.",
+          "For positive divisors a floor-division formula also works; the loop is practice for conditions that cannot be summarized that way."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-04-while",
+      "version": 1,
+      "title": "Halve until small",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-03-filtered"
+      ],
+      "concepts": "`while` - state and stopping conditions",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`while` repeats as long as its condition is true. Unlike a fixed range, the number of iterations depends on state. Each iteration must make progress toward stopping.",
+          "code": "remaining = 10\nwhile remaining > 0:\n    remaining = remaining - 3\nprint(remaining)  # -2"
+        }
+      ],
+      "brief": "Return how many floor-halving operations reduce value to 1 or less.",
+      "requirements": [
+        "`value` is a positive integer. One operation replaces it with `value // 2`. Starting at 1 needs zero operations.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def halving_steps(value):\n    pass\n\nprint(halving_steps(10))\n",
+      "input": "",
+      "example": "halving_steps(10) -> 3\nhalving_steps(1) -> 0",
+      "hints": [
+        "Trace value and a separate operation count.",
+        "The condition must examine the updated value.",
+        "A zero-operation starting state should leave the counter at zero."
+      ],
+      "tests": [
+        {
+          "function": "halving_steps",
+          "args": [
+            10
+          ],
+          "expected": 3,
+          "public": true,
+          "label": "halving_steps example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "halving_steps",
+          "args": [
+            1
+          ],
+          "expected": 0,
+          "public": true,
+          "label": "halving_steps example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "halving_steps",
+          "args": [
+            2
+          ],
+          "expected": 1,
+          "public": false,
+          "label": "halving_steps example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "halving_steps",
+          "args": [
+            31
+          ],
+          "expected": 4,
+          "public": false,
+          "label": "halving_steps example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "halving_steps",
+          "args": [
+            32
+          ],
+          "expected": 5,
+          "public": false,
+          "label": "halving_steps example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def halving_steps(value):\n    steps = 0\n    while value > 1:\n        value = value // 2\n        steps = steps + 1\n    return steps\n\nprint(halving_steps(10))\n",
+        "notes": [
+          "The value changes toward the stopping condition.",
+          "The counter records actions performed, not values visited."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-05-countdown",
+      "version": 1,
+      "title": "Count the countdown",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-04-while"
+      ],
+      "concepts": "`while` - crossing a boundary",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A decreasing state may cross below zero rather than land exactly on it. A condition such as `remaining != 0` can therefore be unsafe when subtraction skips over zero.",
+          "code": "remaining = 5\nwhile remaining > 0:\n    print(remaining)\n    remaining = remaining - 2"
+        }
+      ],
+      "brief": "Return how many ticks a countdown performs before its remaining amount is zero or negative.",
+      "requirements": [
+        "`start` is a non-negative integer; `step` is a positive integer. Each tick subtracts step. Starting at zero performs no ticks.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def countdown_ticks(start, step):\n    pass\n\nprint(countdown_ticks(5, 2))\n",
+      "input": "",
+      "example": "countdown_ticks(5, 2) -> 3\ncountdown_ticks(0, 3) -> 0",
+      "hints": [
+        "Must the countdown land exactly on zero?",
+        "Count the subtraction that crosses the boundary.",
+        "Choose a stopping condition that includes negative remaining values."
+      ],
+      "tests": [
+        {
+          "function": "countdown_ticks",
+          "args": [
+            5,
+            2
+          ],
+          "expected": 3,
+          "public": true,
+          "label": "countdown_ticks example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "countdown_ticks",
+          "args": [
+            0,
+            3
+          ],
+          "expected": 0,
+          "public": true,
+          "label": "countdown_ticks example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "countdown_ticks",
+          "args": [
+            6,
+            2
+          ],
+          "expected": 3,
+          "public": false,
+          "label": "countdown_ticks example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "countdown_ticks",
+          "args": [
+            2,
+            8
+          ],
+          "expected": 1,
+          "public": false,
+          "label": "countdown_ticks example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def countdown_ticks(start, step):\n    ticks = 0\n    while start > 0:\n        start = start - step\n        ticks = ticks + 1\n    return ticks\n\nprint(countdown_ticks(5, 2))\n",
+        "notes": [
+          "Testing positivity handles both exact and overshooting final ticks.",
+          "A ceiling-division formula is possible here, but the loop generalizes to variable tick sizes."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-06-break",
+      "version": 1,
+      "title": "Find the first divisor",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-05-countdown"
+      ],
+      "concepts": "Early loop exit - first match",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`break` stops the nearest loop; code after that loop still runs. A `return` inside a loop exits the entire function. Either can be appropriate for a first-match search. A divisor divides a number with remainder zero.",
+          "code": "for attempt in range(1, 8):\n    if attempt * attempt > 12:\n        print(attempt)\n        break\nprint(\"Search finished\")"
+        }
+      ],
+      "brief": "Return the smallest divisor of `number` that is at least 2.",
+      "requirements": [
+        "`number` is an `integer >= 2`. If none of 2 through `number`-1 divides it, return number itself. Example: 9 has first divisor 3; 7 returns 7.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def first_divisor(number):\n    pass\n\nprint(first_divisor(9))\n",
+      "input": "",
+      "example": "first_divisor(9) -> 3\nfirst_divisor(7) -> 7",
+      "hints": [
+        "Search candidates in ascending order.",
+        "The first match is already the smallest.",
+        "If the loop finishes without a match, the number itself still satisfies the divisor rule."
+      ],
+      "tests": [
+        {
+          "function": "first_divisor",
+          "args": [
+            9
+          ],
+          "expected": 3,
+          "public": true,
+          "label": "first_divisor example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "first_divisor",
+          "args": [
+            7
+          ],
+          "expected": 7,
+          "public": true,
+          "label": "first_divisor example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "first_divisor",
+          "args": [
+            2
+          ],
+          "expected": 2,
+          "public": false,
+          "label": "first_divisor example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "first_divisor",
+          "args": [
+            12
+          ],
+          "expected": 2,
+          "public": false,
+          "label": "first_divisor example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "first_divisor",
+          "args": [
+            25
+          ],
+          "expected": 5,
+          "public": false,
+          "label": "first_divisor example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def first_divisor(number):\n    for candidate in range(2, number):\n        if number % candidate == 0:\n            return candidate\n    return number\n\nprint(first_divisor(9))\n",
+        "notes": [
+          "An early return is a simple first-match implementation.",
+          "A `break`-based version can save a found value and return after the loop; behavior is what the tests assess."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-07-continue",
+      "version": 1,
+      "title": "Skip selected values",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-06-break"
+      ],
+      "concepts": "`continue` - skip one iteration",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`continue` skips the rest of the current iteration and moves to the next. It can keep a loop body focused on accepted values. An `if` around the work can express the same filtering.",
+          "code": "for number in range(1, 5):\n    if number == 3:\n        continue\n    print(number)  # 1, 2, 4"
+        }
+      ],
+      "brief": "Return the sum of integers from 1 through `stop`, excluding multiples of `factor`.",
+      "requirements": [
+        "`stop` is a non-negative integer; `factor` is positive. Empty candidate ranges sum to zero. Practice aim: try continue; an equivalent conditional filter is accepted.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def sum_nonmultiples(stop, factor):\n    pass\n\nprint(sum_nonmultiples(5, 2))\n",
+      "input": "",
+      "example": "sum_nonmultiples(5, 2) -> 9\nsum_nonmultiples(0, 3) -> 0",
+      "hints": [
+        "Decide whether a candidate is excluded before adding it.",
+        "The excluded value contributes nothing.",
+        "`continue` skips just that iteration; break would stop considering all later candidates."
+      ],
+      "tests": [
+        {
+          "function": "sum_nonmultiples",
+          "args": [
+            5,
+            2
+          ],
+          "expected": 9,
+          "public": true,
+          "label": "sum_nonmultiples example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "sum_nonmultiples",
+          "args": [
+            0,
+            3
+          ],
+          "expected": 0,
+          "public": true,
+          "label": "sum_nonmultiples example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "sum_nonmultiples",
+          "args": [
+            5,
+            1
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "sum_nonmultiples example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "sum_nonmultiples",
+          "args": [
+            4,
+            9
+          ],
+          "expected": 10,
+          "public": false,
+          "label": "sum_nonmultiples example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def sum_nonmultiples(stop, factor):\n    total = 0\n    for number in range(1, stop + 1):\n        if number % factor == 0:\n            continue\n        total = total + number\n    return total\n\nprint(sum_nonmultiples(5, 2))\n",
+        "notes": [
+          "The continue makes the excluded path explicit.",
+          "An `if` with a nonzero-remainder condition is equally reasonable here."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-08-nested",
+      "version": 1,
+      "title": "Count alternating tiles",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-07-continue"
+      ],
+      "concepts": "Nested loops - coordinate pairs",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Nested loops visit combinations: an outer row and an inner column. The inner loop runs fully for each row. Coordinates here start at zero. A checkerboard can classify a tile by whether `row + column` is even.",
+          "code": "for row in range(2):\n    for column in range(3):\n        print(row, column)"
+        }
+      ],
+      "brief": "Return how many tiles in a rectangular grid have an even sum of row and column coordinates.",
+      "requirements": [
+        "rows and `columns` are non-negative integers. Coordinates start at 0; a tile is light when `(row + column) % 2 == 0`. Any zero-sized dimension means zero tiles.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def light_tiles(rows, columns):\n    pass\n\nprint(light_tiles(2, 3))\n",
+      "input": "",
+      "example": "light_tiles(2, 3) -> 3\nlight_tiles(0, 4) -> 0",
+      "hints": [
+        "Draw a small grid with row and column labels.",
+        "Each pair of coordinates is one candidate tile.",
+        "Count the qualifying pairs; do not reset the total for each new row."
+      ],
+      "tests": [
+        {
+          "function": "light_tiles",
+          "args": [
+            2,
+            3
+          ],
+          "expected": 3,
+          "public": true,
+          "label": "light_tiles example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "light_tiles",
+          "args": [
+            0,
+            4
+          ],
+          "expected": 0,
+          "public": true,
+          "label": "light_tiles example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "light_tiles",
+          "args": [
+            3,
+            3
+          ],
+          "expected": 5,
+          "public": false,
+          "label": "light_tiles example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "light_tiles",
+          "args": [
+            1,
+            1
+          ],
+          "expected": 1,
+          "public": false,
+          "label": "light_tiles example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "light_tiles",
+          "args": [
+            4,
+            0
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "light_tiles example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def light_tiles(rows, columns):\n    count = 0\n    for row in range(rows):\n        for column in range(columns):\n            if (row + column) % 2 == 0:\n                count = count + 1\n    return count\n\nprint(light_tiles(2, 3))\n",
+        "notes": [
+          "The nested loops match the two-dimensional domain.",
+          "A mathematical shortcut exists for this regular pattern, but visiting coordinates prepares for game grids."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-09-bounded",
+      "version": 1,
+      "title": "Bound the simulation",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-08-nested"
+      ],
+      "concepts": "Bounded `while` - success and exhaustion",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A simulation may need both a success condition and a limit on work. Check whether the starting state already succeeds. A finite turn budget also handles cases that cannot make progress.",
+          "code": "turns = 0\nvalue = 0\nwhile value < 5 and turns < 3:\n    value = value + 2\n    turns = turns + 1"
+        }
+      ],
+      "brief": "Return how many turns reach a target, or -1 if the allowed turns cannot reach it.",
+      "requirements": [
+        "All inputs are non-negative integers. Each turn adds gain to the current value. A starting value `already >= target` succeeds in zero turns.",
+        "Reaching the target on the last allowed turn succeeds. If it remains below target, return -1. Gain may be zero.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def turns_to_target(start, gain, target, maximum_turns):\n    pass\n\nprint(turns_to_target(0, 3, 8, 3))\n",
+      "input": "",
+      "example": "turns_to_target(0, 3, 8, 3) -> 3\nturns_to_target(8, 0, 8, 0) -> 0",
+      "hints": [
+        "Track state and turns separately.",
+        "A success check must still happen after the loop stops.",
+        "The turn limit must protect the zero-gain case too."
+      ],
+      "tests": [
+        {
+          "function": "turns_to_target",
+          "args": [
+            0,
+            3,
+            8,
+            3
+          ],
+          "expected": 3,
+          "public": true,
+          "label": "turns_to_target example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "turns_to_target",
+          "args": [
+            8,
+            0,
+            8,
+            0
+          ],
+          "expected": 0,
+          "public": true,
+          "label": "turns_to_target example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "turns_to_target",
+          "args": [
+            0,
+            3,
+            8,
+            2
+          ],
+          "expected": -1,
+          "public": false,
+          "label": "turns_to_target example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "turns_to_target",
+          "args": [
+            0,
+            0,
+            8,
+            4
+          ],
+          "expected": -1,
+          "public": false,
+          "label": "turns_to_target example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "turns_to_target",
+          "args": [
+            1,
+            4,
+            5,
+            1
+          ],
+          "expected": 1,
+          "public": false,
+          "label": "turns_to_target example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "turns_to_target",
+          "args": [
+            1,
+            1,
+            2,
+            0
+          ],
+          "expected": -1,
+          "public": false,
+          "label": "turns_to_target example 6",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def turns_to_target(start, gain, target, maximum_turns):\n    turns = 0\n    value = start\n    while value < target and turns < maximum_turns:\n        value = value + gain\n        turns = turns + 1\n    if value >= target:\n        return turns\n    return -1\n\nprint(turns_to_target(0, 3, 8, 3))\n",
+        "notes": [
+          "The bound guarantees termination even with no progress.",
+          "A final success check distinguishes exhaustion from reaching the target on the final turn."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-repetition-10-menu",
+      "version": 1,
+      "title": "Build a repeatable session console",
+      "concepts": "Chapter project - command loop and accumulated state",
+      "xp": 30,
+      "prerequisites": [
+        "py-repetition-09-bounded"
+      ],
+      "boss": true,
+      "lesson": [
+        {
+          "heading": "A program that stays open",
+          "text": "A command loop reads a command, performs an action, then waits for another. State lives across iterations. The workshop supplies all input lines in advance; the exported program accepts them interactively in a terminal. Every test includes `quit` so this is bounded by supplied input.",
+          "code": "while True:\n    command = input()\n    if command == \"stop\":\n        break"
+        }
+      ],
+      "brief": "Build a small console that accepts add, report and quit commands.",
+      "requirements": [
+        "Read commands using `input()` without prompts, ignoring surrounding whitespace and case. Start with zero sessions and zero total minutes.",
+        "add reads one extra line containing a valid non-negative integer duration, records it and prints nothing. report prints `Sessions: N | Total: T min`. quit prints `Finished.` and stops without reading anything else.",
+        "Any other command, including an empty command, prints `Unknown command` and continues without reading a duration. All tests eventually provide quit."
+      ],
+      "starter": "# Build the command loop and its session state.\n",
+      "input": "add\n15\nadd\n25\nreport\nquit",
+      "example": "Input lines: add, 15, add, 25, report, quit\nOutput:\nSessions: 2 | Total: 40 min\nFinished.",
+      "hints": [
+        "Keep the session count and total outside the repeated command handling.",
+        "Each command consumes a different amount of input; only add reads a duration.",
+        "A quit command should break the loop. Unknown commands should leave stored state unchanged."
+      ],
+      "reference": {
+        "code": "count = 0\ntotal = 0\nwhile True:\n    command = input().strip().lower()\n    if command == \"quit\":\n        print(\"Finished.\")\n        break\n    elif command == \"add\":\n        total = total + int(input())\n        count = count + 1\n    elif command == \"report\":\n        print(f\"Sessions: {count} | Total: {total} min\")\n    else:\n        print(\"Unknown command\")\n",
+        "notes": [
+          "The loop keeps state until quit, while each command has a small explicit behavior.",
+          "This extends the session project with repeated interactions. Individual durations and file persistence are future extensions."
+        ]
+      },
+      "tests": [
+        {
+          "label": "Two sessions",
+          "public": true,
+          "stdin": [
+            "add",
+            "15",
+            "add",
+            "25",
+            "report",
+            "quit"
+          ],
+          "stdout": "Sessions: 2 | Total: 40 min\nFinished.",
+          "hint": "Check command normalization, state persistence and exactly which commands read a duration."
+        },
+        {
+          "label": "Empty report",
+          "public": true,
+          "stdin": [
+            "report",
+            "quit"
+          ],
+          "stdout": "Sessions: 0 | Total: 0 min\nFinished.",
+          "hint": "Check command normalization, state persistence and exactly which commands read a duration."
+        },
+        {
+          "label": "Normalization and unknown command",
+          "public": false,
+          "stdin": [
+            " ADD ",
+            "0",
+            "what",
+            " REPORT ",
+            " QUIT "
+          ],
+          "stdout": "Unknown command\nSessions: 1 | Total: 0 min\nFinished.",
+          "hint": "Check command normalization, state persistence and exactly which commands read a duration."
+        },
+        {
+          "label": "Report preserves state",
+          "public": false,
+          "stdin": [
+            "add",
+            "7",
+            "report",
+            "report",
+            "quit"
+          ],
+          "stdout": "Sessions: 1 | Total: 7 min\nSessions: 1 | Total: 7 min\nFinished.",
+          "hint": "Check command normalization, state persistence and exactly which commands read a duration."
+        },
+        {
+          "label": "Quit does not need more input",
+          "public": false,
+          "stdin": [
+            "quit"
+          ],
+          "stdout": "Finished.",
+          "hint": "Check command normalization, state persistence and exactly which commands read a duration."
+        },
+        {
+          "label": "Blank command",
+          "public": false,
+          "stdin": [
+            "",
+            "report",
+            "quit"
+          ],
+          "stdout": "Unknown command\nSessions: 0 | Total: 0 min\nFinished.",
+          "hint": "Check command normalization, state persistence and exactly which commands read a duration."
+        }
+      ]
+    }
+  ]
+}

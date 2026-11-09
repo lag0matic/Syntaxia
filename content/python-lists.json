@@ -1,0 +1,1226 @@
+{
+  "id": "python-lists",
+  "title": "Lists and sequences",
+  "badge": "Queue Keeper",
+  "language": "python",
+  "version": 1,
+  "missions": [
+    {
+      "id": "py-lists-01-first",
+      "version": 1,
+      "title": "Inspect the first item",
+      "xp": 10,
+      "prerequisites": [
+        "py-repetition-10-menu"
+      ],
+      "concepts": "Lists - length - zero-based indexing",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A list stores an ordered collection. Square brackets create one; `len` counts its elements. Index 0 selects the first element. A missing index raises `IndexError`, so an empty-list contract needs attention before indexing.",
+          "code": "tools = [\"radio\", \"printer\", \"headset\"]\nprint(len(tools))  # 3\nprint(tools[1])    # printer"
+        }
+      ],
+      "brief": "Return the first element of `items`, or `None` when the list is empty.",
+      "requirements": [
+        "`items` is a list of text values. Return an element, not a one-element list. Leave the supplied list unchanged.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def first_or_none(items):\n    pass\n\nprint(first_or_none(['Radio', 'Printer']))\n",
+      "input": "",
+      "example": "first_or_none(['Radio', 'Printer']) -> 'Radio'\nfirst_or_none([]) -> None",
+      "hints": [
+        "What index describes the first element?",
+        "Check whether that index exists before reading it.",
+        "Handle the empty case, then retrieve the first value."
+      ],
+      "tests": [
+        {
+          "function": "first_or_none",
+          "args": [
+            [
+              "Radio",
+              "Printer"
+            ]
+          ],
+          "expected": "Radio",
+          "public": true,
+          "label": "first_or_none example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "first_or_none",
+          "args": [
+            []
+          ],
+          "expected": null,
+          "public": true,
+          "label": "first_or_none example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "first_or_none",
+          "args": [
+            [
+              ""
+            ]
+          ],
+          "expected": "",
+          "public": false,
+          "label": "first_or_none example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def first_or_none(items):\n    if len(items) == 0:\n        return None\n    return items[0]\n\nprint(first_or_none(['Radio', 'Printer']))\n",
+        "notes": [
+          "The guard makes the empty contract explicit.",
+          "Returning a value does not require removing it from the collection."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-02-last",
+      "version": 1,
+      "title": "Inspect the last item",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-01-first"
+      ],
+      "concepts": "Negative indexes - empty lists",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Negative indexes count backward from the end: `-1` is the last element, `-2` the one before it. They still require an element to exist. Empty lists have no valid positive or negative indexes.",
+          "code": "values = [4, 8, 12]\nprint(values[-1])  # 12\nprint(values[-2])  # 8"
+        }
+      ],
+      "brief": "Return the final element of `items`, or `None` for an empty list.",
+      "requirements": [
+        "`items` is a list of integers. Do not remove or change any elements.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def last_or_none(items):\n    pass\n\nprint(last_or_none([3, 7, 2]))\n",
+      "input": "",
+      "example": "last_or_none([3, 7, 2]) -> 2\nlast_or_none([]) -> None",
+      "hints": [
+        "You can count from the end without calculating a positive index.",
+        "A negative index does not solve the empty-list case.",
+        "Return the last value only after ruling out the empty input."
+      ],
+      "tests": [
+        {
+          "function": "last_or_none",
+          "args": [
+            [
+              3,
+              7,
+              2
+            ]
+          ],
+          "expected": 2,
+          "public": true,
+          "label": "last_or_none example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "last_or_none",
+          "args": [
+            []
+          ],
+          "expected": null,
+          "public": true,
+          "label": "last_or_none example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "last_or_none",
+          "args": [
+            [
+              0
+            ]
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "last_or_none example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "last_or_none",
+          "args": [
+            [
+              -2,
+              -5
+            ]
+          ],
+          "expected": -5,
+          "public": false,
+          "label": "last_or_none example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def last_or_none(items):\n    if len(items) == 0:\n        return None\n    return items[-1]\n\nprint(last_or_none([3, 7, 2]))\n",
+        "notes": [
+          "Negative indexing states the intent clearly.",
+          "`items[len(items)-1]` can also work after the empty guard."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-03-slice",
+      "version": 1,
+      "title": "Preview part of a queue",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-02-last"
+      ],
+      "concepts": "Slicing - new lists - bounded prefixes",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A slice selects a range of elements: `items[start:stop]` includes `start` and excludes `stop`. Omitting `start` uses the beginning. Slicing beyond the end is safe and returns the elements that exist. A slice creates a new outer list.",
+          "code": "letters = [\"A\", \"B\", \"C\", \"D\"]\nprint(letters[1:3])  # ['B', 'C']\nprint(letters[:2])   # ['A', 'B']"
+        }
+      ],
+      "brief": "Return a new list containing up to `count` jobs from the beginning of `jobs`.",
+      "requirements": [
+        "`jobs` is a list of strings and `count` is a non-negative integer. Return all available jobs if count exceeds the length; zero returns an empty list. Do not change `jobs`.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def first_jobs(jobs, count):\n    pass\n\nprint(first_jobs(['A', 'B', 'C'], 2))\n",
+      "input": "",
+      "example": "first_jobs(['A', 'B', 'C'], 2) -> ['A', 'B']\nfirst_jobs(['A'], 4) -> ['A']",
+      "hints": [
+        "This is an ordered prefix, not a search.",
+        "The slice stop is excluded, just like range.",
+        "A prefix slice naturally handles a count larger than the available collection."
+      ],
+      "tests": [
+        {
+          "function": "first_jobs",
+          "args": [
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            2
+          ],
+          "expected": [
+            "A",
+            "B"
+          ],
+          "public": true,
+          "label": "first_jobs example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "first_jobs",
+          "args": [
+            [
+              "A"
+            ],
+            4
+          ],
+          "expected": [
+            "A"
+          ],
+          "public": true,
+          "label": "first_jobs example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "first_jobs",
+          "args": [
+            [],
+            2
+          ],
+          "expected": [],
+          "public": false,
+          "label": "first_jobs example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "first_jobs",
+          "args": [
+            [
+              "A",
+              "B"
+            ],
+            0
+          ],
+          "expected": [],
+          "public": false,
+          "label": "first_jobs example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        }
+      ],
+      "reference": {
+        "code": "def first_jobs(jobs, count):\n    return jobs[:count]\n\nprint(first_jobs(['A', 'B', 'C'], 2))\n",
+        "notes": [
+          "Slicing expresses a bounded preview and produces a separate outer list.",
+          "Nested objects inside a sliced list are still shared; deeper copying is a later topic."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-04-append",
+      "version": 1,
+      "title": "Add to the real queue",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-03-slice"
+      ],
+      "concepts": "`append` - in-place mutation - `None`",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`append` adds one element to the end of a list in place. The method returns `None`; it does not return the changed list. The caller sees the mutation because its name refers to the same list object.",
+          "code": "tasks = [\"Check\"]\nresult = tasks.append(\"Report\")\nprint(tasks)   # ['Check', 'Report']\nprint(result)  # None"
+        }
+      ],
+      "brief": "Add job to the end of the supplied queue, changing that same list.",
+      "requirements": [
+        "`queue` is a list of strings; `job` is a string. Keep all existing jobs in their order and append one job, even if it is a duplicate.",
+        "Return `None`. The helper prints nothing. The sample outer code prints the return and then the changed list; checks verify both the return and mutation."
+      ],
+      "starter": "def enqueue(queue, job):\n    pass\n\nsample = ['A']\nresult = enqueue(sample, 'B')\nprint(result)\nprint(sample)\n",
+      "input": "",
+      "example": "enqueue(['A'], 'B') -> None; arguments afterward: [['A', 'B'], 'B']\nenqueue([], 'A') -> None; arguments afterward: [['A'], 'A']",
+      "hints": [
+        "The contract asks for a visible change to the caller's collection.",
+        "Reassigning a local name to a new list is different from mutating the supplied list.",
+        "append changes the object and already has the required no-value return behavior."
+      ],
+      "tests": [
+        {
+          "function": "enqueue",
+          "args": [
+            [
+              "A"
+            ],
+            "B"
+          ],
+          "expected": null,
+          "public": true,
+          "label": "enqueue example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            [
+              "A",
+              "B"
+            ],
+            "B"
+          ]
+        },
+        {
+          "function": "enqueue",
+          "args": [
+            [],
+            "A"
+          ],
+          "expected": null,
+          "public": true,
+          "label": "enqueue example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            [
+              "A"
+            ],
+            "A"
+          ]
+        },
+        {
+          "function": "enqueue",
+          "args": [
+            [
+              "A"
+            ],
+            "A"
+          ],
+          "expected": null,
+          "public": false,
+          "label": "enqueue example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            [
+              "A",
+              "A"
+            ],
+            "A"
+          ]
+        }
+      ],
+      "reference": {
+        "code": "def enqueue(queue, job):\n    queue.append(job)\n\nsample = ['A']\nresult = enqueue(sample, 'B')\nprint(result)\nprint(sample)\n",
+        "notes": [
+          "No explicit `return` is necessary when `None` is the intended result.",
+          "Assigning `queue = queue.append(job)` would replace the local name with `None`."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-05-pop",
+      "version": 1,
+      "title": "Remove the most recent job",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-04-append"
+      ],
+      "concepts": "`pop` - returned element - mutation",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`pop` removes and returns an element. With no index, it uses the last element. Popping an empty list raises `IndexError`, so decide the empty behavior before calling it.",
+          "code": "scores = [10, 20]\nremoved = scores.pop()\nprint(removed)  # 20\nprint(scores)   # [10]"
+        }
+      ],
+      "brief": "Remove and return the last job from `queue`, or return `None` when there is no job.",
+      "requirements": [
+        "`queue` is a list of strings. Change it by removing exactly its last element when nonempty. Empty input must stay empty. The helper prints nothing; checks verify both return and remaining items."
+      ],
+      "starter": "def remove_last(queue):\n    pass\n\nsample = ['A', 'B']\nresult = remove_last(sample)\nprint(result)\nprint(sample)\n",
+      "input": "",
+      "example": "remove_last(['A', 'B']) -> 'B'; arguments afterward: [['A']]\nremove_last([]) -> None; arguments afterward: [[]]",
+      "hints": [
+        "The removed value and the remaining collection are separate results of this operation.",
+        "Handle the empty list before attempting removal.",
+        "Unlike append, `pop` returns a meaningful element."
+      ],
+      "tests": [
+        {
+          "function": "remove_last",
+          "args": [
+            [
+              "A",
+              "B"
+            ]
+          ],
+          "expected": "B",
+          "public": true,
+          "label": "remove_last example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            [
+              "A"
+            ]
+          ]
+        },
+        {
+          "function": "remove_last",
+          "args": [
+            []
+          ],
+          "expected": null,
+          "public": true,
+          "label": "remove_last example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            []
+          ]
+        },
+        {
+          "function": "remove_last",
+          "args": [
+            [
+              "A"
+            ]
+          ],
+          "expected": "A",
+          "public": false,
+          "label": "remove_last example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            []
+          ]
+        }
+      ],
+      "reference": {
+        "code": "def remove_last(queue):\n    if len(queue) == 0:\n        return None\n    return queue.pop()\n\nsample = ['A', 'B']\nresult = remove_last(sample)\nprint(result)\nprint(sample)\n",
+        "notes": [
+          "The empty guard preserves the specified behavior without an exception.",
+          "The `return` sends the removed job back to the caller."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-06-filter",
+      "version": 1,
+      "title": "Keep usable durations",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-05-pop"
+      ],
+      "concepts": "Direct iteration - filtering into a new list",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A `for` loop can iterate list values directly, without `range` or indexing. Build a separate output collection when selecting elements. Changing the input while iterating it can skip or duplicate work.",
+          "code": "labels = [\"A\", \"B\"]\nfor label in labels:\n    print(label)"
+        }
+      ],
+      "brief": "Return a new list containing only the positive durations from `lengths`.",
+      "requirements": [
+        "`lengths` is a list of integers. Keep `values > 0` in their original order, including duplicates. Zero and negative values are excluded. Leave lengths unchanged.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def positive_lengths(lengths):\n    pass\n\nprint(positive_lengths([0, 8, -1, 3]))\n",
+      "input": "",
+      "example": "positive_lengths([0, 8, -1, 3]) -> [8, 3]\npositive_lengths([]) -> []",
+      "hints": [
+        "The result starts empty and accepts only qualifying values.",
+        "Preserving order means considering the values in their original order.",
+        "Append a qualifying value to a separate output list rather than removing rejected values from the input."
+      ],
+      "tests": [
+        {
+          "function": "positive_lengths",
+          "args": [
+            [
+              0,
+              8,
+              -1,
+              3
+            ]
+          ],
+          "expected": [
+            8,
+            3
+          ],
+          "public": true,
+          "label": "positive_lengths example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "positive_lengths",
+          "args": [
+            []
+          ],
+          "expected": [],
+          "public": true,
+          "label": "positive_lengths example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "positive_lengths",
+          "args": [
+            [
+              -2,
+              0
+            ]
+          ],
+          "expected": [],
+          "public": false,
+          "label": "positive_lengths example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "positive_lengths",
+          "args": [
+            [
+              4,
+              4,
+              1
+            ]
+          ],
+          "expected": [
+            4,
+            4,
+            1
+          ],
+          "public": false,
+          "label": "positive_lengths example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        }
+      ],
+      "reference": {
+        "code": "def positive_lengths(lengths):\n    accepted = []\n    for length in lengths:\n        if length > 0:\n            accepted.append(length)\n    return accepted\n\nprint(positive_lengths([0, 8, -1, 3]))\n",
+        "notes": [
+          "Direct iteration emphasizes values instead of their positions.",
+          "A comprehension can express the same filter once that syntax is introduced."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-07-enumerate",
+      "version": 1,
+      "title": "Number the labels",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-06-filter"
+      ],
+      "concepts": "`enumerate` - position and value - str display",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`enumerate` supplies a position and a value together. A `for` loop can bind both names, separated by a comma. The default position starts at zero; `start=1` is useful for human labels. F-strings convert inserted values to text for display.",
+          "code": "for position, word in enumerate([\"Red\", \"Blue\"], start=1):\n    print(f\"{position}: {word}\")"
+        }
+      ],
+      "brief": "Return labels numbered from 1 for the supplied names.",
+      "requirements": [
+        "`names` is a list of strings. Return a new list of strings in the form `\"N: NAME\"`, preserving order and name text exactly. Empty input returns an empty list. Do not modify `names`.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def numbered_labels(names):\n    pass\n\nprint(numbered_labels(['Radio', 'Printer']))\n",
+      "input": "",
+      "example": "numbered_labels(['Radio', 'Printer']) -> ['1: Radio', '2: Printer']\nnumbered_labels([]) -> []",
+      "hints": [
+        "You need each value and its human-facing number.",
+        "`enumerate` can supply both, including the starting number.",
+        "Construct one label per pair and keep their original sequence."
+      ],
+      "tests": [
+        {
+          "function": "numbered_labels",
+          "args": [
+            [
+              "Radio",
+              "Printer"
+            ]
+          ],
+          "expected": [
+            "1: Radio",
+            "2: Printer"
+          ],
+          "public": true,
+          "label": "numbered_labels example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "numbered_labels",
+          "args": [
+            []
+          ],
+          "expected": [],
+          "public": true,
+          "label": "numbered_labels example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "numbered_labels",
+          "args": [
+            [
+              "A",
+              "A"
+            ]
+          ],
+          "expected": [
+            "1: A",
+            "2: A"
+          ],
+          "public": false,
+          "label": "numbered_labels example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "numbered_labels",
+          "args": [
+            [
+              ""
+            ]
+          ],
+          "expected": [
+            "1: "
+          ],
+          "public": false,
+          "label": "numbered_labels example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        }
+      ],
+      "reference": {
+        "code": "def numbered_labels(names):\n    labels = []\n    for number, name in enumerate(names, start=1):\n        labels.append(f\"{number}: {name}\")\n    return labels\n\nprint(numbered_labels(['Radio', 'Printer']))\n",
+        "notes": [
+          "enumerate avoids manually maintaining a parallel counter.",
+          "An index-based loop can work but adds indexing when the value is already available."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-08-membership",
+      "version": 1,
+      "title": "Check for a complete label",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-07-enumerate"
+      ],
+      "concepts": "List membership - exact element equality",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "For a list, `in` checks whether an equal element exists. It does not treat each element as a string to search inside. This differs from substring membership in one string.",
+          "code": "print(\"ad\" in \"radio\")       # True\nprint(\"ad\" in [\"radio\"])     # False\nprint(\"radio\" in [\"radio\"])  # True"
+        }
+      ],
+      "brief": "Return whether `target` is an exact element of `names`.",
+      "requirements": [
+        "`names` is a list of strings and `target` is a string. Matching is case-sensitive; partial words do not count. Leave names unchanged and return a Boolean.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def contains_label(names, target):\n    pass\n\nprint(contains_label(['Radio', 'Printer'], 'Radio'))\n",
+      "input": "",
+      "example": "contains_label(['Radio', 'Printer'], 'Radio') -> True\ncontains_label(['Radio'], 'Rad') -> False",
+      "hints": [
+        "Decide whether the contract needs a substring or a complete element.",
+        "List membership already compares complete values.",
+        "Return the membership decision directly."
+      ],
+      "tests": [
+        {
+          "function": "contains_label",
+          "args": [
+            [
+              "Radio",
+              "Printer"
+            ],
+            "Radio"
+          ],
+          "expected": true,
+          "public": true,
+          "label": "contains_label example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "contains_label",
+          "args": [
+            [
+              "Radio"
+            ],
+            "Rad"
+          ],
+          "expected": false,
+          "public": true,
+          "label": "contains_label example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "contains_label",
+          "args": [
+            [
+              "Radio"
+            ],
+            "radio"
+          ],
+          "expected": false,
+          "public": false,
+          "label": "contains_label example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "contains_label",
+          "args": [
+            [],
+            "A"
+          ],
+          "expected": false,
+          "public": false,
+          "label": "contains_label example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "contains_label",
+          "args": [
+            [
+              ""
+            ],
+            ""
+          ],
+          "expected": true,
+          "public": false,
+          "label": "contains_label example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def contains_label(names, target):\n    return target in names\n\nprint(contains_label(['Radio', 'Printer'], 'Radio'))\n",
+        "notes": [
+          "The operation matches exact element equality.",
+          "A loop with equality checks is also valid and useful when the matching rule is more complex."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-09-sort",
+      "version": 1,
+      "title": "Order a copy",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-08-membership"
+      ],
+      "concepts": "sorted versus sort - mutation and ordering",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`sorted(values)` returns a new sorted list. `values.sort()` changes that list in place and returns `None`. Both use ascending order by default. Choose based on whether callers need the original order preserved.",
+          "code": "values = [4, 1, 3]\nordered = sorted(values)\nprint(values)   # [4, 1, 3]\nprint(ordered)  # [1, 3, 4]"
+        }
+      ],
+      "brief": "Return durations in ascending numeric order while preserving the original list.",
+      "requirements": [
+        "`times` is a list of integers. Keep duplicates, include negative values as normal integers, and return an empty list for empty input. Do not modify `times`.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def ordered_times(times):\n    pass\n\nprint(ordered_times([4, 1, 3]))\n",
+      "input": "",
+      "example": "ordered_times([4, 1, 3]) -> [1, 3, 4]\nordered_times([]) -> []",
+      "hints": [
+        "Does the caller want the original order retained?",
+        "The two sorting APIs differ in what they change and return.",
+        "Sorting a separate copy is another way to meet the non-mutation contract."
+      ],
+      "tests": [
+        {
+          "function": "ordered_times",
+          "args": [
+            [
+              4,
+              1,
+              3
+            ]
+          ],
+          "expected": [
+            1,
+            3,
+            4
+          ],
+          "public": true,
+          "label": "ordered_times example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "ordered_times",
+          "args": [
+            []
+          ],
+          "expected": [],
+          "public": true,
+          "label": "ordered_times example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "ordered_times",
+          "args": [
+            [
+              2,
+              -1,
+              2
+            ]
+          ],
+          "expected": [
+            -1,
+            2,
+            2
+          ],
+          "public": false,
+          "label": "ordered_times example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "ordered_times",
+          "args": [
+            [
+              3,
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            3
+          ],
+          "public": false,
+          "label": "ordered_times example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        }
+      ],
+      "reference": {
+        "code": "def ordered_times(times):\n    return sorted(times)\n\nprint(ordered_times([4, 1, 3]))\n",
+        "notes": [
+          "sorted communicates that the result is separate from the input.",
+          "A copied list followed by sort also works. Neither approach is universally faster for all situations."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-10-copy",
+      "version": 1,
+      "title": "Preview without changing the queue",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-09-sort"
+      ],
+      "concepts": "Copying versus aliasing - shallow copies",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`other = items` creates another name for the same list. `items.copy()` creates a separate outer list. With a flat list of strings, this lets a preview add an item without changing the real queue.",
+          "code": "original = [\"A\"]\ncopy = original.copy()\ncopy.append(\"B\")\nprint(original)  # ['A']\nprint(copy)      # ['A', 'B']"
+        }
+      ],
+      "brief": "Return a preview list containing the existing queue followed by `job`, without changing queue.",
+      "requirements": [
+        "`queue` is a list of strings; `job` is a string. Preserve all existing elements and duplicates. Return a new outer list even when the `queue` is empty.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def preview_add(queue, job):\n    pass\n\nprint(preview_add(['A'], 'B'))\n",
+      "input": "",
+      "example": "preview_add(['A'], 'B') -> ['A', 'B']\npreview_add([], 'A') -> ['A']",
+      "hints": [
+        "A second name alone is not a second list.",
+        "Your preview must own a separate outer collection.",
+        "A copy followed by append, slicing followed by append, or list concatenation can meet the goal."
+      ],
+      "tests": [
+        {
+          "function": "preview_add",
+          "args": [
+            [
+              "A"
+            ],
+            "B"
+          ],
+          "expected": [
+            "A",
+            "B"
+          ],
+          "public": true,
+          "label": "preview_add example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "preview_add",
+          "args": [
+            [],
+            "A"
+          ],
+          "expected": [
+            "A"
+          ],
+          "public": true,
+          "label": "preview_add example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "preview_add",
+          "args": [
+            [
+              "A"
+            ],
+            "A"
+          ],
+          "expected": [
+            "A",
+            "A"
+          ],
+          "public": false,
+          "label": "preview_add example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        }
+      ],
+      "reference": {
+        "code": "def preview_add(queue, job):\n    preview = queue.copy()\n    preview.append(job)\n    return preview\n\nprint(preview_add(['A'], 'B'))\n",
+        "notes": [
+          "Copying separates later outer-list mutation.",
+          "This is a shallow copy: nested mutable objects would still be shared. The current contract contains only strings."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-11-comprehension",
+      "version": 1,
+      "title": "Transform every reading",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-10-copy"
+      ],
+      "concepts": "List comprehension - expression and iteration",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A list comprehension creates a new list from an expression applied to each value. Read `[expression for item in items]` as transform each item. Start with the equivalent loop if that makes the data flow easier to follow.",
+          "code": "values = [1, 2, 3]\nsquares = [value * value for value in values]\nprint(squares)  # [1, 4, 9]"
+        }
+      ],
+      "brief": "Return a new list with every supplied reading doubled.",
+      "requirements": [
+        "`values` is a list of integers. Preserve order and duplicates, including zeros and negatives. Do not modify `values`. Practice aim: try a comprehension; an equivalent loop is accepted.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def double_readings(values):\n    pass\n\nprint(double_readings([1, 0, -2]))\n",
+      "input": "",
+      "example": "double_readings([1, 0, -2]) -> [2, 0, -4]\ndouble_readings([]) -> []",
+      "hints": [
+        "The transformation produces exactly one result per input.",
+        "Write a loop first if the compact syntax feels unclear.",
+        "In a comprehension, put the transformed value before the `for` clause."
+      ],
+      "tests": [
+        {
+          "function": "double_readings",
+          "args": [
+            [
+              1,
+              0,
+              -2
+            ]
+          ],
+          "expected": [
+            2,
+            0,
+            -4
+          ],
+          "public": true,
+          "label": "double_readings example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "double_readings",
+          "args": [
+            []
+          ],
+          "expected": [],
+          "public": true,
+          "label": "double_readings example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        },
+        {
+          "function": "double_readings",
+          "args": [
+            [
+              3,
+              3
+            ]
+          ],
+          "expected": [
+            6,
+            6
+          ],
+          "public": false,
+          "label": "double_readings example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true,
+          "new_result": true
+        }
+      ],
+      "reference": {
+        "code": "def double_readings(values):\n    return [value * 2 for value in values]\n\nprint(double_readings([1, 0, -2]))\n",
+        "notes": [
+          "The comprehension describes a simple transformation without unrelated state.",
+          "A normal loop is preferable when the body needs several steps or becomes hard to read."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-lists-12-boss",
+      "version": 1,
+      "title": "Build a clean queue report",
+      "xp": 30,
+      "prerequisites": [
+        "py-lists-11-comprehension"
+      ],
+      "concepts": "Chapter project - filtering, totals and list contracts",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Combine a collection rule with a small report. Decide which values represent real jobs before counting and totaling them. Keep the original collection available for the caller.",
+          "code": "labels = [\"A\", \"\", \"B\"]\nfor label in labels:\n    if label != \"\":\n        print(label)"
+        }
+      ],
+      "brief": "Summarize the usable jobs in a duration queue.",
+      "requirements": [
+        "`lengths` is a list of integers; `available` is a non-negative integer. Only positive lengths represent usable jobs. Keep duplicates as separate jobs.",
+        "Return exactly `Queued: N | Total: T min | Fits: B` using the count and sum of usable jobs. Fits includes equality. Empty or all-invalid input means zero jobs and zero total, which fits any supplied budget.",
+        "Do not change `lengths`. You may use helpers or any equivalent valid implementation.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def queue_report(lengths, available):\n    pass\n\nprint(queue_report([10, 0, -2, 20], 30))\n",
+      "input": "",
+      "example": "queue_report([10, 0, -2, 20], 30) -> 'Queued: 2 | Total: 30 min | Fits: True'\nqueue_report([], 0) -> 'Queued: 0 | Total: 0 min | Fits: True'",
+      "hints": [
+        "The filter determines both which jobs count and which durations contribute.",
+        "An empty accepted collection should still have a sensible count and total.",
+        "Separate filtering, aggregation and display if combining them makes debugging harder."
+      ],
+      "tests": [
+        {
+          "function": "queue_report",
+          "args": [
+            [
+              10,
+              0,
+              -2,
+              20
+            ],
+            30
+          ],
+          "expected": "Queued: 2 | Total: 30 min | Fits: True",
+          "public": true,
+          "label": "queue_report example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "queue_report",
+          "args": [
+            [],
+            0
+          ],
+          "expected": "Queued: 0 | Total: 0 min | Fits: True",
+          "public": true,
+          "label": "queue_report example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "queue_report",
+          "args": [
+            [
+              15,
+              15
+            ],
+            29
+          ],
+          "expected": "Queued: 2 | Total: 30 min | Fits: False",
+          "public": false,
+          "label": "queue_report example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "queue_report",
+          "args": [
+            [
+              -3,
+              0
+            ],
+            0
+          ],
+          "expected": "Queued: 0 | Total: 0 min | Fits: True",
+          "public": false,
+          "label": "queue_report example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def queue_report(lengths, available):\n    valid = [length for length in lengths if length > 0]\n    total = 0\n    for length in valid:\n        total = total + length\n    return f\"Queued: {len(valid)} | Total: {total} min | Fits: {total <= available}\"\n\nprint(queue_report([10, 0, -2, 20], 30))\n",
+        "notes": [
+          "Filtering once gives count and total the same definition of a valid job.",
+          "A single loop that counts and sums accepted values avoids an intermediate list and is equally valid."
+        ]
+      },
+      "boss": true
+    }
+  ]
+}

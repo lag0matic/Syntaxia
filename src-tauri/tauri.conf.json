@@ -1,0 +1,20 @@
+{
+  "productName": "Syntaxia",
+  "version": "0.2.0",
+  "identifier": "local.lag0matic.pythonworkshop",
+  "build": {
+    "frontendDist": "shell"
+  },
+  "app": {
+    "windows": [],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": false,
+    "icon": [
+      "../assets/workshop-app.ico"
+    ]
+  }
+}

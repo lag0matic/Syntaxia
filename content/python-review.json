@@ -1,0 +1,593 @@
+{
+  "id": "python-foundations",
+  "title": "Console foundations",
+  "language": "python",
+  "version": 1,
+  "badge": "Console builder",
+  "missions": [
+    {
+      "id": "py-01-message",
+      "version": 1,
+      "title": "A message with a purpose",
+      "xp": 10,
+      "prerequisites": [],
+      "concepts": "Variables \u00b7 strings \u00b7 print \u00b7 f-strings",
+      "lesson": [
+        {
+          "heading": "Give a value a name",
+          "text": "A variable is a name attached to a value. Assignment uses one equals sign. Python figures out the value's type, so you do not need a declaration such as STRING or INTEGER first.",
+          "code": "project = \"Radio logbook\"\nprint(project)"
+        },
+        {
+          "heading": "Put values into a message",
+          "text": "A string is text inside quotes. An f-string starts with `f` and substitutes the values inside braces. `print()` sends the result to the output panel.",
+          "code": "project = \"Radio logbook\"\nprint(f\"Working on: {project}\")"
+        },
+        {
+          "heading": "A habit worth keeping",
+          "text": "Use descriptive lowercase names with underscores: `project_name` tells you more than `x`. You can use single or double quotes; be consistent. A `#` starts a comment for the reader, not an instruction for Python."
+        }
+      ],
+      "brief": "Introduce the tool you are going to build.",
+      "requirements": [
+        "Create a variable named `tool_name` with the text Session tracker.",
+        "Print exactly `Building: Session tracker` on one line. Do not print quotation marks."
+      ],
+      "example": "Building: Session tracker",
+      "starter": "# Give your tool a name, then print its introduction.\n",
+      "input": "",
+      "hints": [
+        "There are two jobs: assign a text value, then print a message containing it.",
+        "Your assignment should have the shape `name = \"text\"`. The required variable name is `tool_name`.",
+        "In an f-string, put the variable's name between `{ and }`. Look at the project example above; change the name and surrounding words."
+      ],
+      "tests": [
+        {
+          "label": "The tool has a name and an introduction",
+          "public": true,
+          "stdin": [],
+          "stdout": "Building: Session tracker\n",
+          "variables": {
+            "tool_name": "Session tracker"
+          },
+          "hint": "Check the variable name, its exact text, and the printed introduction."
+        }
+      ],
+      "reference": {
+        "code": "tool_name = 'Session tracker'\nprint(f'Building: {tool_name}')\n",
+        "notes": [
+          "`tool_name` gives the value a meaningful name. The f-string places that value directly into the message, so the name is not duplicated in the output statement.",
+          "String concatenation or print with separate arguments can also work here. The f-string makes the intended output easy to read; this is a readability choice, not a claim about speed."
+        ]
+      }
+    },
+    {
+      "id": "py-02-arithmetic",
+      "version": 1,
+      "title": "Count the cost",
+      "xp": 10,
+      "prerequisites": [
+        "py-01-message"
+      ],
+      "concepts": "Numbers \u00b7 arithmetic \u00b7 debugging",
+      "lesson": [
+        {
+          "heading": "Numbers are different from text",
+          "text": "The integer 12 can be used in arithmetic. The string `\"12\"` is text. Put quotes around words, but leave them off numbers you intend to calculate with.",
+          "code": "minutes_per_task = 12\ntasks = 4\ntotal_minutes = minutes_per_task * tasks\nprint(total_minutes)"
+        },
+        {
+          "heading": "Follow the values",
+          "text": "Python runs statements from top to bottom. `+` adds, `-` subtracts, `*` multiplies, and `/` divides. Parentheses group calculations. A calculation stored in a variable will not automatically update if an earlier variable changes; you must calculate it again."
+        },
+        {
+          "heading": "Repair one thing at a time",
+          "text": "This starter runs, but gives the wrong total. Predict its current result, run it, then repair the calculation. A program that runs is not necessarily a program that is right."
+        }
+      ],
+      "brief": "Repair the session estimate without hard-coding the final answer.",
+      "requirements": [
+        "Keep `minutes_per_session` equal to 25 and sessions equal to 3.",
+        "Calculate `total_minutes` by multiplying those two variables.",
+        "Print Total: 75 minutes using `total_minutes`."
+      ],
+      "example": "Total: 75 minutes",
+      "starter": "minutes_per_session = 25\nsessions = 3\ntotal_minutes = minutes_per_session + sessions\n\nprint(f\"Total: {total_minutes} minutes\")\n",
+      "input": "",
+      "hints": [
+        "Run the starter. Which line produces the value you see?",
+        "Adding the session count to the duration is different from adding that duration once per session.",
+        "The multiplication operator in Python is `*`. Change the calculation, not the `print()` call."
+      ],
+      "tests": [
+        {
+          "label": "Three 25-minute sessions total 75 minutes",
+          "public": true,
+          "stdin": [],
+          "stdout": "Total: 75 minutes\n",
+          "variables": {
+            "total_minutes": 75,
+            "minutes_per_session": 25,
+            "sessions": 3
+          },
+          "hint": "Trace the arithmetic line. The total should be a number, not a quoted string."
+        }
+      ],
+      "reference": {
+        "code": "minutes_per_session = 25\nsessions = 3\ntotal_minutes = minutes_per_session * sessions\nprint(f'Total: {total_minutes} minutes')\n",
+        "notes": [
+          "The total is calculated from the two inputs instead of storing 75 directly. Changing either input then changes the result when the program runs again.",
+          "Descriptive names separate the session duration, session count, and calculated total. This makes the arithmetic easy to inspect."
+        ]
+      }
+    },
+    {
+      "id": "py-03-input",
+      "version": 1,
+      "title": "Make it personal",
+      "xp": 10,
+      "prerequisites": [
+        "py-02-arithmetic"
+      ],
+      "concepts": "input \u00b7 int \u00b7 string methods",
+      "lesson": [
+        {
+          "heading": "Ask for a value",
+          "text": "`input()` reads one answer and returns a string. In this classroom, type answers into Program input before pressing Run, one answer on each line. Use `input()` without a prompt for these exercises so the output is easy to check.",
+          "code": "project_name = input()\nprint(f\"Project: {project_name}\")"
+        },
+        {
+          "heading": "Convert before calculating",
+          "text": "Even an answer that looks numeric arrives as text. `int()` converts whole-number text into an integer. For now we will supply valid whole numbers; handling invalid numeric text comes in a later chapter.",
+          "code": "item_count = int(input())\nprint(item_count + 1)"
+        },
+        {
+          "heading": "Clean up the edges",
+          "text": "A string's `.strip()` method returns a new string with leading and trailing whitespace removed. It does not remove spaces in the middle. Calling a method uses parentheses, just like calling a function.",
+          "code": "label = \"  Field notebook  \"\nclean_label = label.strip()\nprint(clean_label)"
+        }
+      ],
+      "brief": "Read a learner's name and a session length, then calculate two sessions.",
+      "requirements": [
+        "Read two inputs in order: a name, then a whole-number session length in minutes.",
+        "Strip surrounding spaces from the name and convert the minutes to an integer.",
+        "Print NAME: TOTAL minutes, where TOTAL is twice the entered session length.",
+        "Do not hard-code the sample name or duration. Use `input()` without prompt text."
+      ],
+      "example": "Input:\n  David  \n20\n\nOutput:\nDavid: 40 minutes",
+      "starter": "# Read a name and a session length.\n# Calculate the time for two sessions, then print the summary.\n",
+      "input": "  David  \n20",
+      "hints": [
+        "You need two calls to `input()`. Each consumes the next line from Program input.",
+        "The name needs `.strip()`; the duration needs `int()`. Those are different kinds of conversion.",
+        "Calculate the total with `duration * 2`, then place the cleaned name and total in an f-string."
+      ],
+      "tests": [
+        {
+          "label": "Clean up the name and double 20 minutes",
+          "public": true,
+          "stdin": [
+            "  David  ",
+            "20"
+          ],
+          "stdout": "David: 40 minutes\n",
+          "hint": "Remove surrounding spaces from the name and convert the minutes before multiplying."
+        },
+        {
+          "label": "A different name and duration",
+          "public": false,
+          "stdin": [
+            "Morgan",
+            "35"
+          ],
+          "stdout": "Morgan: 70 minutes\n",
+          "hint": "Use the supplied input rather than fixed sample values."
+        }
+      ],
+      "reference": {
+        "code": "name = input().strip()\nminutes = int(input())\nprint(f'{name}: {minutes * 2} minutes')\n",
+        "notes": [
+          "Clean the name with `strip()` and convert the duration with `int()` at the point where you read them. The calculation then operates on a number rather than text.",
+          "Multiplying by two expresses the operation directly. A separate total variable would also be reasonable, especially if you reused it later."
+        ]
+      }
+    },
+    {
+      "id": "py-04-conditions",
+      "version": 1,
+      "title": "Choose the right response",
+      "xp": 10,
+      "prerequisites": [
+        "py-03-input"
+      ],
+      "concepts": "if `/` elif `/` else \u00b7 comparisons \u00b7 indentation",
+      "lesson": [
+        {
+          "heading": "Choose a branch",
+          "text": "An `if` statement runs its block only when its condition is true. `elif` checks another condition if the earlier one was false. `else` handles what remains. The first matching branch wins.",
+          "code": "temperature = 18\nif temperature < 10:\n    print(\"Cold\")\nelif temperature < 25:\n    print(\"Mild\")\nelse:\n    print(\"Hot\")"
+        },
+        {
+          "heading": "Indentation is structure",
+          "text": "The colon starts a block. Indent its statements by four spaces. Python uses that indentation where BASIC or Pascal might use explicit block-ending words. Lines at the original indentation are outside the block."
+        },
+        {
+          "heading": "Watch the boundary",
+          "text": "`<` means less than, `<=` means less than or equal to, and `==` compares equality. A single `=` assigns a value. Test the exact point where behavior changes, not just a value far away from it."
+        }
+      ],
+      "brief": "Give a useful response to a proposed session length.",
+      "requirements": [
+        "Read one whole-number duration with `input()` and convert it to an integer.",
+        "For zero or a negative number, print Enter a positive duration.",
+        "For 1 through 24, print Short session.",
+        "For 25 or more, print Focus session.",
+        "Print exactly one of these messages, with the final period."
+      ],
+      "example": "Input: 25\nOutput: Focus session.",
+      "starter": "# Read the session length, then choose one response.\n",
+      "input": "25",
+      "hints": [
+        "Start with the invalid duration case, then handle the positive values.",
+        "After ruling out values `<= 0`, an `elif` comparing with `25` can identify short sessions.",
+        "Check 0, 1, 24, and 25 yourself. Is your boundary using `<` or `<=` where it should?"
+      ],
+      "tests": [
+        {
+          "label": "Zero needs a helpful message",
+          "public": true,
+          "stdin": [
+            "0"
+          ],
+          "stdout": "Enter a positive duration.\n",
+          "hint": "Zero is not a positive duration."
+        },
+        {
+          "label": "25 minutes starts a focus session",
+          "public": true,
+          "stdin": [
+            "25"
+          ],
+          "stdout": "Focus session.\n",
+          "hint": "The focus-session boundary includes 25."
+        },
+        {
+          "label": "24 minutes is a short session",
+          "public": false,
+          "stdin": [
+            "24"
+          ],
+          "stdout": "Short session.\n",
+          "hint": "Check the value immediately below the boundary."
+        },
+        {
+          "label": "Negative durations are rejected",
+          "public": false,
+          "stdin": [
+            "-5"
+          ],
+          "stdout": "Enter a positive duration.\n",
+          "hint": "Your invalid branch should cover negative numbers as well as zero."
+        },
+        {
+          "label": "One minute is still positive",
+          "public": false,
+          "stdin": [
+            "1"
+          ],
+          "stdout": "Short session.\n",
+          "hint": "The short-session interval begins at 1."
+        }
+      ],
+      "reference": {
+        "code": "minutes = int(input())\nif minutes <= 0:\n    print('Enter a positive duration.')\nelif minutes < 25:\n    print('Short session.')\nelse:\n    print('Focus session.')\n",
+        "notes": [
+          "Reject nonpositive durations first. Once that branch is excluded, `minutes < 25` covers the entire short-session interval without a second lower-bound check.",
+          "Using `if/elif/else` guarantees that exactly one response is printed. Separate if statements would require more care to avoid overlapping responses."
+        ]
+      }
+    },
+    {
+      "id": "py-05-loops",
+      "version": 1,
+      "title": "Repeat without repeating yourself",
+      "xp": 10,
+      "prerequisites": [
+        "py-04-conditions"
+      ],
+      "concepts": "for \u00b7 range \u00b7 repeated work",
+      "lesson": [
+        {
+          "heading": "Let the loop do the repetition",
+          "text": "A `for` loop visits each value in a sequence. `range(start, stop)` supplies integers starting at `start` and stopping before `stop`. That excluded end is a common source of off-by-one mistakes.",
+          "code": "for step in range(1, 4):\n    print(f\"Step {step}\")\nprint(\"Ready.\")"
+        },
+        {
+          "heading": "Inside or outside?",
+          "text": "The indented `print` runs once per step. The final `print` runs once after the loop ends. Change the indentation and you change the behavior. `range(1, 1)` has no values, so its loop body runs zero times."
+        },
+        {
+          "heading": "Try a small case",
+          "text": "Before trying ten sessions, test one and zero. Small cases are easy to trace by hand. If a program keeps running, use Stop; your code remains in the editor."
+        }
+      ],
+      "brief": "Generate a numbered checklist for any requested number of sessions.",
+      "requirements": [
+        "Read a nonnegative integer session count. You do not need to handle negative numbers here.",
+        "Print Session 1, Session 2, and so on, through the entered count, one per line.",
+        "After the checklist, print Ready. exactly once. With zero sessions, print only Ready.",
+        "Use a loop so the program works for any nonnegative count."
+      ],
+      "example": "Input: 3\nOutput:\nSession 1\nSession 2\nSession 3\nReady.",
+      "starter": "# Read how many sessions to list.\n# Print the numbered checklist, then the closing message.\n",
+      "input": "3",
+      "hints": [
+        "The loop variable can be the session number in your f-string.",
+        "Because `range` excludes its stop value, the stop must be one past the last session number.",
+        "Keep the closing print outside the loop. Its indentation should match the `for` statement."
+      ],
+      "tests": [
+        {
+          "label": "Three sessions, then one closing message",
+          "public": true,
+          "stdin": [
+            "3"
+          ],
+          "stdout": "Session 1\nSession 2\nSession 3\nReady.\n",
+          "hint": "Check both ends of the range and the indentation of Ready."
+        },
+        {
+          "label": "An empty checklist still finishes",
+          "public": true,
+          "stdin": [
+            "0"
+          ],
+          "stdout": "Ready.\n",
+          "hint": "The closing message belongs outside the loop."
+        },
+        {
+          "label": "A single session is included",
+          "public": false,
+          "stdin": [
+            "1"
+          ],
+          "stdout": "Session 1\nReady.\n",
+          "hint": "Remember that the stop value of range is excluded."
+        },
+        {
+          "label": "Five sessions also work",
+          "public": false,
+          "stdin": [
+            "5"
+          ],
+          "stdout": "Session 1\nSession 2\nSession 3\nSession 4\nSession 5\nReady.\n",
+          "hint": "Generate the checklist from the input count."
+        }
+      ],
+      "reference": {
+        "code": "sessions = int(input())\nfor number in range(1, sessions + 1):\n    print(f'Session {number}')\nprint('Ready.')\n",
+        "notes": [
+          "A `for` loop over `range(1, sessions + 1)` states the numbering directly. range excludes its stop value, so adding one includes the final session.",
+          "A manually updated counter with while can produce the same output. For a known sequence of integers, range avoids separate initialization and increment logic, reducing opportunities for off-by-one errors or a forgotten increment. This is mainly about clarity and correctness; neither approach is automatically fastest in every situation.",
+          "The Ready. message is outside the loop so it prints once, including when there are zero sessions."
+        ]
+      }
+    },
+    {
+      "id": "py-06-functions",
+      "version": 1,
+      "title": "Return something useful",
+      "xp": 10,
+      "prerequisites": [
+        "py-05-loops"
+      ],
+      "concepts": "def \u00b7 parameters \u00b7 return \u00b7 calling functions",
+      "lesson": [
+        {
+          "heading": "Name a reusable operation",
+          "text": "`def` defines a function. Parameters are names for the values its caller supplies. The indented body does not run until you call the function.",
+          "code": "def total_cost(price, quantity):\n    return price * quantity\n\ncost = total_cost(7, 3)\nprint(cost)"
+        },
+        {
+          "heading": "Return versus print",
+          "text": "`return` hands a value back to the caller and ends the function. `print` displays text. A function that only prints cannot hand that printed value to another calculation. Without an explicit `return`, it returns `None`."
+        },
+        {
+          "heading": "Keep the calculation independent",
+          "text": "The function in this mission should receive numbers, not ask for input itself. That makes it usable from a console, a GUI, or a test. Local parameter names belong to the function; the caller may use completely different names."
+        }
+      ],
+      "brief": "Build a reusable session-total function.",
+      "requirements": [
+        "Define a function named `total_minutes` with two parameters, `minutes_per_session` and sessions.",
+        "Return their product as a number. Do not use `input()` inside the function.",
+        "The sample print is only for Run; checks call the function with several pairs of values."
+      ],
+      "example": "total_minutes(20, 3) returns 60\ntotal_minutes(15, 0) returns 0",
+      "starter": "def total_minutes(minutes_per_session, sessions):\n    # Replace pass with the calculation and a return.\n    pass\n\nprint(total_minutes(20, 3))\n",
+      "input": "",
+      "hints": [
+        "The calculation is familiar. The new part is handing the result back to the caller.",
+        "Printing the answer inside the function is not the same as returning it.",
+        "Replace pass with a `return` statement using the product of the two parameters."
+      ],
+      "tests": [
+        {
+          "label": "Returns 60 for three 20-minute sessions",
+          "public": true,
+          "function": "total_minutes",
+          "args": [
+            20,
+            3
+          ],
+          "expected": 60,
+          "hint": "Return the numeric product. A print-only function returns None."
+        },
+        {
+          "label": "Zero sessions return zero",
+          "public": true,
+          "function": "total_minutes",
+          "args": [
+            15,
+            0
+          ],
+          "expected": 0,
+          "hint": "Use the arguments rather than the sample values."
+        },
+        {
+          "label": "Different durations work too",
+          "public": false,
+          "function": "total_minutes",
+          "args": [
+            45,
+            4
+          ],
+          "expected": 180,
+          "hint": "The calculation should use both parameters."
+        }
+      ],
+      "reference": {
+        "code": "def total_minutes(minutes_per_session, sessions):\n    return minutes_per_session * sessions\n\nprint(total_minutes(20, 3))\n",
+        "notes": [
+          "The function returns a number rather than printing it. Its caller can display that number, store it, or use it in another calculation.",
+          "Receiving both values as parameters keeps the function independent of input prompts and outside variables. The sample print belongs to the caller."
+        ]
+      }
+    },
+    {
+      "id": "py-07-session-tool",
+      "version": 1,
+      "title": "Build your session planner",
+      "xp": 30,
+      "prerequisites": [
+        "py-06-functions"
+      ],
+      "concepts": "Chapter project \u00b7 combine what you know",
+      "boss": true,
+      "lesson": [
+        {
+          "heading": "A tool you can keep",
+          "text": "Combine input, cleanup, decisions, a function, and a loop into a working session planner. Read the requirements, make one piece work, then add the next. Download the finished `.py` file to use with Python on your PC."
+        },
+        {
+          "heading": "Combine conditions",
+          "text": "The word `or` makes a condition true if either side is true. Use it when either of two invalid values should trigger the same response. Compare equality with `==`; an empty string is written `\"\"`.",
+          "code": "if width <= 0 or height <= 0:\n    print(\"Dimensions must be positive.\")\n\nif title == \"\":\n    title = \"Untitled\""
+        },
+        {
+          "heading": "A sensible order",
+          "text": "Define your calculation function first. Read and clean the inputs. Choose the invalid or valid path. On the valid path, print the total and the checklist. Keep all checklist output inside the valid branch. Automated checks judge behavior. After passing, compare your solution with the reference. The optional tutor can help you reason through a difference."
+        }
+      ],
+      "brief": "Build a session planner that prints a useful summary and checklist.",
+      "requirements": [
+        "Define `total_minutes(minutes_per_session, sessions)` so it returns the numeric product, and use it for your total.",
+        "Read three inputs in order: name, minutes per session, number of `sessions`. Numeric inputs will be whole numbers.",
+        "Strip surrounding spaces from the name. If it is empty, use Learner.",
+        "If either number is zero or negative, print only Enter positive numbers.",
+        "Otherwise print NAME: COUNT sessions, TOTAL minutes total. Then print Session 1 through Session COUNT, one per line.",
+        "Use the plural words sessions and minutes even when the count is one. Do not print input prompts or an extra Ready. line."
+      ],
+      "example": "Input:\nDavid\n25\n3\n\nOutput:\nDavid: 3 sessions, 75 minutes total.\nSession 1\nSession 2\nSession 3",
+      "starter": "# 1. Define your total_minutes function.\n\n# 2. Read and clean the three inputs.\n\n# 3. Handle invalid numbers, or print the summary and checklist.\n",
+      "input": "David\n25\n3",
+      "hints": [
+        "Build in stages: get the three inputs working, then the total, then validation, then the checklist.",
+        "Use `name.strip()` and compare the result with an empty string. For the numbers, combine the two `<= 0` checks with `or`.",
+        "Your valid else branch contains the summary print and the `for` loop. The loop's print needs one extra indentation level. Reuse the `total_minutes` function from the preceding mission."
+      ],
+      "tests": [
+        {
+          "label": "Three sessions produce a summary and checklist",
+          "public": true,
+          "stdin": [
+            "David",
+            "25",
+            "3"
+          ],
+          "stdout": "David: 3 sessions, 75 minutes total.\nSession 1\nSession 2\nSession 3\n",
+          "hint": "Check the summary punctuation and the inclusive checklist range."
+        },
+        {
+          "label": "Zero duration is rejected",
+          "public": true,
+          "stdin": [
+            "David",
+            "0",
+            "3"
+          ],
+          "stdout": "Enter positive numbers.\n",
+          "hint": "Invalid numbers should produce only the helpful message."
+        },
+        {
+          "label": "A blank name becomes Learner",
+          "public": false,
+          "stdin": [
+            "   ",
+            "10",
+            "1"
+          ],
+          "stdout": "Learner: 1 sessions, 10 minutes total.\nSession 1\n",
+          "hint": "Strip whitespace before checking whether the name is empty."
+        },
+        {
+          "label": "Names are cleaned and totals are calculated",
+          "public": false,
+          "stdin": [
+            "  Morgan  ",
+            "15",
+            "2"
+          ],
+          "stdout": "Morgan: 2 sessions, 30 minutes total.\nSession 1\nSession 2\n",
+          "hint": "Use the actual inputs and remove surrounding name whitespace."
+        },
+        {
+          "label": "Negative session counts are rejected",
+          "public": false,
+          "stdin": [
+            "David",
+            "20",
+            "-1"
+          ],
+          "stdout": "Enter positive numbers.\n",
+          "hint": "Validate both numeric inputs before printing the summary."
+        },
+        {
+          "label": "Zero sessions are rejected",
+          "public": false,
+          "stdin": [
+            "David",
+            "20",
+            "0"
+          ],
+          "stdout": "Enter positive numbers.\n",
+          "hint": "The session count must also be positive."
+        },
+        {
+          "label": "The calculation function can be reused",
+          "public": false,
+          "stdin": [
+            "David",
+            "25",
+            "1"
+          ],
+          "function": "total_minutes",
+          "args": [
+            7,
+            6
+          ],
+          "expected": 42,
+          "hint": "Define total_minutes with two parameters and return their product."
+        }
+      ],
+      "reference": {
+        "code": "def total_minutes(minutes_per_session, sessions):\n    return minutes_per_session * sessions\n\nname = input().strip()\nif name == '':\n    name = 'Learner'\nminutes = int(input())\nsessions = int(input())\nif minutes <= 0 or sessions <= 0:\n    print('Enter positive numbers.')\nelse:\n    total = total_minutes(minutes, sessions)\n    print(f'{name}: {sessions} sessions, {total} minutes total.')\n    for number in range(1, sessions + 1):\n        print(f'Session {number}')\n",
+        "notes": [
+          "The calculation function has one job and returns its result. Input handling and presentation stay in the main program.",
+          "The name is cleaned before checking for an empty string. A single invalid-input branch uses or to reject either nonpositive number.",
+          "The valid branch contains the summary and checklist. range handles the numbering without a manual counter. A production version could also handle nonnumeric input, but exception handling is beyond this mission."
+        ]
+      }
+    }
+  ]
+}

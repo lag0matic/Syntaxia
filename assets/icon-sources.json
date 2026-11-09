@@ -1,0 +1,26 @@
+{
+  "generator": "built-in image_gen",
+  "selected": {
+    "app": "Grimoire A - Enchanted leather",
+    "taskbar": "Grimoire B - Clean emblem"
+  },
+  "source_files": {
+    "workshop-app": "exec-1cd8079c-fb48-49b7-9183-cfcb084442af.png",
+    "workshop-taskbar": "exec-f1c23e43-5990-4409-8742-5f83037d4222.png"
+  },
+  "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40,
+    48,
+    64,
+    128,
+    256
+  ],
+  "prompts": {
+    "app": "A slightly open charcoal leather spellbook seen at a gentle three-quarter angle, thick cream pages, brass corners, mint-green python bookmark, restrained violet light. Hand-painted fantasy game inventory icon. Isolated on transparency with no lettering.",
+    "taskbar": "An open book with broad ivory pages and charcoal cover; a mint-green python curls down the center crease as a bookmark. Restrained violet accent, crisp clean emblem, isolated on transparency. No lettering."
+  }
+}

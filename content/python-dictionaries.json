@@ -1,0 +1,1092 @@
+{
+  "id": "python-dictionaries",
+  "title": "Dictionaries and records",
+  "badge": "Record Keeper",
+  "language": "python",
+  "version": 1,
+  "missions": [
+    {
+      "id": "py-dictionaries-01-record",
+      "version": 1,
+      "title": "Create a named record",
+      "xp": 10,
+      "prerequisites": [
+        "py-lists-12-boss"
+      ],
+      "concepts": "Dictionaries - named fields and literals",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A dictionary maps keys to values. A literal uses braces and `key: value` pairs. Reading `record[\"name\"]` retrieves the value under that key, not a numeric position. These first records use string keys.",
+          "code": "record = {\"label\": \"Sensor\", \"count\": 2}\nprint(record[\"label\"])  # Sensor"
+        }
+      ],
+      "brief": "Return a device record with named fields.",
+      "requirements": [
+        "name and `category` are strings. Return a dictionary with exactly the keys `\"name\"` and `\"category\"`, holding the supplied values unchanged.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def make_device(name, category):\n    pass\n\nprint(make_device('Radio', 'Comms'))\n",
+      "input": "",
+      "example": "make_device('Radio', 'Comms') -> {'name': 'Radio', 'category': 'Comms'}\nmake_device('', 'Other') -> {'name': '', 'category': 'Other'}",
+      "hints": [
+        "Keys describe what a value means.",
+        "The required field names are literal strings, not variable names.",
+        "A dictionary literal can directly express this small record."
+      ],
+      "tests": [
+        {
+          "function": "make_device",
+          "args": [
+            "Radio",
+            "Comms"
+          ],
+          "expected": {
+            "name": "Radio",
+            "category": "Comms"
+          },
+          "public": true,
+          "label": "make_device example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "make_device",
+          "args": [
+            "",
+            "Other"
+          ],
+          "expected": {
+            "name": "",
+            "category": "Other"
+          },
+          "public": true,
+          "label": "make_device example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "make_device",
+          "args": [
+            " Printer ",
+            "Tools"
+          ],
+          "expected": {
+            "name": " Printer ",
+            "category": "Tools"
+          },
+          "public": false,
+          "label": "make_device example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def make_device(name, category):\n    return {\"name\": name, \"category\": category}\n\nprint(make_device('Radio', 'Comms'))\n",
+        "notes": [
+          "Named fields make the record meaningful without remembering positional indexes.",
+          "Preserving input text is part of this contract; normalization should be deliberate rather than automatic."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-02-get",
+      "version": 1,
+      "title": "Look up missing stock",
+      "xp": 10,
+      "prerequisites": [
+        "py-dictionaries-01-record"
+      ],
+      "concepts": "get - missing-key default",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`dict.get(key, default)` returns a stored value when the key exists, otherwise the default. It does not insert the default into the dictionary. With no explicit default, it returns `None` for missing keys.",
+          "code": "settings = {\"volume\": 0}\nprint(settings.get(\"volume\", 5))  # 0\nprint(settings.get(\"speed\", 5))   # 5"
+        }
+      ],
+      "brief": "Return the stock quantity for name, using zero when that `name` is absent.",
+      "requirements": [
+        "`stock` is a dictionary of string names to non-negative integer quantities; `name` is a string. Preserve the dictionary, including when a lookup misses.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def stock_of(stock, name):\n    pass\n\nprint(stock_of({'Cable': 3}, 'Cable'))\n",
+      "input": "",
+      "example": "stock_of({'Cable': 3}, 'Cable') -> 3\nstock_of({}, 'Cable') -> 0",
+      "hints": [
+        "Does the lookup have a sensible answer when no record exists?",
+        "Returning a fallback should not create a stock entry.",
+        "get can provide a lookup default without a separate insertion."
+      ],
+      "tests": [
+        {
+          "function": "stock_of",
+          "args": [
+            {
+              "Cable": 3
+            },
+            "Cable"
+          ],
+          "expected": 3,
+          "public": true,
+          "label": "stock_of example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "stock_of",
+          "args": [
+            {},
+            "Cable"
+          ],
+          "expected": 0,
+          "public": true,
+          "label": "stock_of example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "stock_of",
+          "args": [
+            {
+              "Cable": 0
+            },
+            "Cable"
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "stock_of example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "stock_of",
+          "args": [
+            {
+              "Radio": 2
+            },
+            "Cable"
+          ],
+          "expected": 0,
+          "public": false,
+          "label": "stock_of example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def stock_of(stock, name):\n    return stock.get(name, 0)\n\nprint(stock_of({'Cable': 3}, 'Cable'))\n",
+        "notes": [
+          "The default handles only absence; an existing zero remains zero.",
+          "Membership followed by bracket lookup is another clear implementation."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-03-update",
+      "version": 1,
+      "title": "Update the real inventory",
+      "xp": 10,
+      "prerequisites": [
+        "py-dictionaries-02-get"
+      ],
+      "concepts": "Dictionary assignment - mutation",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Assignment to `dictionary[key]` adds or replaces that key's value in place. Existing unrelated keys remain. Like list mutation, the caller sees the changed object.",
+          "code": "record = {\"status\": \"old\", \"name\": \"A\"}\nrecord[\"status\"] = \"new\"\nrecord[\"location\"] = \"Desk\""
+        }
+      ],
+      "brief": "Store quantity under name in the supplied stock dictionary.",
+      "requirements": [
+        "`stock` maps strings to non-negative integers. `name` is a string and `quantity` is a non-negative integer. Add a missing name or replace its quantity without changing any other entry.",
+        "Return `None`; the helper prints nothing. Checks verify the updated input dictionary as well as the return."
+      ],
+      "starter": "def set_stock(stock, name, quantity):\n    pass\n\nsample = {'A': 1}\nresult = set_stock(sample, 'A', 4)\nprint(result)\nprint(sample)\n",
+      "input": "",
+      "example": "set_stock({'A': 1}, 'A', 4) -> None; arguments afterward: [{'A': 4}, 'A', 4]\nset_stock({}, 'B', 0) -> None; arguments afterward: [{'B': 0}, 'B', 0]",
+      "hints": [
+        "The caller needs its existing dictionary updated.",
+        "An assignment to a key affects one entry, not the whole mapping.",
+        "Rebinding stock to a new local dictionary would not fulfill the mutation contract."
+      ],
+      "tests": [
+        {
+          "function": "set_stock",
+          "args": [
+            {
+              "A": 1
+            },
+            "A",
+            4
+          ],
+          "expected": null,
+          "public": true,
+          "label": "set_stock example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            {
+              "A": 4
+            },
+            "A",
+            4
+          ]
+        },
+        {
+          "function": "set_stock",
+          "args": [
+            {},
+            "B",
+            0
+          ],
+          "expected": null,
+          "public": true,
+          "label": "set_stock example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            {
+              "B": 0
+            },
+            "B",
+            0
+          ]
+        },
+        {
+          "function": "set_stock",
+          "args": [
+            {
+              "A": 2
+            },
+            "B",
+            3
+          ],
+          "expected": null,
+          "public": false,
+          "label": "set_stock example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            {
+              "A": 2,
+              "B": 3
+            },
+            "B",
+            3
+          ]
+        }
+      ],
+      "reference": {
+        "code": "def set_stock(stock, name, quantity):\n    stock[name] = quantity\n\nsample = {'A': 1}\nresult = set_stock(sample, 'A', 4)\nprint(result)\nprint(sample)\n",
+        "notes": [
+          "Key assignment handles both insertion and replacement.",
+          "No return expression is required when the contract returns `None`."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-04-presence",
+      "version": 1,
+      "title": "Present is not the same as nonempty",
+      "xp": 10,
+      "prerequisites": [
+        "py-dictionaries-03-update"
+      ],
+      "concepts": "Dictionary membership - keys with `None` or zero",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`key in dictionary` checks whether the key exists. It does not check the stored value's truth value. A field can be present with `None`, `0`, `False` or empty text.",
+          "code": "record = {\"port\": None}\nprint(\"port\" in record)  # True\nprint(\"name\" in record)  # False"
+        }
+      ],
+      "brief": "Return whether `record` contains field as a key.",
+      "requirements": [
+        "`record` is a dictionary with string keys and `field` is a string. A present key counts regardless of its value. Do not modify `record`. Return a Boolean.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def has_field(record, field):\n    pass\n\nprint(has_field({'port': None}, 'port'))\n",
+      "input": "",
+      "example": "has_field({'port': None}, 'port') -> True\nhas_field({}, 'port') -> False",
+      "hints": [
+        "The question concerns the key, not whether its value looks useful.",
+        "A get result of `None` can mean two different things.",
+        "Dictionary membership directly answers whether the key exists."
+      ],
+      "tests": [
+        {
+          "function": "has_field",
+          "args": [
+            {
+              "port": null
+            },
+            "port"
+          ],
+          "expected": true,
+          "public": true,
+          "label": "has_field example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "has_field",
+          "args": [
+            {},
+            "port"
+          ],
+          "expected": false,
+          "public": true,
+          "label": "has_field example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "has_field",
+          "args": [
+            {
+              "count": 0
+            },
+            "count"
+          ],
+          "expected": true,
+          "public": false,
+          "label": "has_field example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "has_field",
+          "args": [
+            {
+              "enabled": false
+            },
+            "enabled"
+          ],
+          "expected": true,
+          "public": false,
+          "label": "has_field example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "has_field",
+          "args": [
+            {
+              "name": ""
+            },
+            "name"
+          ],
+          "expected": true,
+          "public": false,
+          "label": "has_field example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def has_field(record, field):\n    return field in record\n\nprint(has_field({'port': None}, 'port'))\n",
+        "notes": [
+          "Presence and value are different properties.",
+          "Testing `record.get(field)` would confuse absent fields with false-like stored values."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-05-values",
+      "version": 1,
+      "title": "Total all quantities",
+      "xp": 10,
+      "prerequisites": [
+        "py-dictionaries-04-presence"
+      ],
+      "concepts": "Dictionary values - aggregation",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Iterating a dictionary directly gives keys. `values()` supplies its values. Use the view that matches the information needed; a total does not need the associated names.",
+          "code": "scores = {\"A\": 4, \"B\": 7}\nfor score in scores.values():\n    print(score)"
+        }
+      ],
+      "brief": "Return the sum of all quantities in stock.",
+      "requirements": [
+        "`stock` maps string names to non-negative integers. Empty stock totals zero. Do not change the dictionary.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def total_units(stock):\n    pass\n\nprint(total_units({'A': 3, 'B': 5}))\n",
+      "input": "",
+      "example": "total_units({'A': 3, 'B': 5}) -> 8\ntotal_units({}) -> 0",
+      "hints": [
+        "The total needs quantities rather than names.",
+        "A dictionary loop without a view gives keys.",
+        "An accumulator over values works; `sum(stock.values())` is a concise alternative."
+      ],
+      "tests": [
+        {
+          "function": "total_units",
+          "args": [
+            {
+              "A": 3,
+              "B": 5
+            }
+          ],
+          "expected": 8,
+          "public": true,
+          "label": "total_units example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "total_units",
+          "args": [
+            {}
+          ],
+          "expected": 0,
+          "public": true,
+          "label": "total_units example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "total_units",
+          "args": [
+            {
+              "A": 0,
+              "B": 2
+            }
+          ],
+          "expected": 2,
+          "public": false,
+          "label": "total_units example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def total_units(stock):\n    total = 0\n    for quantity in stock.values():\n        total = total + quantity\n    return total\n\nprint(total_units({'A': 3, 'B': 5}))\n",
+        "notes": [
+          "values avoids an unnecessary lookup for every key.",
+          "The loop makes accumulation explicit; sum is a standard shorthand for this aggregation."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-06-items",
+      "version": 1,
+      "title": "Find low-stock names",
+      "xp": 10,
+      "prerequisites": [
+        "py-dictionaries-05-values"
+      ],
+      "concepts": "items - key/value pairs - insertion order",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`items()` supplies key/value pairs. A loop can unpack each pair into two names, like `enumerate`. Dictionaries preserve insertion order, so iteration can return names in that order.",
+          "code": "ages = {\"Oak\": 8, \"Pine\": 3}\nfor name, age in ages.items():\n    print(name, age)"
+        }
+      ],
+      "brief": "Return the names whose `stock` is strictly below threshold.",
+      "requirements": [
+        "`stock` maps strings to non-negative integers; `threshold` is a non-negative integer. Return a list of qualifying names in dictionary insertion order, without changing stock. Equality does not qualify.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def low_stock(stock, threshold):\n    pass\n\nprint(low_stock({'Cable': 2, 'Radio': 5, 'Adapter': 0}, 3))\n",
+      "input": "",
+      "example": "low_stock({'Cable': 2, 'Radio': 5, 'Adapter': 0}, 3) -> ['Cable', 'Adapter']\nlow_stock({}, 3) -> []",
+      "hints": [
+        "You need a value for the decision and a key for the output.",
+        "items supplies both at once.",
+        "Keep the dictionary's iteration order rather than sorting the result."
+      ],
+      "tests": [
+        {
+          "function": "low_stock",
+          "args": [
+            {
+              "Cable": 2,
+              "Radio": 5,
+              "Adapter": 0
+            },
+            3
+          ],
+          "expected": [
+            "Cable",
+            "Adapter"
+          ],
+          "public": true,
+          "label": "low_stock example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "low_stock",
+          "args": [
+            {},
+            3
+          ],
+          "expected": [],
+          "public": true,
+          "label": "low_stock example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "low_stock",
+          "args": [
+            {
+              "A": 3,
+              "B": 2
+            },
+            3
+          ],
+          "expected": [
+            "B"
+          ],
+          "public": false,
+          "label": "low_stock example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "low_stock",
+          "args": [
+            {
+              "A": 0
+            },
+            0
+          ],
+          "expected": [],
+          "public": false,
+          "label": "low_stock example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def low_stock(stock, threshold):\n    names = []\n    for name, quantity in stock.items():\n        if quantity < threshold:\n            names.append(name)\n    return names\n\nprint(low_stock({'Cable': 2, 'Radio': 5, 'Adapter': 0}, 3))\n",
+        "notes": [
+          "Unpacking keeps the key/value relationship visible.",
+          "Iterating keys and looking up each quantity is also valid."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-07-count",
+      "version": 1,
+      "title": "Count repeated words",
+      "xp": 10,
+      "prerequisites": [
+        "py-dictionaries-06-items"
+      ],
+      "concepts": "Frequency dictionary - get and update",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A dictionary can accumulate a separate count for each distinct key. The first occurrence needs an initial count; later occurrences update it. This is the same accumulator idea applied per key.",
+          "code": "counts = {}\ncounts[\"A\"] = counts.get(\"A\", 0) + 1\ncounts[\"A\"] = counts.get(\"A\", 0) + 1\nprint(counts)  # {'A': 2}"
+        }
+      ],
+      "brief": "Return a frequency dictionary for the supplied words.",
+      "requirements": [
+        "`words` is a list of strings. Count exact text, case-sensitively, including empty strings. Empty input returns an empty dictionary. Do not modify `words`.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def word_counts(words):\n    pass\n\nprint(word_counts(['a', 'b', 'a']))\n",
+      "input": "",
+      "example": "word_counts(['a', 'b', 'a']) -> {'a': 2, 'b': 1}\nword_counts([]) -> {}",
+      "hints": [
+        "Each word needs its own accumulator.",
+        "What value should a word have before its first occurrence?",
+        "A missing-key default can avoid a separate initialization branch for every new word."
+      ],
+      "tests": [
+        {
+          "function": "word_counts",
+          "args": [
+            [
+              "a",
+              "b",
+              "a"
+            ]
+          ],
+          "expected": {
+            "a": 2,
+            "b": 1
+          },
+          "public": true,
+          "label": "word_counts example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "word_counts",
+          "args": [
+            []
+          ],
+          "expected": {},
+          "public": true,
+          "label": "word_counts example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "word_counts",
+          "args": [
+            [
+              "A",
+              "a",
+              ""
+            ]
+          ],
+          "expected": {
+            "A": 1,
+            "a": 1,
+            "": 1
+          },
+          "public": false,
+          "label": "word_counts example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "word_counts",
+          "args": [
+            [
+              "x",
+              "x",
+              "x"
+            ]
+          ],
+          "expected": {
+            "x": 3
+          },
+          "public": false,
+          "label": "word_counts example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def word_counts(words):\n    counts = {}\n    for word in words:\n        counts[word] = counts.get(word, 0) + 1\n    return counts\n\nprint(word_counts(['a', 'b', 'a']))\n",
+        "notes": [
+          "get supplies a starting zero without inserting until the assignment.",
+          "A membership check plus separate initialize/increment branches is equally valid."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-08-records",
+      "version": 1,
+      "title": "Find one device record",
+      "xp": 10,
+      "prerequisites": [
+        "py-dictionaries-07-count"
+      ],
+      "concepts": "Lists of dictionaries - first-match lookup",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A list of records separates order from named fields. A loop visits each dictionary, then key lookup reads the field needed for a decision. An early return naturally selects the first match.",
+          "code": "records = [{\"label\": \"A\", \"score\": 3}, {\"label\": \"B\", \"score\": 5}]\nfor record in records:\n    print(record[\"label\"])"
+        }
+      ],
+      "brief": "Return the first device record whose name field equals `name`, or `None` when absent.",
+      "requirements": [
+        "`records` is a list of dictionaries, each containing a string `\"name\"` field. Other fields may vary and must be retained in the returned record.",
+        "Matching is case-sensitive. Preserve the input list and every record. Return the first match if names repeat. A copied matching record is also acceptable.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def find_device(records, name):\n    pass\n\nprint(find_device([{'name': 'A', 'port': 1}, {'name': 'B', 'port': 2}], 'B'))\n",
+      "input": "",
+      "example": "find_device([{'name': 'A', 'port': 1}, {'name': 'B', 'port': 2}], 'B') -> {'name': 'B', 'port': 2}\nfind_device([], 'A') -> None",
+      "hints": [
+        "Inspect one record at a time.",
+        "Return the whole matching record, not only its name.",
+        "Only `return None` after all candidates have been considered."
+      ],
+      "tests": [
+        {
+          "function": "find_device",
+          "args": [
+            [
+              {
+                "name": "A",
+                "port": 1
+              },
+              {
+                "name": "B",
+                "port": 2
+              }
+            ],
+            "B"
+          ],
+          "expected": {
+            "name": "B",
+            "port": 2
+          },
+          "public": true,
+          "label": "find_device example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "find_device",
+          "args": [
+            [],
+            "A"
+          ],
+          "expected": null,
+          "public": true,
+          "label": "find_device example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "find_device",
+          "args": [
+            [
+              {
+                "name": "A",
+                "x": 1
+              },
+              {
+                "name": "A",
+                "x": 2
+              }
+            ],
+            "A"
+          ],
+          "expected": {
+            "name": "A",
+            "x": 1
+          },
+          "public": false,
+          "label": "find_device example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "find_device",
+          "args": [
+            [
+              {
+                "name": "A"
+              }
+            ],
+            "a"
+          ],
+          "expected": null,
+          "public": false,
+          "label": "find_device example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def find_device(records, name):\n    for record in records:\n        if record[\"name\"] == name:\n            return record\n    return None\n\nprint(find_device([{'name': 'A', 'port': 1}, {'name': 'B', 'port': 2}], 'B'))\n",
+        "notes": [
+          "Returning inside the matching branch implements first-match behavior.",
+          "The returned record may share the original object; callers should copy before editing if they need isolation."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-09-remove",
+      "version": 1,
+      "title": "Remove an optional device",
+      "xp": 10,
+      "prerequisites": [
+        "py-dictionaries-08-records"
+      ],
+      "concepts": "Dictionary `pop` - optional deletion",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`dict.pop(key, default)` removes a present key and returns its old value. When the key is absent it returns the default without changing anything. Unlike `list.pop`, its argument identifies a key rather than an index.",
+          "code": "settings = {\"mode\": \"quiet\"}\nold = settings.pop(\"mode\", None)\nprint(old, settings)  # quiet {}"
+        }
+      ],
+      "brief": "Remove name from `devices` and return its stored location, or `None` if absent.",
+      "requirements": [
+        "`devices` maps string device names to string locations. Change only the requested entry; keep other entries. Return an empty string if that was the stored location.",
+        "The helper prints nothing. Checks verify the remaining mapping as well as the returned value."
+      ],
+      "starter": "def remove_device(devices, name):\n    pass\n\nsample = {'A': 'Desk', 'B': 'Shelf'}\nresult = remove_device(sample, 'A')\nprint(result)\nprint(sample)\n",
+      "input": "",
+      "example": "remove_device({'A': 'Desk', 'B': 'Shelf'}, 'A') -> 'Desk'; arguments afterward: [{'B': 'Shelf'}, 'A']\nremove_device({}, 'A') -> None; arguments afterward: [{}, 'A']",
+      "hints": [
+        "Removing and returning a stored value is one dictionary operation.",
+        "The missing-key fallback avoids a `KeyError`.",
+        "A stored empty string is a real result, not a missing entry."
+      ],
+      "tests": [
+        {
+          "function": "remove_device",
+          "args": [
+            {
+              "A": "Desk",
+              "B": "Shelf"
+            },
+            "A"
+          ],
+          "expected": "Desk",
+          "public": true,
+          "label": "remove_device example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            {
+              "B": "Shelf"
+            },
+            "A"
+          ]
+        },
+        {
+          "function": "remove_device",
+          "args": [
+            {},
+            "A"
+          ],
+          "expected": null,
+          "public": true,
+          "label": "remove_device example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            {},
+            "A"
+          ]
+        },
+        {
+          "function": "remove_device",
+          "args": [
+            {
+              "A": ""
+            },
+            "A"
+          ],
+          "expected": "",
+          "public": false,
+          "label": "remove_device example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            {},
+            "A"
+          ]
+        },
+        {
+          "function": "remove_device",
+          "args": [
+            {
+              "B": "Shelf"
+            },
+            "A"
+          ],
+          "expected": null,
+          "public": false,
+          "label": "remove_device example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "args_after": [
+            {
+              "B": "Shelf"
+            },
+            "A"
+          ]
+        }
+      ],
+      "reference": {
+        "code": "def remove_device(devices, name):\n    return devices.pop(name, None)\n\nsample = {'A': 'Desk', 'B': 'Shelf'}\nresult = remove_device(sample, 'A')\nprint(result)\nprint(sample)\n",
+        "notes": [
+          "pop matches both the mutation and return contract.",
+          "Without a default, a missing key would raise `KeyError`."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-dictionaries-10-boss",
+      "version": 1,
+      "title": "Build an inventory summary",
+      "xp": 30,
+      "prerequisites": [
+        "py-dictionaries-09-remove"
+      ],
+      "concepts": "Chapter project - filtering records and aggregation",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A small inventory combines the collection techniques you have practiced: named fields, record filtering and totals. A report dictionary lets other code choose how to display the result later.",
+          "code": "summary = {\"count\": 2, \"labels\": [\"A\", \"B\"]}\nprint(summary[\"count\"])\nprint(summary[\"labels\"][0])"
+        }
+      ],
+      "brief": "Return a structured summary of the records in one category.",
+      "requirements": [
+        "Each record has a string `\"name\"`, string `\"category\"`, and non-negative integer `\"quantity\"`. category matching is case-sensitive. Extra record fields should not affect the result.",
+        "Return exactly `{\"items\": N, \"units\": T, \"names\": [...]}`. N is the number of matching records, T is their quantity sum, and names is their name list in input order, including duplicate names and zero-quantity records.",
+        "No matches means `{\"items\": 0, \"units\": 0, \"names\": []}`. Do not change any input record or the original list.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def inventory_summary(records, category):\n    pass\n\nprint(inventory_summary([{'name': 'Cable', 'category': 'Comms', 'quantity': 3}, {'name': 'Pen', 'category': 'Desk', 'quantity': 2}, {'name': 'Radio', 'category': 'Comms', 'quantity': 1}], 'Comms'))\n",
+      "input": "",
+      "example": "inventory_summary([{'name': 'Cable', 'category': 'Comms', 'quantity': 3}, {'name': 'Pen', 'category': 'Desk', 'quantity': 2}, {'name': 'Radio', 'category': 'Comms', 'quantity': 1}], 'Comms') -> {'items': 2, 'units': 4, 'names': ['Cable', 'Radio']}\ninventory_summary([], 'Comms') -> {'items': 0, 'units': 0, 'names': []}",
+      "hints": [
+        "Apply the category rule consistently to every part of the summary.",
+        "Record count and unit count are different quantities.",
+        "The names collection also supplies the number of matching records, while a separate accumulator tracks units."
+      ],
+      "tests": [
+        {
+          "function": "inventory_summary",
+          "args": [
+            [
+              {
+                "name": "Cable",
+                "category": "Comms",
+                "quantity": 3
+              },
+              {
+                "name": "Pen",
+                "category": "Desk",
+                "quantity": 2
+              },
+              {
+                "name": "Radio",
+                "category": "Comms",
+                "quantity": 1
+              }
+            ],
+            "Comms"
+          ],
+          "expected": {
+            "items": 2,
+            "units": 4,
+            "names": [
+              "Cable",
+              "Radio"
+            ]
+          },
+          "public": true,
+          "label": "inventory_summary example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "inventory_summary",
+          "args": [
+            [],
+            "Comms"
+          ],
+          "expected": {
+            "items": 0,
+            "units": 0,
+            "names": []
+          },
+          "public": true,
+          "label": "inventory_summary example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "inventory_summary",
+          "args": [
+            [
+              {
+                "name": "A",
+                "category": "X",
+                "quantity": 0
+              },
+              {
+                "name": "A",
+                "category": "X",
+                "quantity": 2
+              }
+            ],
+            "X"
+          ],
+          "expected": {
+            "items": 2,
+            "units": 2,
+            "names": [
+              "A",
+              "A"
+            ]
+          },
+          "public": false,
+          "label": "inventory_summary example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        },
+        {
+          "function": "inventory_summary",
+          "args": [
+            [
+              {
+                "name": "A",
+                "category": "X",
+                "quantity": 3
+              }
+            ],
+            "x"
+          ],
+          "expected": {
+            "items": 0,
+            "units": 0,
+            "names": []
+          },
+          "public": false,
+          "label": "inventory_summary example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule.",
+          "unchanged_args": true
+        }
+      ],
+      "reference": {
+        "code": "def inventory_summary(records, category):\n    names = []\n    units = 0\n    for record in records:\n        if record[\"category\"] == category:\n            names.append(record[\"name\"])\n            units = units + record[\"quantity\"]\n    return {\"items\": len(names), \"units\": units, \"names\": names}\n\nprint(inventory_summary([{'name': 'Cable', 'category': 'Comms', 'quantity': 3}, {'name': 'Pen', 'category': 'Desk', 'quantity': 2}, {'name': 'Radio', 'category': 'Comms', 'quantity': 1}], 'Comms'))\n",
+        "notes": [
+          "The summary has a clear data contract that a display or file-saving layer could consume.",
+          "One loop preserves ordering and keeps names and quantities under the same filter. A filtered intermediate list is another valid design."
+        ]
+      },
+      "boss": true
+    }
+  ]
+}

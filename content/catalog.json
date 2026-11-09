@@ -1,0 +1,17 @@
+{
+  "format_version": 1,
+  "id": "python-workshop",
+  "title": "Syntaxia",
+  "chapters": [
+    "python-orientation.json",
+    "python-review.json",
+    "python-functions.json",
+    "python-scope.json",
+    "python-numbers.json",
+    "python-session-project.json",
+    "python-decisions.json",
+    "python-repetition.json",
+    "python-lists.json",
+    "python-dictionaries.json"
+  ]
+}

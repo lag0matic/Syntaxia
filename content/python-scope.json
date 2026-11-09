@@ -1,0 +1,770 @@
+{
+  "id": "python-scope",
+  "title": "Scope, tracing and debugging",
+  "language": "python",
+  "version": 1,
+  "badge": "Value Detective",
+  "missions": [
+    {
+      "id": "py-scope-01-route",
+      "version": 1,
+      "title": "Follow the value, not the name",
+      "concepts": "Trace a call \u00b7 parameter binding \u00b7 unchanged caller",
+      "xp": 10,
+      "prerequisites": [
+        "py-fn-16-toolkit"
+      ],
+      "lesson": [
+        {
+          "heading": "A call lends a value to a local name",
+          "text": "At a call, the argument supplies the parameter value. An assignment to that parameter inside the function does not reassign the caller's integer variable. Before Run, predict all three output lines in the starter.",
+          "code": "def with_bonus(points):\n    points = points + 2\n    return points\n\nscore = 7\nresult = with_bonus(score)\nprint(result)\nprint(score)"
+        },
+        {
+          "heading": "Keep a tiny trace",
+          "text": "For the example: `score` is `7`; the parameter `points` starts as `7`; `points` becomes `9`; the caller receives `9` as `result`; `score` is still `7`. This chapter uses numbers and strings. Later, mutable collections will need a more detailed model."
+        }
+      ],
+      "brief": "Repair only the call that creates planned: pass the caller's minutes value to `add_setup`.",
+      "requirements": [
+        "Repair only the call that creates planned: pass the caller's minutes value to `add_setup`.",
+        "Keep the helper, the three print statements and minutes `=` 20. Output Before: 20, Planned: 25, and After: 20 on separate lines."
+      ],
+      "starter": "def add_setup(minutes):\n    minutes = minutes + 5\n    return minutes\n\nminutes = 20\nprint(f\"Before: {minutes}\")\nplanned = add_setup(0)\nprint(f\"Planned: {planned}\")\nprint(f\"After: {minutes}\")\n",
+      "example": "Before: 20\nPlanned: 25\nAfter: 20",
+      "input": "",
+      "hints": [
+        "Which value enters the helper in the starter?",
+        "The parameter and caller happen to use the same spelling. Trace them as two separate names.",
+        "Look at the argument between the call parentheses, rather than changing the addition or the output."
+      ],
+      "tests": [
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [],
+          "stdout": "Before: 20\nPlanned: 25\nAfter: 20",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "add_setup(8) returns 13",
+          "public": false,
+          "function": "add_setup",
+          "args": [
+            8
+          ],
+          "expected": 13,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "add_setup(0) returns 5",
+          "public": false,
+          "function": "add_setup",
+          "args": [
+            0
+          ],
+          "expected": 5,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        }
+      ],
+      "reference": {
+        "code": "def add_setup(minutes):\n    minutes = minutes + 5\n    return minutes\n\nminutes = 20\nprint(f\"Before: {minutes}\")\nplanned = add_setup(minutes)\nprint(f\"Planned: {planned}\")\nprint(f\"After: {minutes}\")\n",
+        "notes": [
+          "The caller keeps `minutes = 20`; the helper returns a different integer.",
+          "Naming the returned value planned makes the detour visible. Matching parameter names are allowed, but do not connect the assignments."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-scope-02-locals",
+      "version": 1,
+      "title": "Same spelling, separate locals",
+      "concepts": "Local scope \u00b7 separate function calls",
+      "xp": 10,
+      "prerequisites": [
+        "py-scope-01-route"
+      ],
+      "lesson": [
+        {
+          "heading": "Each call has its own workspace",
+          "text": "A variable assigned inside a function is local to that call. Two functions can use the same local name without overwriting each other. This makes it possible to understand one function at a time.",
+          "code": "def double(value):\n    result = value * 2\n    return result\n\ndef plus_three(value):\n    result = value + 3\n    return result\n\nprint(double(4))\nprint(plus_three(4))"
+        },
+        {
+          "heading": "Trace repeated calls",
+          "text": "Predict the three calls below before running. Each helper must calculate its own result from its parameter. A previous call does not leave a result for the next call to reuse."
+        }
+      ],
+      "brief": "Complete `work_block(minutes)` and `rest_block(minutes)`, each using its own local variable named result.",
+      "requirements": [
+        "Complete `work_block(minutes)` and `rest_block(minutes)`, each using its own local variable named result.",
+        "`work_block` returns twice its argument; `rest_block` returns its argument plus 5. Neither helper prints.",
+        "Keep the supplied calls. They should print 20, 15, and 6 on separate lines."
+      ],
+      "starter": "def work_block(minutes):\n    result = 0  # Replace this calculation.\n    return result\n\ndef rest_block(minutes):\n    result = 0  # Replace this calculation.\n    return result\n\nprint(work_block(10))\nprint(rest_block(10))\nprint(work_block(3))\n",
+      "example": "20\n15\n6",
+      "input": "",
+      "hints": [
+        "Work on one helper at a time. What value should its result hold?",
+        "Both assignments use the current call's minutes parameter.",
+        "The second `work_block` call must start from 3, not the result of an earlier call."
+      ],
+      "tests": [
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [],
+          "stdout": "20\n15\n6",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "work_block(7) returns 14",
+          "public": false,
+          "function": "work_block",
+          "args": [
+            7
+          ],
+          "expected": 14,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "rest_block(0) returns 5",
+          "public": false,
+          "function": "rest_block",
+          "args": [
+            0
+          ],
+          "expected": 5,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "rest_block(12) returns 17",
+          "public": false,
+          "function": "rest_block",
+          "args": [
+            12
+          ],
+          "expected": 17,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        }
+      ],
+      "reference": {
+        "code": "def work_block(minutes):\n    result = minutes * 2\n    return result\n\ndef rest_block(minutes):\n    result = minutes + 5\n    return result\n\nprint(work_block(10))\nprint(rest_block(10))\nprint(work_block(3))\n",
+        "notes": [
+          "Both result names are local. Neither helper depends on the other helper having run.",
+          "These small helpers could return their expressions directly. The intermediate locals are intentional tracing practice; tests assess their behavior, not that spelling."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-scope-03-boundary",
+      "version": 1,
+      "title": "Bring the value across the boundary",
+      "concepts": "Local names \u00b7 return values \u00b7 `NameError`",
+      "xp": 10,
+      "prerequisites": [
+        "py-scope-02-locals"
+      ],
+      "lesson": [
+        {
+          "heading": "A local name stays inside",
+          "text": "Returning a value gives the caller that value; it does not make every local name in the helper available outside. Referring to a name that Python cannot find raises `NameError`.",
+          "code": "def label_length(text):\n    length = len(text)\n    return length\n\nsize = label_length(\"Radio\")\nprint(size)\n# print(length) would fail here: length is local."
+        },
+        {
+          "heading": "A useful failure",
+          "text": "Run the starter once and read the error. The helper successfully returns, but the outer `print` tries to use its local name. Repair the outer code by capturing the returned value. No `global` declaration is needed."
+        }
+      ],
+      "brief": "Capture the return from `session_total(15, 4)` in an outer variable named total.",
+      "requirements": [
+        "Capture the return from `session_total(15, 4)` in an outer variable named total.",
+        "Print Total: 60 using total. Keep the helper unchanged; do not create an outer subtotal."
+      ],
+      "starter": "def session_total(length, count):\n    subtotal = length * count\n    return subtotal\n\nsession_total(15, 4)\nprint(f\"Total: {subtotal}\")\n",
+      "example": "Total: 60",
+      "input": "",
+      "hints": [
+        "The name in the error exists, but only during the helper call.",
+        "The helper already sends the right value back. What does the caller do with it?",
+        "Assign the call result to an outer name, then use that same outer name in the print."
+      ],
+      "tests": [
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [],
+          "stdout": "Total: 60",
+          "hint": "Compare the first differing line, then trace where that value was created.",
+          "variables": {
+            "total": 60
+          }
+        },
+        {
+          "label": "session_total(8, 3) returns 24",
+          "public": false,
+          "function": "session_total",
+          "args": [
+            8,
+            3
+          ],
+          "expected": 24,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "session_total(8, 0) returns 0",
+          "public": false,
+          "function": "session_total",
+          "args": [
+            8,
+            0
+          ],
+          "expected": 0,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        }
+      ],
+      "reference": {
+        "code": "def session_total(length, count):\n    subtotal = length * count\n    return subtotal\n\ntotal = session_total(15, 4)\nprint(f\"Total: {total}\")\n",
+        "notes": [
+          "Return crosses the function boundary; the local name subtotal does not.",
+          "Using a different outer name emphasizes that it is the returned value that connects the two scopes."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-scope-04-dependency",
+      "version": 1,
+      "title": "Make the dependency visible",
+      "concepts": "Parameters \u00b7 accidental global dependency",
+      "xp": 10,
+      "prerequisites": [
+        "py-scope-03-boundary"
+      ],
+      "lesson": [
+        {
+          "heading": "Reading outside is possible",
+          "text": "Python can read a name from the surrounding module when it is not a local name. That can hide a dependency: a helper appears to accept one value, but secretly calculates with another.",
+          "code": "outside = 99\n\ndef triple(number):\n    return number * 3\n\nprint(triple(4))  # Uses the argument, not outside."
+        },
+        {
+          "heading": "Different inputs expose the bug",
+          "text": "The starter's sample looks convincing because the outside variable matches its first argument. Test a different argument mentally. Repair the helper so its parameters fully describe what it needs."
+        }
+      ],
+      "brief": "Repair `work_total(length, count)` so it returns length multiplied by `count`, using its supplied parameters.",
+      "requirements": [
+        "Repair `work_total(length, count)` so it returns length multiplied by `count`, using its supplied parameters.",
+        "Keep `minutes_per_session` `=` 20 and the two sample calls. Print no extra output inside the helper."
+      ],
+      "starter": "minutes_per_session = 20\n\ndef work_total(length, count):\n    return minutes_per_session * count\n\nprint(work_total(20, 3))\nprint(work_total(7, 2))\n",
+      "example": "60\n14",
+      "input": "",
+      "hints": [
+        "Why does the first example work while the second one does not?",
+        "List the names the calculation reads. Are they both parameters?",
+        "Changing the outside variable would only move the bug. Make the helper honor the value its caller supplied."
+      ],
+      "tests": [
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [],
+          "stdout": "60\n14",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "work_total(5, 4) returns 20",
+          "public": true,
+          "function": "work_total",
+          "args": [
+            5,
+            4
+          ],
+          "expected": 20,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "work_total(0, 8) returns 0",
+          "public": false,
+          "function": "work_total",
+          "args": [
+            0,
+            8
+          ],
+          "expected": 0,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "work_total(12, 1) returns 12",
+          "public": false,
+          "function": "work_total",
+          "args": [
+            12,
+            1
+          ],
+          "expected": 12,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        }
+      ],
+      "reference": {
+        "code": "minutes_per_session = 20\n\ndef work_total(length, count):\n    return length * count\n\nprint(work_total(20, 3))\nprint(work_total(7, 2))\n",
+        "notes": [
+          "Explicit inputs let the same helper serve different callers and make tests independent.",
+          "Module constants can be useful later. The bug here is ignoring a parameter, not that every outside name is forbidden."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-scope-05-chain",
+      "version": 1,
+      "title": "Trace the whole journey",
+      "concepts": "Call chain \u00b7 intermediate values \u00b7 data flow",
+      "xp": 10,
+      "prerequisites": [
+        "py-scope-04-dependency"
+      ],
+      "lesson": [
+        {
+          "heading": "Follow one value through stages",
+          "text": "A call chain is a sequence of small transformations. Write an intermediate value beside each step before running. The function name tells you the action; its return tells you what travels to the next stage.",
+          "code": "def twice(value):\n    return value * 2\n\ndef add_one(value):\n    return value + 1\n\ndef prepare(value):\n    doubled = twice(value)\n    adjusted = add_one(doubled)\n    return adjusted"
+        },
+        {
+          "heading": "Do not restart the journey",
+          "text": "In the example, the second helper must receive `doubled`, not the original value. An intermediate name is useful when you want to inspect where a result first went wrong."
+        }
+      ],
+      "brief": "Complete `plan_minutes(length, count)`: get work from `work_minutes`, pass work to `add_setup`, and return the planned result.",
+      "requirements": [
+        "Complete `plan_minutes(length, count)`: get work from `work_minutes`, pass work to `add_setup`, and return the planned result.",
+        "Keep both supplied helpers unchanged. They multiply length by `count`, then add a single 5-minute setup.",
+        "Do not print from the helpers. The supplied outer call prints 65."
+      ],
+      "starter": "def work_minutes(length, count):\n    return length * count\n\ndef add_setup(work):\n    return work + 5\n\ndef plan_minutes(length, count):\n    work = work_minutes(length, count)\n    planned = 0  # Continue the journey here.\n    return planned\n\nprint(plan_minutes(20, 3))\n",
+      "example": "20 and 3 -> work 60 -> planned 65\nOutput: 65",
+      "input": "",
+      "hints": [
+        "Which variable already contains the multiplication result?",
+        "The next helper expects work minutes, not a session count or the original length.",
+        "Check that the `return` sends the final stage back to the caller."
+      ],
+      "tests": [
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [],
+          "stdout": "65",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "plan_minutes(10, 2) returns 25",
+          "public": true,
+          "function": "plan_minutes",
+          "args": [
+            10,
+            2
+          ],
+          "expected": 25,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "plan_minutes(0, 3) returns 5",
+          "public": false,
+          "function": "plan_minutes",
+          "args": [
+            0,
+            3
+          ],
+          "expected": 5,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "plan_minutes(7, 4) returns 33",
+          "public": false,
+          "function": "plan_minutes",
+          "args": [
+            7,
+            4
+          ],
+          "expected": 33,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        }
+      ],
+      "reference": {
+        "code": "def work_minutes(length, count):\n    return length * count\n\ndef add_setup(work):\n    return work + 5\n\ndef plan_minutes(length, count):\n    work = work_minutes(length, count)\n    planned = add_setup(work)\n    return planned\n\nprint(plan_minutes(20, 3))\n",
+        "notes": [
+          "The named stages form a readable trace and keep setup separate from repeated work.",
+          "A nested call can also be clear for a small expression. Intermediate names help when inspecting or explaining several stages."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-scope-06-traceback",
+      "version": 1,
+      "title": "Read the error from the bottom",
+      "concepts": "Traceback \u00b7 application frames \u00b7 misspelled name",
+      "xp": 10,
+      "prerequisites": [
+        "py-scope-05-chain"
+      ],
+      "lesson": [
+        {
+          "heading": "The last line names the failure",
+          "text": "A traceback shows the chain of calls that led to an exception. Start at the final line for the error type and message, then look just above for the failing line in `mission.py`. Earlier frames show how execution arrived there. The workshop adds harness frames; focus on your application frames.",
+          "code": "def add_fee(amount):\n    return amuont + 2\n\nprint(add_fee(6))\n# NameError: name 'amuont' is not defined"
+        },
+        {
+          "heading": "Repair the cause",
+          "text": "Run the starter to see the actual traceback. The call site tells you which helper ran, while the deeper application frame shows the misspelled name. Fix the spelling rather than adding a new outside variable. Line numbers vary as you edit."
+        }
+      ],
+      "brief": "Repair the misspelled name inside `add_setup` so it returns work plus setup.",
+      "requirements": [
+        "Repair the misspelled name inside `add_setup` so it returns work plus setup.",
+        "Keep `make_plan`, both signatures, and the sample print. Helpers return values without printing."
+      ],
+      "starter": "def add_setup(work, setup):\n    planned = work + setpu\n    return planned\n\ndef make_plan(length, count, setup):\n    work = length * count\n    return add_setup(work, setup)\n\nprint(make_plan(12, 2, 3))\n",
+      "example": "Before repair: NameError mentions setpu.\nAfter repair: 27",
+      "input": "",
+      "hints": [
+        "Which name is mentioned on the last line of the traceback?",
+        "Compare that name with the parameters in the failing helper's definition.",
+        "A new variable outside the function would hide a typo. Repair the name at the calculation instead."
+      ],
+      "tests": [
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [],
+          "stdout": "27",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "make_plan(5, 3, 0) returns 15",
+          "public": true,
+          "function": "make_plan",
+          "args": [
+            5,
+            3,
+            0
+          ],
+          "expected": 15,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "make_plan(0, 4, 6) returns 6",
+          "public": false,
+          "function": "make_plan",
+          "args": [
+            0,
+            4,
+            6
+          ],
+          "expected": 6,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "add_setup(11, 2) returns 13",
+          "public": false,
+          "function": "add_setup",
+          "args": [
+            11,
+            2
+          ],
+          "expected": 13,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        }
+      ],
+      "reference": {
+        "code": "def add_setup(work, setup):\n    planned = work + setup\n    return planned\n\ndef make_plan(length, count, setup):\n    work = length * count\n    return add_setup(work, setup)\n\nprint(make_plan(12, 2, 3))\n",
+        "notes": [
+          "The outer call was valid; following the traceback into `add_setup` located the cause.",
+          "A `NameError` is a runtime failure. A program can also run without exceptions and calculate the wrong answer; that is the next mission."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-scope-07-first-wrong",
+      "version": 1,
+      "title": "Find the first wrong value",
+      "concepts": "Logic bug \u00b7 trace table \u00b7 minimal repair",
+      "xp": 10,
+      "prerequisites": [
+        "py-scope-06-traceback"
+      ],
+      "lesson": [
+        {
+          "heading": "No exception does not mean correct",
+          "text": "A logic bug can produce a perfectly valid number that breaks the requirement. Compare the intended stages with the actual stages. Start with the first mismatch, because later values may simply inherit the earlier mistake."
+        },
+        {
+          "heading": "Trace before editing",
+          "text": "This session planner should multiply length by count and add one setup afterward. For length 10, count 3, setup 4, the expected trace is `work=30`, `planned=34`. The starter instead produces `work=14`, `planned=44`. Which operation first disagrees? Repair the responsibilities instead of adjusting the final `print`."
+        }
+      ],
+      "brief": "Repair `work_minutes` so it returns `length * count`.",
+      "requirements": [
+        "Repair `work_minutes` so it returns `length * count`.",
+        "Repair `planned_minutes` so it gets that work result, adds setup once, and returns the total.",
+        "Keep the supplied print. Do not print trace messages from the helpers; use a temporary Run experiment if helpful, then remove extra output before Test."
+      ],
+      "starter": "def work_minutes(length, count):\n    return length + count\n\ndef planned_minutes(length, count, setup):\n    work = work_minutes(length, setup)\n    return work + count * length\n\nprint(planned_minutes(10, 3, 4))\n",
+      "example": "Expected trace: work=30, planned=34\nOutput: 34",
+      "input": "",
+      "hints": [
+        "There is a bug inside the work calculation and another in how the planner uses values.",
+        "Follow the names in each signature. Does `work_minutes` receive a count at its call site?",
+        "Compute repeated work once, then add the one-time setup. Keep the two stages separate."
+      ],
+      "tests": [
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [],
+          "stdout": "34",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "work_minutes(10, 3) returns 30",
+          "public": true,
+          "function": "work_minutes",
+          "args": [
+            10,
+            3
+          ],
+          "expected": 30,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "planned_minutes(7, 2, 3) returns 17",
+          "public": false,
+          "function": "planned_minutes",
+          "args": [
+            7,
+            2,
+            3
+          ],
+          "expected": 17,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "planned_minutes(8, 0, 2) returns 2",
+          "public": false,
+          "function": "planned_minutes",
+          "args": [
+            8,
+            0,
+            2
+          ],
+          "expected": 2,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        },
+        {
+          "label": "planned_minutes(4, 5, 0) returns 20",
+          "public": false,
+          "function": "planned_minutes",
+          "args": [
+            4,
+            5,
+            0
+          ],
+          "expected": 20,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout."
+        }
+      ],
+      "reference": {
+        "code": "def work_minutes(length, count):\n    return length * count\n\ndef planned_minutes(length, count, setup):\n    work = work_minutes(length, count)\n    return work + setup\n\nprint(planned_minutes(10, 3, 4))\n",
+        "notes": [
+          "The first incorrect stage was the work calculation; the call and final expression also needed repair.",
+          "Distinct values make argument swaps visible. Testing only zeros or equal inputs can conceal mistakes."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-scope-08-toolkit",
+      "version": 1,
+      "title": "Repair the planning desk",
+      "concepts": "Chapter boss \u00b7 scope \u00b7 calls \u00b7 diagnosis",
+      "xp": 30,
+      "prerequisites": [
+        "py-scope-07-first-wrong"
+      ],
+      "lesson": [
+        {
+          "heading": "A small program, several boundaries",
+          "text": "This boss combines the same names, calls and returned values you have practiced. The intended flow is input -`>` repeated work -`>` setup -`>` label -`>` output. Read each helper contract below, then trace the supplied inputs before fixing code."
+        },
+        {
+          "heading": "Debug in small steps",
+          "text": "Run first, read the error and repair one cause at a time. After runtime errors are gone, compare intermediate values with the contracts to find logic bugs. Before submitting, remove temporary debug prints. No new exception handling or collection techniques are required."
+        },
+        {
+          "heading": "Explain the route",
+          "text": "After passing, try explaining which names are local, where each returned value goes, and why changing the session count changes the total. This explanation is a reflection prompt, not something the automatic tests can assess."
+        }
+      ],
+      "brief": "Repair the supplied toolkit so it reads name, whole-number `length`, count, and setup in that order, without input prompts.",
+      "requirements": [
+        "Repair the supplied toolkit so it reads name, whole-number `length`, count, and setup in that order, without input prompts.",
+        "`work_minutes(length, count)` returns `length * count`. `plan_minutes(length, count, setup)` uses that helper and adds setup once.",
+        "`format_plan(name, minutes)` strips the name, uses Learner when the cleaned `name` is empty, and returns `NAME: MINUTES minutes.`",
+        "Keep calculation and formatting inside the existing helpers, and print only the returned message at the outer level. Helpers must not print.",
+        "Inputs are valid integers, length/`count` are positive, and `setup` is zero or positive. Numeric validation is not part of this mission."
+      ],
+      "starter": "def work_minutes(length, count):\n    return length + count\n\ndef plan_minutes(length, count, setup):\n    work = work_minutes(length, setup)\n    planned = work + setup\n    return work\n\ndef format_plan(name, minutes):\n    clean_name = name.strip()\n    if clean_name == \"\":\n        clean_name = \"Learner\"\n    return f\"{name}: {minutes} minutes.\"\n\nname = input()\nlength = int(input())\ncount = int(input())\nsetup = int(input())\nplan_minutes(length, count, setup)\nmessage = format_plan(name, planned)\nprint(message)\n",
+      "example": "Input: \"  David  \", then 15, 3, 5\nOutput: David: 50 minutes.",
+      "input": "  David  \n15\n3\n5",
+      "hints": [
+        "Start with the runtime error: does the outer code capture the planner's returned value?",
+        "Trace the planner's call arguments, calculation, and return separately. Are you returning its final stage?",
+        "After totals work, check a name with spaces and a blank name. Which local name holds the cleaned or fallback text?"
+      ],
+      "tests": [
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [
+            "  David  ",
+            "15",
+            "3",
+            "5"
+          ],
+          "stdout": "David: 50 minutes.",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "Program output",
+          "public": true,
+          "stdin": [
+            "   ",
+            "7",
+            "2",
+            "0"
+          ],
+          "stdout": "Learner: 14 minutes.",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "Another set of inputs",
+          "public": false,
+          "stdin": [
+            "Cassia",
+            "8",
+            "3",
+            "5"
+          ],
+          "stdout": "Cassia: 29 minutes.",
+          "hint": "Compare the first differing line, then trace where that value was created."
+        },
+        {
+          "label": "work_minutes(4, 6) returns 24",
+          "public": false,
+          "function": "work_minutes",
+          "args": [
+            4,
+            6
+          ],
+          "expected": 24,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout.",
+          "stdin": [
+            "Test",
+            "1",
+            "1",
+            "0"
+          ]
+        },
+        {
+          "label": "plan_minutes(9, 2, 4) returns 22",
+          "public": false,
+          "function": "plan_minutes",
+          "args": [
+            9,
+            2,
+            4
+          ],
+          "expected": 22,
+          "call_stdout": "",
+          "hint": "Trace the supplied arguments through the function. Check the returned value, not just the sample printout.",
+          "stdin": [
+            "Test",
+            "1",
+            "1",
+            "0"
+          ]
+        },
+        {
+          "label": "format_plan cleans a blank name",
+          "public": false,
+          "function": "format_plan",
+          "args": [
+            "   ",
+            12
+          ],
+          "expected": "Learner: 12 minutes.",
+          "call_stdout": "",
+          "stdin": [
+            "Test",
+            "1",
+            "1",
+            "0"
+          ]
+        },
+        {
+          "label": "format_plan cleans surrounding spaces",
+          "public": false,
+          "function": "format_plan",
+          "args": [
+            "  Radio  ",
+            18
+          ],
+          "expected": "Radio: 18 minutes.",
+          "call_stdout": "",
+          "stdin": [
+            "Test",
+            "1",
+            "1",
+            "0"
+          ]
+        }
+      ],
+      "reference": {
+        "code": "def work_minutes(length, count):\n    return length * count\n\ndef plan_minutes(length, count, setup):\n    work = work_minutes(length, count)\n    planned = work + setup\n    return planned\n\ndef format_plan(name, minutes):\n    clean_name = name.strip()\n    if clean_name == \"\":\n        clean_name = \"Learner\"\n    return f\"{clean_name}: {minutes} minutes.\"\n\nname = input()\nlength = int(input())\ncount = int(input())\nsetup = int(input())\nplanned = plan_minutes(length, count, setup)\nmessage = format_plan(name, planned)\nprint(message)\n",
+        "notes": [
+          "Local calculations travel back through return, and the outer program stores the result before formatting it.",
+          "The helpers have explicit inputs and separate responsibilities, making it possible to test each stage.",
+          "The blank-name condition was already taught in the completed functions toolkit. No new validation is hidden in these tests.",
+          "A direct expression return can be equally readable. Named intermediate values here help expose the trace; tests check behavior rather than enforcing one arrangement of lines."
+        ]
+      },
+      "boss": true
+    }
+  ]
+}

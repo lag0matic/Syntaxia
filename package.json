@@ -1,0 +1,27 @@
+{
+  "name": "syntaxia",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "test:python": "python -m unittest discover -s tests -p test_*.py"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "6.20.3",
+    "@codemirror/commands": "6.11.1",
+    "@codemirror/lang-python": "^6.2.1",
+    "@codemirror/language": "6.12.4",
+    "@codemirror/state": "6.7.5",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "@codemirror/view": "6.43.12",
+    "@lezer/highlight": "1.2.3",
+    "codemirror": "^6.0.2",
+    "pyodide": "0.27.7"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "playwright": "^1.51.0"
+  }
+}

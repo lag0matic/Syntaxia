@@ -1,0 +1,1083 @@
+{
+  "id": "python-decisions",
+  "title": "Decisions and Boolean logic",
+  "badge": "Branch Weaver",
+  "language": "python",
+  "version": 1,
+  "missions": [
+    {
+      "id": "py-decisions-01-checkpoint",
+      "version": 1,
+      "title": "Choose the right status",
+      "xp": 10,
+      "prerequisites": [
+        "py-session-03-tool"
+      ],
+      "concepts": "Independent checkpoint - branches and equality",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Start with a fresh function rather than a repair. A conditional selects behavior from the contract. Explain an exact-boundary example to yourself before writing code.",
+          "code": "if temperature < 0:\n    message = \"Below freezing\"\nelse:\n    message = \"Not below freezing\""
+        }
+      ],
+      "brief": "Return a status label comparing `value` with `limit`.",
+      "requirements": [
+        "Both inputs are integers. Return `\"below\"` when `value` is smaller, `\"equal\"` on equality, and `\"above\"` when larger.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def status_label(value, limit):\n    pass\n\nprint(status_label(8, 10))\n",
+      "input": "",
+      "example": "status_label(8, 10) -> 'below'\nstatus_label(10, 10) -> 'equal'",
+      "hints": [
+        "There are three distinct outcomes.",
+        "Make sure equality has its own meaning.",
+        "A `return` finishes a call, so later branches do not run after one returns."
+      ],
+      "tests": [
+        {
+          "function": "status_label",
+          "args": [
+            8,
+            10
+          ],
+          "expected": "below",
+          "public": true,
+          "label": "status_label example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "status_label",
+          "args": [
+            10,
+            10
+          ],
+          "expected": "equal",
+          "public": true,
+          "label": "status_label example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "status_label",
+          "args": [
+            11,
+            10
+          ],
+          "expected": "above",
+          "public": false,
+          "label": "status_label example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "status_label",
+          "args": [
+            -4,
+            -3
+          ],
+          "expected": "below",
+          "public": false,
+          "label": "status_label example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "status_label",
+          "args": [
+            0,
+            0
+          ],
+          "expected": "equal",
+          "public": false,
+          "label": "status_label example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def status_label(value, limit):\n    if value < limit:\n        return \"below\"\n    if value == limit:\n        return \"equal\"\n    return \"above\"\n\nprint(status_label(8, 10))\n",
+        "notes": [
+          "A three-way contract needs all three cases, including equality.",
+          "An `if/elif/else` chain is an equally clear implementation."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-02-and",
+      "version": 1,
+      "title": "Stay inside the window",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-01-checkpoint"
+      ],
+      "concepts": "`and` - inclusive ranges",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`and` requires both conditions to be true. Write each comparison as a full expression. Python also supports chained comparisons, such as `low <= value <= high`; both forms are valid.",
+          "code": "age = 18\npaid = True\nprint(age >= 16 and paid)  # True"
+        }
+      ],
+      "brief": "Return whether `value` falls inside the inclusive interval from `low` to `high`.",
+      "requirements": [
+        "All inputs are integers and `low <= high`. Both endpoints belong to the interval. Return a Boolean.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def in_window(value, low, high):\n    pass\n\nprint(in_window(5, 2, 8))\n",
+      "input": "",
+      "example": "in_window(5, 2, 8) -> True\nin_window(2, 2, 8) -> True",
+      "hints": [
+        "A value can fail at either end.",
+        "Passing just one boundary test is not sufficient.",
+        "Combine the lower-bound and upper-bound conditions, or use a chained comparison."
+      ],
+      "tests": [
+        {
+          "function": "in_window",
+          "args": [
+            5,
+            2,
+            8
+          ],
+          "expected": true,
+          "public": true,
+          "label": "in_window example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "in_window",
+          "args": [
+            2,
+            2,
+            8
+          ],
+          "expected": true,
+          "public": true,
+          "label": "in_window example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "in_window",
+          "args": [
+            8,
+            2,
+            8
+          ],
+          "expected": true,
+          "public": false,
+          "label": "in_window example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "in_window",
+          "args": [
+            1,
+            2,
+            8
+          ],
+          "expected": false,
+          "public": false,
+          "label": "in_window example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "in_window",
+          "args": [
+            9,
+            2,
+            8
+          ],
+          "expected": false,
+          "public": false,
+          "label": "in_window example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "in_window",
+          "args": [
+            4,
+            4,
+            4
+          ],
+          "expected": true,
+          "public": false,
+          "label": "in_window example 6",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def in_window(value, low, high):\n    return low <= value and value <= high\n\nprint(in_window(5, 2, 8))\n",
+        "notes": [
+          "Both inclusive comparisons must hold.",
+          "The chained spelling `low <= value <= high` expresses the same interval."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-03-or",
+      "version": 1,
+      "title": "Allow either route",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-02-and"
+      ],
+      "concepts": "`or` - Boolean flags",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`or` requires at least one condition to be true. Its inclusive meaning includes the case where both are true. For this task the supplied flags are actual Boolean values.",
+          "code": "is_weekend = False\nis_holiday = True\nprint(is_weekend or is_holiday)  # True"
+        }
+      ],
+      "brief": "Return whether a visitor may enter using a ticket or staff access.",
+      "requirements": [
+        "Both inputs are Booleans. Either a ticket or staff status allows entry, including when both are present. Return a Boolean.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def can_enter(has_ticket, is_staff):\n    pass\n\nprint(can_enter(True, False))\n",
+      "input": "",
+      "example": "can_enter(True, False) -> True\ncan_enter(False, True) -> True",
+      "hints": [
+        "Which combinations should be denied?",
+        "Either successful access route is enough.",
+        "Check the both-true case as well as the two one-true cases."
+      ],
+      "tests": [
+        {
+          "function": "can_enter",
+          "args": [
+            true,
+            false
+          ],
+          "expected": true,
+          "public": true,
+          "label": "can_enter example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_enter",
+          "args": [
+            false,
+            true
+          ],
+          "expected": true,
+          "public": true,
+          "label": "can_enter example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_enter",
+          "args": [
+            true,
+            true
+          ],
+          "expected": true,
+          "public": false,
+          "label": "can_enter example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_enter",
+          "args": [
+            false,
+            false
+          ],
+          "expected": false,
+          "public": false,
+          "label": "can_enter example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def can_enter(has_ticket, is_staff):\n    return has_ticket or is_staff\n\nprint(can_enter(True, False))\n",
+        "notes": [
+          "or is inclusive, not an exclusive choice.",
+          "and would incorrectly require both routes."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-04-not",
+      "version": 1,
+      "title": "Block maintenance mode",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-03-or"
+      ],
+      "concepts": "`not` - negating a condition",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`not` reverses a truth value. Naming a flag clearly helps you decide whether the requirement needs it directly or negated. Parentheses can make combinations easier to read.",
+          "code": "muted = True\nprint(not muted)  # False"
+        }
+      ],
+      "brief": "Return whether a connected device may start while respecting maintenance mode.",
+      "requirements": [
+        "Inputs are Booleans. Starting requires connection and requires maintenance to be off. Return a Boolean.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def can_start(connected, maintenance):\n    pass\n\nprint(can_start(True, False))\n",
+      "input": "",
+      "example": "can_start(True, False) -> True\ncan_start(True, True) -> False",
+      "hints": [
+        "One flag describes permission; the other describes a blocker.",
+        "Translate `\"maintenance is off\"` into a condition.",
+        "Connection alone is insufficient when the blocker is present."
+      ],
+      "tests": [
+        {
+          "function": "can_start",
+          "args": [
+            true,
+            false
+          ],
+          "expected": true,
+          "public": true,
+          "label": "can_start example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_start",
+          "args": [
+            true,
+            true
+          ],
+          "expected": false,
+          "public": true,
+          "label": "can_start example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_start",
+          "args": [
+            false,
+            false
+          ],
+          "expected": false,
+          "public": false,
+          "label": "can_start example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_start",
+          "args": [
+            false,
+            true
+          ],
+          "expected": false,
+          "public": false,
+          "label": "can_start example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def can_start(connected, maintenance):\n    return connected and not maintenance\n\nprint(can_start(True, False))\n",
+        "notes": [
+          "The predicate follows the domain rule directly.",
+          "Explicit comparisons with `True`/`False` also work but are usually unnecessary for Boolean parameters."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-05-elif",
+      "version": 1,
+      "title": "Classify the reading",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-04-not"
+      ],
+      "concepts": "`elif` - branch order and thresholds",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "An `if/elif/else` chain runs the first matching branch. Broad conditions placed too early can swallow more specific cases. A small set of boundary examples helps establish the order.",
+          "code": "if points < 10:\n    rank = \"Starter\"\nelif points < 30:\n    rank = \"Growing\"\nelse:\n    rank = \"Experienced\""
+        }
+      ],
+      "brief": "Return the battery band for a supplied percentage.",
+      "requirements": [
+        "`percent` is an integer from 0 through 100. Values below 20 are `\"low\"`; 20 through 79 are `\"usable\"`; 80 through 100 are `\"full\"`.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def battery_band(percent):\n    pass\n\nprint(battery_band(19))\n",
+      "input": "",
+      "example": "battery_band(19) -> 'low'\nbattery_band(20) -> 'usable'",
+      "hints": [
+        "Mark the two cutoffs before coding.",
+        "Only the first matching branch runs.",
+        "Once the low branch is ruled out, the next branch already knows the reading is at least 20."
+      ],
+      "tests": [
+        {
+          "function": "battery_band",
+          "args": [
+            19
+          ],
+          "expected": "low",
+          "public": true,
+          "label": "battery_band example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "battery_band",
+          "args": [
+            20
+          ],
+          "expected": "usable",
+          "public": true,
+          "label": "battery_band example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "battery_band",
+          "args": [
+            79
+          ],
+          "expected": "usable",
+          "public": false,
+          "label": "battery_band example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "battery_band",
+          "args": [
+            80
+          ],
+          "expected": "full",
+          "public": false,
+          "label": "battery_band example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "battery_band",
+          "args": [
+            0
+          ],
+          "expected": "low",
+          "public": false,
+          "label": "battery_band example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "battery_band",
+          "args": [
+            100
+          ],
+          "expected": "full",
+          "public": false,
+          "label": "battery_band example 6",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def battery_band(percent):\n    if percent < 20:\n        return \"low\"\n    elif percent < 80:\n        return \"usable\"\n    return \"full\"\n\nprint(battery_band(19))\n",
+        "notes": [
+          "Ascending cutoffs avoid redundant lower-bound comparisons.",
+          "Explicit interval checks can be reasonable when the boundaries need emphasis."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-06-groups",
+      "version": 1,
+      "title": "Group access rules",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-05-elif"
+      ],
+      "concepts": "Grouped `and/or` - precedence",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "When rules mix alternatives and blockers, group the alternatives before applying the shared blocker. Parentheses document the policy, even when another expression could produce the same answer.",
+          "code": "member = True\nguest_pass = False\nclosed = True\nprint((member or guest_pass) and not closed)  # False"
+        }
+      ],
+      "brief": "Return whether someone may edit a document.",
+      "requirements": [
+        "Inputs are Booleans. An owner or editor may edit only when the document is not locked. A lock blocks everyone, including owners.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def can_edit(is_owner, is_editor, is_locked):\n    pass\n\nprint(can_edit(True, False, False))\n",
+      "input": "",
+      "example": "can_edit(True, False, False) -> True\ncan_edit(False, True, False) -> True",
+      "hints": [
+        "Which rule applies to both kinds of permitted user?",
+        "An owner must not bypass a lock.",
+        "Treat the two access roles as one group, then apply the blocker."
+      ],
+      "tests": [
+        {
+          "function": "can_edit",
+          "args": [
+            true,
+            false,
+            false
+          ],
+          "expected": true,
+          "public": true,
+          "label": "can_edit example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_edit",
+          "args": [
+            false,
+            true,
+            false
+          ],
+          "expected": true,
+          "public": true,
+          "label": "can_edit example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_edit",
+          "args": [
+            true,
+            true,
+            true
+          ],
+          "expected": false,
+          "public": false,
+          "label": "can_edit example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_edit",
+          "args": [
+            true,
+            false,
+            true
+          ],
+          "expected": false,
+          "public": false,
+          "label": "can_edit example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_edit",
+          "args": [
+            false,
+            false,
+            false
+          ],
+          "expected": false,
+          "public": false,
+          "label": "can_edit example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "can_edit",
+          "args": [
+            false,
+            true,
+            true
+          ],
+          "expected": false,
+          "public": false,
+          "label": "can_edit example 6",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def can_edit(is_owner, is_editor, is_locked):\n    return (is_owner or is_editor) and not is_locked\n\nprint(can_edit(True, False, False))\n",
+        "notes": [
+          "Grouping makes the shared restriction visible.",
+          "Multiple guard clauses could express the same policy without one combined expression."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-07-guards",
+      "version": 1,
+      "title": "Reject an invalid request",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-06-groups"
+      ],
+      "concepts": "Guard clauses - early returns",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A guard clause handles a special case and returns early. The remaining code can then assume the guard did not apply. This often makes exceptional cases easier to see.",
+          "code": "def price_label(quantity):\n    if quantity < 0:\n        return \"Invalid\"\n    return f\"Quantity: {quantity}\""
+        }
+      ],
+      "brief": "Classify a requested duration as invalid, too long, or ready.",
+      "requirements": [
+        "Inputs are integers and `available` is non-negative. `minutes <= 0` returns `\"invalid\"`. Otherwise `minutes > available` returns `\"too long\"`; all other requests return `\"ready\"`.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def request_label(minutes, available):\n    pass\n\nprint(request_label(0, 20))\n",
+      "input": "",
+      "example": "request_label(0, 20) -> 'invalid'\nrequest_label(20, 20) -> 'ready'",
+      "hints": [
+        "Which case should end the function before a normal request is considered?",
+        "Return ends the current call immediately.",
+        "After rejecting invalid duration, compare the remaining request with available time."
+      ],
+      "tests": [
+        {
+          "function": "request_label",
+          "args": [
+            0,
+            20
+          ],
+          "expected": "invalid",
+          "public": true,
+          "label": "request_label example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "request_label",
+          "args": [
+            20,
+            20
+          ],
+          "expected": "ready",
+          "public": true,
+          "label": "request_label example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "request_label",
+          "args": [
+            -1,
+            0
+          ],
+          "expected": "invalid",
+          "public": false,
+          "label": "request_label example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "request_label",
+          "args": [
+            21,
+            20
+          ],
+          "expected": "too long",
+          "public": false,
+          "label": "request_label example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "request_label",
+          "args": [
+            1,
+            0
+          ],
+          "expected": "too long",
+          "public": false,
+          "label": "request_label example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def request_label(minutes, available):\n    if minutes <= 0:\n        return \"invalid\"\n    if minutes > available:\n        return \"too long\"\n    return \"ready\"\n\nprint(request_label(0, 20))\n",
+        "notes": [
+          "The guard removes the invalid case before normal capacity logic.",
+          "A carefully ordered `if/elif/else` chain is equally valid."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-08-choices",
+      "version": 1,
+      "title": "Recognize a command",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-07-guards"
+      ],
+      "concepts": "String normalization - membership",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "`lower()` returns lowercase text. The `in` operator checks membership: for strings it checks whether one string occurs inside another. Exact command choices are better expressed as explicit equality alternatives here, since a substring is not necessarily a whole command.",
+          "code": "word = \"  RADIO  \"\nprint(word.strip().lower())  # radio\nprint(\"ad\" in \"radio\")    # True"
+        }
+      ],
+      "brief": "Return whether a command names a direction.",
+      "requirements": [
+        "`command` is text. Ignore surrounding whitespace and letter case. Only `\"north\"`, `\"south\"`, `\"east\"`, and `\"west\"` count. Empty text and partial words are not valid. Return a Boolean.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def is_direction(command):\n    pass\n\nprint(is_direction(' NORTH '))\n",
+      "input": "",
+      "example": "is_direction(' NORTH ') -> True\nis_direction('south') -> True",
+      "hints": [
+        "Normalize the text once before checking its meaning.",
+        "A substring match can accept a partial word by mistake.",
+        "Use exact equality for each accepted word; an alternative collection-based check will become natural in the lists chapter."
+      ],
+      "tests": [
+        {
+          "function": "is_direction",
+          "args": [
+            " NORTH "
+          ],
+          "expected": true,
+          "public": true,
+          "label": "is_direction example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "is_direction",
+          "args": [
+            "south"
+          ],
+          "expected": true,
+          "public": true,
+          "label": "is_direction example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "is_direction",
+          "args": [
+            "no"
+          ],
+          "expected": false,
+          "public": false,
+          "label": "is_direction example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "is_direction",
+          "args": [
+            ""
+          ],
+          "expected": false,
+          "public": false,
+          "label": "is_direction example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "is_direction",
+          "args": [
+            "east west"
+          ],
+          "expected": false,
+          "public": false,
+          "label": "is_direction example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "is_direction",
+          "args": [
+            "West"
+          ],
+          "expected": true,
+          "public": false,
+          "label": "is_direction example 6",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def is_direction(command):\n    clean = command.strip().lower()\n    return clean == \"north\" or clean == \"south\" or clean == \"east\" or clean == \"west\"\n\nprint(is_direction(' NORTH '))\n",
+        "notes": [
+          "This uses only text methods and Boolean comparisons already introduced.",
+          "After collections, membership in a collection of whole words is another clear option."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-09-overlap",
+      "version": 1,
+      "title": "Do the intervals meet?",
+      "xp": 10,
+      "prerequisites": [
+        "py-decisions-08-choices"
+      ],
+      "concepts": "Interval overlap - inclusive endpoints",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "Some decisions involve two ranges instead of one value. Draw simple intervals on paper before coding, including one that just touches another. The contract decides whether touching counts.",
+          "code": "left = 3\nright = 8\npoint = 8\nprint(left <= point <= right)  # True"
+        }
+      ],
+      "brief": "Return whether two inclusive intervals overlap.",
+      "requirements": [
+        "All inputs are integers; `start_a <= end_a` and `start_b <= end_b`. Sharing one endpoint counts as overlap. Single-point intervals are valid. Return a Boolean.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def overlaps(start_a, end_a, start_b, end_b):\n    pass\n\nprint(overlaps(1, 4, 3, 6))\n",
+      "input": "",
+      "example": "overlaps(1, 4, 3, 6) -> True\noverlaps(1, 4, 4, 8) -> True",
+      "hints": [
+        "First picture the ways intervals can be completely separate.",
+        "Containment and touching both count as overlap.",
+        "Each interval must start no later than the other one ends."
+      ],
+      "tests": [
+        {
+          "function": "overlaps",
+          "args": [
+            1,
+            4,
+            3,
+            6
+          ],
+          "expected": true,
+          "public": true,
+          "label": "overlaps example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "overlaps",
+          "args": [
+            1,
+            4,
+            4,
+            8
+          ],
+          "expected": true,
+          "public": true,
+          "label": "overlaps example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "overlaps",
+          "args": [
+            1,
+            3,
+            4,
+            6
+          ],
+          "expected": false,
+          "public": false,
+          "label": "overlaps example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "overlaps",
+          "args": [
+            5,
+            8,
+            1,
+            4
+          ],
+          "expected": false,
+          "public": false,
+          "label": "overlaps example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "overlaps",
+          "args": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "expected": true,
+          "public": false,
+          "label": "overlaps example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "overlaps",
+          "args": [
+            1,
+            10,
+            3,
+            4
+          ],
+          "expected": true,
+          "public": false,
+          "label": "overlaps example 6",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def overlaps(start_a, end_a, start_b, end_b):\n    return start_a <= end_b and start_b <= end_a\n\nprint(overlaps(1, 4, 3, 6))\n",
+        "notes": [
+          "The two comparisons cover partial overlap, containment and touching.",
+          "Negating the two disjoint cases is another correct way to express the rule."
+        ]
+      },
+      "boss": false
+    },
+    {
+      "id": "py-decisions-10-boss",
+      "version": 1,
+      "title": "Build a dispatch decision",
+      "xp": 30,
+      "prerequisites": [
+        "py-decisions-09-overlap"
+      ],
+      "concepts": "Chapter project - priorities and Boolean policy",
+      "lesson": [
+        {
+          "heading": "The idea",
+          "text": "A useful policy defines what happens when several conditions apply at once. Priority is part of the specification. Test combinations, not only one blocker at a time.",
+          "code": "def queue_label(count, paused):\n    if paused:\n        return \"paused\"\n    if count == 0:\n        return \"empty\"\n    return \"waiting\""
+        }
+      ],
+      "brief": "Build the status decision for a simulated session dispatcher.",
+      "requirements": [
+        "`minutes` is an integer; `available` is a non-negative integer; connected and `maintenance` are Booleans.",
+        "Return one label using this priority: invalid duration (`minutes <= 0`) -`>` `\"invalid\"`; maintenance on -`>` `\"maintenance\"`; disconnected -`>` `\"offline\"`; duration above available -`>` `\"over budget\"`; otherwise -`>` `\"ready\"`.",
+        "An exact budget fit is ready if no higher-priority blocker applies. This is a simulation; it does not control hardware.",
+        "Return the result without printing or reading input inside the helper."
+      ],
+      "starter": "def dispatch_status(minutes, available, connected, maintenance):\n    pass\n\nprint(dispatch_status(20, 20, True, False))\n",
+      "input": "",
+      "example": "dispatch_status(20, 20, True, False) -> 'ready'\ndispatch_status(0, 0, False, True) -> 'invalid'",
+      "hints": [
+        "Try an input with two simultaneous blockers.",
+        "The first applicable rule owns the answer.",
+        "A sequence of guarded returns can mirror the stated priority without deeply nested code."
+      ],
+      "tests": [
+        {
+          "function": "dispatch_status",
+          "args": [
+            20,
+            20,
+            true,
+            false
+          ],
+          "expected": "ready",
+          "public": true,
+          "label": "dispatch_status example 1",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "dispatch_status",
+          "args": [
+            0,
+            0,
+            false,
+            true
+          ],
+          "expected": "invalid",
+          "public": true,
+          "label": "dispatch_status example 2",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "dispatch_status",
+          "args": [
+            20,
+            10,
+            false,
+            true
+          ],
+          "expected": "maintenance",
+          "public": false,
+          "label": "dispatch_status example 3",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "dispatch_status",
+          "args": [
+            20,
+            10,
+            false,
+            false
+          ],
+          "expected": "offline",
+          "public": false,
+          "label": "dispatch_status example 4",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "dispatch_status",
+          "args": [
+            20,
+            10,
+            true,
+            false
+          ],
+          "expected": "over budget",
+          "public": false,
+          "label": "dispatch_status example 5",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        },
+        {
+          "function": "dispatch_status",
+          "args": [
+            1,
+            4,
+            true,
+            true
+          ],
+          "expected": "maintenance",
+          "public": false,
+          "label": "dispatch_status example 6",
+          "call_stdout": "",
+          "hint": "Compare the result with the visible contract, especially the boundary or empty-input rule."
+        }
+      ],
+      "reference": {
+        "code": "def dispatch_status(minutes, available, connected, maintenance):\n    if minutes <= 0:\n        return \"invalid\"\n    if maintenance:\n        return \"maintenance\"\n    if not connected:\n        return \"offline\"\n    if minutes > available:\n        return \"over budget\"\n    return \"ready\"\n\nprint(dispatch_status(20, 20, True, False))\n",
+        "notes": [
+          "Priority is explicit and each `return` ends consideration of later rules.",
+          "Different working branch layouts are valid; tests assess policy outcomes, not one exact arrangement."
+        ]
+      },
+      "boss": true
+    }
+  ]
+}

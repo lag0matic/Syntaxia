@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Syntaxia</title>
+  <link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/style.css">
+</head>
+<body data-pane="lesson">
+  <header><a class="title" href="/"><img src="/workshop-mark.png" alt="" width="40" height="40">Syntaxia</a><span id="total-progress">Chapter 1 · Console foundations</span><button id="open-journey" type="button" aria-controls="journey" aria-pressed="false" disabled>Journey</button><button id="open-settings" type="button" disabled>Settings</button><button id="export">Back up progress</button></header>
+  <div id="lesson-update-notice" hidden><span>A lesson update is available.</span><button type="button">View update</button></div>
+  <div class="pane-switch" aria-label="Classroom view"><button data-pane-button="lesson" aria-pressed="true">Lesson</button><button data-pane-button="code" aria-pressed="false">Code &amp; results</button></div>
+  <div class="workspace">
+    <aside aria-label="Course navigation"><h2>Your course</h2><label for="chapter-picker" class="chapter-picker-label">Go to chapter</label><select id="chapter-picker" aria-label="Go to chapter"></select><p id="xp">0 XP</p><progress id="chapter-progress" max="7" value="0" aria-label="Chapter progress"></progress><p id="chapter-count">0 of 7 missions complete</p><nav id="missions"><button class="mission active">01 &nbsp; A message with a purpose</button><button class="mission" disabled>02 &nbsp; Count the cost</button><button class="mission" disabled>03 &nbsp; Make it personal</button></nav><div class="course-note"><h3>Up next</h3><p>Loading your next mission...</p><p>Hints are free. Take your time.</p></div></aside>
+    <main><section class="lesson" aria-labelledby="lesson-title"><div class="lesson-meta"><span id="mission-number">Mission 1 of 7</span><span id="reward">10 XP</span></div><h1 id="lesson-title">A message with a purpose</h1><div id="lesson-body"><p>A variable gives a value a name. Start with a small message you can change without rewriting the whole program.</p><h2>The idea</h2><pre><code>project = "Radio logbook"
+print(f"Working on: {project}")</code></pre><h2>Your mission</h2><p>Create a variable called <code>tool_name</code> containing <code>Session tracker</code>. Print <code>Building: Session tracker</code>.</p></div><div id="hints"></div></section>
+    <section class="coding" aria-label="Python workspace"><div class="editor-heading"><label for="fallback-code">mission.py</label><span id="save-status" role="status">Preparing classroom…</span></div><div id="editor"><textarea id="fallback-code" aria-label="Python code" spellcheck="false"># Give your tool a name, then print its introduction.
+</textarea></div><div class="editor-options"><button id="download">Download .py</button><button id="reset">Reset</button><button id="restore">Restore reset backup</button><label><input type="checkbox" id="practice"> Free practice</label></div><div class="input-area"><label for="stdin">Program input <span>(one answer per line)</span></label><textarea id="stdin" rows="2" spellcheck="false" placeholder="Answers for input() go here before you run."></textarea></div><div class="runbar"><button id="run" disabled>Run</button><button id="test" disabled>Test</button><button id="submit" class="primary" disabled>Submit</button><button id="stop" disabled>Stop</button><span id="runtime-status" role="status">Preparing Python…</span></div><div class="results-heading"><h2>Results</h2><button id="next" hidden>Next mission →</button></div><div id="feedback" role="status">Your program output and checks will appear here.</div><pre id="output" tabindex="0" aria-label="Program output"></pre><ul id="test-results" aria-label="Test results"></ul></section></main>
+  </div>
+  <section id="journey" aria-labelledby="journey-title" hidden>
+    <div class="journey-inner">
+      <div class="journey-heading">
+        <h1 id="journey-title" tabindex="-1">Journey</h1>
+        <button id="journey-back" type="button">Back to lessons</button>
+      </div>
+      <div id="journey-content"></div>
+    </div>
+  </section>
+  <dialog id="reset-dialog"><h2>Reset this mission?</h2><p>Your current code will be saved as a reset backup before the starter code is restored.</p><div><button id="cancel-reset">Keep editing</button><button id="confirm-reset">Save backup and reset</button></div></dialog>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

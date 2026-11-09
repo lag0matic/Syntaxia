@@ -1,0 +1,6 @@
+{
+  "format": "python-workshop-course",
+  "version": 1,
+  "catalog": "content/catalog.json",
+  "progress": "data/workshop.sqlite3"
+}
